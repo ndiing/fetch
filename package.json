@@ -1,0 +1,28 @@
+{
+  "name": "@ndiing/fetch",
+  "version": "1.0.0",
+  "description": "nodejs fetch with Storage and CookieStore",
+  "main": "index.js",
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ndiing/fetch.git"
+  },
+  "keywords": [
+    "nodejs",
+    "fetch",
+    "localStorage",
+    "cookieStore"
+  ],
+  "author": "ndiing",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ndiing/fetch/issues"
+  },
+  "homepage": "https://github.com/ndiing/fetch#readme",
+  "publishConfig":{
+    "@ndiing:registry": "https://npm.pkg.github.com"
+  }
+}
