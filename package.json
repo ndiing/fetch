@@ -1,6 +1,6 @@
 {
   "name": "@ndiing/fetch",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "nodejs fetch with Storage and CookieStore",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,10 @@
     "url": "https://github.com/ndiing/fetch/issues"
   },
   "homepage": "https://github.com/ndiing/fetch#readme",
-  "publishConfig":{
+  "publishConfig": {
     "registry": "https://npm.pkg.github.com"
+  },
+  "dependencies": {
+    "@ndiing/storage": "^1.0.0"
   }
 }
