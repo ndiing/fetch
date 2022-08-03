@@ -1,7 +1,7 @@
 const http = require("http");
 const https = require("https");
 const url = require("url");
-const storage = require("@ndiing/storage");
+const Storage = require("@ndiing/storage");
 
 // Interfaces
 class Headers extends URLSearchParams {
@@ -66,7 +66,7 @@ class Response {
 // Methods
 function fetch(resource = "", options = {}) {
     resource = url.parse(resource);
-    const pool = storage.get(resource.hostname, options);
+    const pool = Storage.get(resource.hostname, options);
     if (pool.cookie) options.headers["Cookie"] = pool.cookie;
     const request = new Request(resource, options);
     const protocol = request.protocol == "https:" ? https : http;
@@ -84,6 +84,7 @@ function fetch(resource = "", options = {}) {
     });
 }
 
+fetch.Storage = Storage;
 fetch.Headers = Headers;
 fetch.Request = Request;
 fetch.Response = Response;
@@ -112,5 +113,5 @@ module.exports = fetch;
 // // in request options
 
 // // Access data pool by `hostname`
-// const pool=storage.get('jsonplaceholder.typicode.com')
+// const pool=Storage.get('jsonplaceholder.typicode.com')
 // console.log(pool.cookie)
