@@ -3,8 +3,23 @@ const https = require("https");
 const url = require("url");
 const Storage = require("@ndiing/storage");
 
-// Interfaces
+/**
+ * Nodejs fetch module
+ * 
+ * ### Install
+ * ```
+ * npm install @ndiing/fetch
+ * ```
+ * 
+ * @module fetch
+ */
+
+
 class Headers extends URLSearchParams {
+    /**
+     *
+     * @param {Object} init -
+     */
     constructor(init = {}) {
         super();
         for (const name in init) {
@@ -15,7 +30,22 @@ class Headers extends URLSearchParams {
     }
 }
 
+
 class Request {
+    /**
+     *
+     * @param {String} input -
+     * @param {Object} options -
+     * @param {String} options.method -
+     * @param {String} options.body -
+     * @param {Object} options.agent -
+     * @param {String} options.hostname -
+     * @param {Boolean} options.insecureHTTPParser -
+     * @param {String} options.path -
+     * @param {Number} options.port -
+     * @param {String} options.protocol -
+     * @param {Object} options.headers -
+     */
     constructor(input = "", options = {}) {
         // input = url.parse(input);
         const port = input.protocol == "https:" ? 443 : 80;
@@ -39,7 +69,13 @@ class Request {
     }
 }
 
+
 class Response {
+    /**
+     *
+     * @param {Array} body -
+     * @param {Object} options -
+     */
     constructor(body = [], options = {}) {
         this.body = body;
         this.status = options.statusCode;
@@ -47,23 +83,46 @@ class Response {
         this.headers = new Headers(options.headers);
     }
 
-    // Returns a promise that resolves with an ArrayBuffer representation of the response body.
+    /**
+     * Returns a promise that resolves with an ArrayBuffer representation of the response body.
+     * @returns {Array}
+     */
     arrayBuffer() {
         return Buffer.concat(this.body);
     }
 
-    // Returns a promise that resolves with the result of parsing the response body text as JSON.
+    /**
+     * Returns a promise that resolves with the result of parsing the response body text as JSON.
+     * @returns {Object}
+     */
     json() {
         return JSON.parse(this.text());
     }
 
-    // Returns a promise that resolves with a text representation of the response body.
+    /**
+     * Returns a promise that resolves with a text representation of the response body.
+     * @returns {String}
+     */
     text() {
         return this.arrayBuffer().toString();
     }
 }
 
-// Methods
+/**
+ * fetching resources
+ * @param {String} resource -
+ * @param {Object} options -
+ * @param {String} options.method -
+ * @param {String} options.body -
+ * @param {Object} options.agent -
+ * @param {String} options.hostname -
+ * @param {Boolean} options.insecureHTTPParser -
+ * @param {String} options.path -
+ * @param {Number} options.port -
+ * @param {String} options.protocol -
+ * @param {Object} options.headers -
+ * @returns {Promise}
+ */
 function fetch(resource = "", options = {}) {
     resource = url.parse(resource);
     const pool = Storage.get(resource.hostname, options);
@@ -89,29 +148,3 @@ fetch.Headers = Headers;
 fetch.Request = Request;
 fetch.Response = Response;
 module.exports = fetch;
-
-// // # Fetch
-// // nodejs fetch resource like `window.fetch`
-
-// // ### Install
-// // ```
-// // npm install @ndiing/fetch
-// // ```
-
-// // ### Usage
-
-// const fetch = require('@ndiing/fetch')
-
-// fetch('http://jsonplaceholder.typicode.com/posts')
-// .then(res=>res.json())
-// .then(console.log)
-// .catch(console.error)
-
-// // when recive Set-Cookie header
-// // cookies will be store in ./data/${hostname}/default.json
-// // or setting default `userDataDir` and `profileDirectory`
-// // in request options
-
-// // Access data pool by `hostname`
-// const pool=Storage.get('jsonplaceholder.typicode.com')
-// console.log(pool.cookie)
