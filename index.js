@@ -1,172 +1,327 @@
 const http = require("http");
 const https = require("https");
-const url = require("url");
-const Storage = require("@ndiing/storage");
+const zlib = require("zlib");
+const storage = require("@ndiing/storage");
 
 /**
  * Nodejs fetch module
- *
  * ### Install
  * ```
  * npm install @ndiing/fetch
  * ```
- *
- *
- * ### Usage
- * ```js
- * const fetch = require("../index.js");
- * const { Storage } = require("../index.js");
- *
- * fetch("https://mitra.tokopedia.com/")
- * .then((res) => res.text())
- * .then(console.log)
- * .catch(console.error);
- *
- * // when set-cookies present in headers
- * // cookies stored in ./${userDataDir}/${hostname}/${profileDirector}.json
- * // in this case in ./data/mitra.tokopedia.com/default.json
- *
- * // how to check data
- * // manage data using pool
- * const pool = Storage.get("mitra.tokopedia.com")
- * console.log(pool.localStorage.getItem('user'));
- * console.log(pool.cookieStore.get('_abck'));
- * console.log(pool.cookie);
- *
- * ```
- *
- * @module fetch
- */
+ * @see {@link ./examples/fetch.js}
+* @module fetch
+*/
 
-class Headers extends URLSearchParams {
+/**
+ *
+ */
+class Headers {
     /**
-     *
-     * @param {Object} init -
+     * Create headers
+     * @param {Any} init
      */
     constructor(init = {}) {
-        super();
         for (const name in init) {
-            const value = init[name];
-            if (Array.isArray(value)) for (const val of value) this.append(name, val);
-            else this.append(name, value);
+            this.append(name, init[name]);
         }
     }
-}
 
-class Request {
     /**
-     *
-     * @param {String} input -
-     * @param {Object} options -
-     * @param {String} options.method -
-     * @param {String} options.body -
-     * @param {Object} options.agent -
-     * @param {String} options.hostname -
-     * @param {Boolean} options.insecureHTTPParser -
-     * @param {String} options.path -
-     * @param {Number} options.port -
-     * @param {String} options.protocol -
-     * @param {Object} options.headers -
+     * Append value by name, if exists it's create an array of values
+     * @param {Any} name
+     * @param {Any} value
      */
-    constructor(input = "", options = {}) {
-        // input = url.parse(input);
-        const port = input.protocol == "https:" ? 443 : 80;
-        this.method = "GET";
-        this.body = undefined;
-        this.agent = undefined;
-        this.hostname = input.host;
-        this.insecureHTTPParser = true;
-        this.path = input.path;
-        this.port = parseInt(input.port || port);
-        this.protocol = input.protocol;
-        this.headers = {
-            Host: input.host,
-            Connection: "keep-alive",
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
-            Accept: "*/*", //"text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-            "Accept-Encoding": "*", //"gzip, deflate, br",
-            "Accept-Language": "*", //"en-US,en;q=0.9,id;q=0.8",
-            ...options?.headers,
-        };
+    append(name, value) {
+        name = name.toLowerCase();
+        if (this[name]) {
+            if (Array.isArray(this[name])) {
+                this[name].push(value);
+            } else {
+                this[name] = [this[name], value];
+            }
+        } else {
+            this[name] = value;
+        }
+    }
+
+    /**
+     * Delete headers by name
+     * @param {Any} name
+     */
+    delete(name) {
+        name = name.toLowerCase();
+        delete this[name];
+    }
+
+    /**
+     * Get array of [name,value]
+     * @returns {Array}
+     */
+    entries() {
+        const keys = this.keys();
+        const values = [];
+        for (let i = 0; i < keys.length; i++) {
+            const name = keys[i];
+            values.push([name.replace(/(^|[^\w])(\w)/g, ($, $1, $2) => $1 + $2.toUpperCase()), this[name]]);
+        }
+        return values;
+    }
+
+    /**
+     * Get headers by name
+     * @param {Any} name
+     * @returns {Any}
+     */
+    get(name) {
+        name = name.toLowerCase();
+        return this[name];
+    }
+
+    /**
+     * Check headers name exists
+     * @param {Any} name
+     * @returns {Boolean}
+     */
+    has(name) {
+        name = name.toLowerCase();
+        return !!this[name];
+    }
+
+    /**
+     * Get array of headers names
+     * @returns {Array}
+     */
+    keys() {
+        return Object.getOwnPropertyNames(this);
+    }
+
+    /**
+     * Set value by name
+     * @param {Any} name
+     * @param {Any} value
+     */
+    set(name, value) {
+        name = name.toLowerCase();
+        this[name] = value;
+    }
+
+    /**
+     * Get Array of heades value
+     * @returns {Array}
+     */
+    values() {
+        const keys = this.keys();
+        const values = [];
+        for (let i = 0; i < keys.length; i++) {
+            const name = keys[i];
+            values.push(this[name]);
+        }
+        return values;
     }
 }
 
+/**
+ * 
+ */
+class Request {
+    constructor(input, options) {
+        this.body = options.body;
+        // this.bodyUsed = options.bodyUsed;
+        // this.cache = options.cache;
+        // this.credentials = options.credentials;
+        // this.destination = options.destination;
+
+        // this.integrity = options.integrity;
+        /**
+         * @type {String}
+         */
+        this.method = options.method;
+        // this.mode = options.mode;
+        // this.priority = options.priority;
+        // this.redirect = options.redirect;
+        // this.referrer = options.referrer;
+        // this.referrerPolicy = options.referrerPolicy;
+        // this.url=options.url
+
+        // this.url = new URL(input);
+        /**
+         * @type {URL}
+         */
+        this.url = input;
+
+        // default headers
+        options.headers = {
+            ...options.headers,
+            host: this.url.host,
+        };
+
+        /**
+         * @type {Object}
+         */
+        this.headers = new Headers(options.headers);
+
+        const port = this.url.protocol == "https:" ? 443 : 80;
+
+        // this.stream = options;
+
+        // http.request
+        /**
+         * @type {Any}
+         */
+        this.agent = options.agent || null;
+
+        /**
+         * @type {String}
+         */
+        this.hostname = this.url.hostname;
+
+        /**
+         * @type {Boolean}
+         */
+        this.insecureHTTPParser = options.insecureHTTPParser || true;
+
+        /**
+         * @type {String}
+         */
+        this.path = this.url.pathname + this.url.search;
+
+        /**
+         * @type {Number}
+         */
+        this.port = parseInt(this.url.port || port);
+
+        /**
+         * @type {String}
+         */
+        this.protocol = this.url.protocol;
+
+        /**
+         * @type {Number}
+         */
+        this.timeout = options.timeout || 1000 * 60; //60s/1m
+    }
+    // arrayBuffer() {}
+    // blob() {}
+    // clone() {}
+    // formData() {}
+    // json() {}
+    // text() {}
+}
+
+/**
+ * 
+ */
 class Response {
     /**
-     *
-     * @param {Array} body -
-     * @param {Object} options -
+     * 
+     * @param {Array} body 
+     * @param {Object} options 
      */
     constructor(body = [], options = {}) {
         this.body = body;
+        // this.body=options.body
+        // this.bodyUsed = options.bodyUsed;
+        this.headers = new Headers(options.headers);
+        // this.ok = options.ok;
+        // this.redirected = options.redirected;
         this.status = options.statusCode;
         this.statusText = options.statusMessage;
-        this.headers = new Headers(options.headers);
+        // this.type = options.type;
+        // this.url = this.request.url;
+        // this.request={}
+        this.stream = options;
     }
 
     /**
-     * Returns a promise that resolves with an ArrayBuffer representation of the response body.
-     * @returns {Array}
+     * 
+     * @returns {Buffer}
      */
     arrayBuffer() {
         return Buffer.concat(this.body);
     }
+    // blob() {}
+    // clone() {}
+    // error() {}
+    // formData() {}
 
     /**
-     * Returns a promise that resolves with the result of parsing the response body text as JSON.
+     * 
      * @returns {Object}
      */
-    json() {
-        return JSON.parse(this.text());
+    async json() {
+        return JSON.parse(this.arrayBuffer());
     }
+    // redirect() {}
 
     /**
-     * Returns a promise that resolves with a text representation of the response body.
+     * 
      * @returns {String}
      */
-    text() {
+    async text() {
         return this.arrayBuffer().toString();
     }
 }
 
 /**
- * fetching resources
+ * 
  * @param {String} resource -
  * @param {Object} options -
- * @param {String} options.method -
- * @param {String} options.body -
- * @param {Object} options.agent -
- * @param {String} options.hostname -
- * @param {Boolean} options.insecureHTTPParser -
- * @param {String} options.path -
- * @param {Number} options.port -
- * @param {String} options.protocol -
- * @param {Object} options.headers -
  * @returns {Promise}
  */
 function fetch(resource = "", options = {}) {
-    resource = url.parse(resource);
-    const pool = Storage.get(resource.hostname, options);
-    if (!options.headers) options.headers = {};
-    if (pool.cookie) options.headers["Cookie"] = pool.cookie;
+    resource=new URL(resource)
+    options.url=resource
+    const pool=storage.get(resource.hostname,options)
+    if(!options.headers){
+        options.headers={}
+    }
+    options.headers.cookie=pool.cookie
     const request = new Request(resource, options);
-    const protocol = request.protocol == "https:" ? https : http;
+
+    const protocol = request.url.protocol == "https:" ? https : http;
+
     return new Promise((resolve, reject) => {
         const req = protocol.request(request, async (res) => {
             const response = new Response([], res);
-            const cookies = response.headers.getAll("set-cookie");
-            if (cookies && cookies.length) pool.cookie = cookies;
-            for await (const chunk of res) response.body.push(chunk);
+            response.url = request.url;
+
+            if(response.headers.has('set-cookie')){
+                pool.cookie=response.headers.get('set-cookie')
+            }
+
+            // 
+            let stream = res;
+
+            if (response.headers.get("content-encoding") == "br") {
+                stream = zlib.createBrotliDecompress();
+            } else if (response.headers.get("content-encoding") == "gzip") {
+                stream = zlib.createGunzip();
+            } else if (response.headers.get("content-encoding") == "deflate") {
+                stream = zlib.createInflate();
+            }
+
+            if (stream !== res) {
+                res.pipe(stream);
+            }
+
+            for await (const chunk of stream) {
+                response.body.push(chunk);
+            }
+            // 
+
             resolve(response);
         });
         req.on("error", reject);
-        if (request.body) req.write(request.body);
+        if (request.body) {
+            req.write(request.body);
+        }
         req.end();
     });
 }
 
-fetch.Storage = Storage;
 fetch.Headers = Headers;
 fetch.Request = Request;
 fetch.Response = Response;
+
 module.exports = fetch;
