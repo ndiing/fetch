@@ -125,7 +125,7 @@ class Headers {
  * 
  */
 class Request {
-    constructor(input, options) {
+    constructor(input='', options={}) {
         this.body = options.body;
         // this.bodyUsed = options.bodyUsed;
         // this.cache = options.cache;

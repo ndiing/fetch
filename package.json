@@ -1,7 +1,7 @@
 {
   "name": "@ndiing/fetch",
   "version": "1.0.4",
-  "description": "nodejs fetch with Storage and CookieStore",
+  "description": "Nodejs fetch module",
   "main": "index.js",
   "scripts": {
     "test": "exit 0"
