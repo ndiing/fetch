@@ -1,7 +1,7 @@
 const http = require("http");
 const https = require("https");
 const zlib = require("zlib");
-const StorageManager = require("../storage/index");
+const StorageManager = require('@ndiing/storage');
 
 /**
  * ### Install
