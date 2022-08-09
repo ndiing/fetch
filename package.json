@@ -1,7 +1,7 @@
 {
   "name": "@ndiing/fetch",
-  "version": "1.0.4",
-  "description": "Nodejs fetch module",
+  "version": "2.0.0",
+  "description": "nodejs fetch module",
   "main": "index.js",
   "scripts": {
     "test": "exit 0"
@@ -13,19 +13,13 @@
   "keywords": [
     "nodejs",
     "fetch",
-    "localStorage",
-    "cookieStore"
+    "http",
+    "https"
   ],
   "author": "ndiing",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ndiing/fetch/issues"
   },
-  "homepage": "https://github.com/ndiing/fetch#readme",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
-  "dependencies": {
-    "@ndiing/storage": "^1.0.0"
-  }
+  "homepage": "https://github.com/ndiing/fetch#readme"
 }

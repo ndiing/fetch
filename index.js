@@ -1,53 +1,243 @@
 const http = require("http");
 const https = require("https");
 const zlib = require("zlib");
-const storage = require("@ndiing/storage");
+const StorageManager = require("../storage/index");
 
 /**
- * Nodejs fetch module
  * ### Install
  * ```
  * npm install @ndiing/fetch
  * ```
- * @see {@link ./examples/fetch.js}
-* @module fetch
-*/
+ * @see ./test.js
+ * @module fetch
+ */
+
+/**
+ *
+ */
+class URLSearchParams2 {
+    /**
+     *
+     * @param {String} init
+     */
+    constructor(init = "") {
+        init = init
+            .replace(/[^\?]+\?/, "")
+            .replace(/#[^#]+/, "")
+            .replace(/^\?/, "")
+            .matchAll(/([^\=&]+)\=([^&]+)/g);
+
+        for (const [, name, value] of init) {
+            this.append(name, value);
+        }
+    }
+
+    /**
+     *
+     * @param {String} name
+     * @param {String} value
+     */
+    append(name, value) {
+        if (this[name] == undefined) {
+            this[name] = value;
+        } else {
+            if (Array.isArray(this[name])) {
+                this[name].push(value);
+            } else {
+                this[name] = [this[name], value];
+            }
+        }
+    }
+
+    /**
+     *
+     * @param {*} name
+     */
+    delete(name) {
+        delete this[name];
+    }
+
+    /**
+     *
+     * @returns {Array}
+     */
+    entries() {
+        const keys = this.keys();
+        const values = [];
+
+        for (const name of keys) {
+            values.push([name, this[name]]);
+        }
+        return values;
+    }
+
+    /**
+     *
+     * @param {Function} callback
+     */
+    forEach(callback) {
+        const keys = this.keys();
+
+        for (const name of keys) {
+            callback(this[name], name, this);
+        }
+    }
+
+    /**
+     *
+     * @param {String} name
+     * @returns {String}
+     */
+    get(name) {
+        return this[name];
+    }
+
+    /**
+     *
+     * @param {String} name
+     * @returns {String/Array}
+     */
+    getAll(name) {
+        return this[name];
+    }
+
+    /**
+     *
+     * @param {String} name
+     * @returns {Boolean}
+     */
+    has(name) {
+        return !!this[name];
+    }
+
+    /**
+     *
+     * @returns {Array}
+     */
+    keys() {
+        return Object.getOwnPropertyNames(this);
+    }
+
+    /**
+     *
+     * @param {String} name
+     * @param {String} value
+     */
+    set(name, value) {
+        this[name] = value;
+    }
+
+    // sort() {}
+
+    /**
+     *
+     * @returns {String}
+     */
+    toString() {
+        const keys = this.keys();
+        const values = [];
+
+        for (const name of keys) {
+            values.push([name, this[name]].join("="));
+        }
+        return values.join("&");
+    }
+
+    /**
+     *
+     * @returns {Array}
+     */
+    values() {
+        const keys = this.keys();
+        const values = [];
+
+        for (const name of keys) {
+            values.push(this[name]);
+        }
+        return values;
+    }
+}
+
+/**
+ *
+ */
+class URL2 {
+    // https://www.rfc-editor.org/rfc/rfc3986#appendix-B
+    static regexp = /^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?/;
+
+    /**
+     *
+     * @param {String} url
+     */
+    constructor(url = "") {
+        let [, protocol, , , host, pathname, search, , hash, ,] = url.match(URL2.regexp);
+        this.hash = hash || "";
+        this.host = host || "localhost";
+        this.pathname = pathname || "/";
+        this.protocol = protocol || "http:";
+        this.search = search || "";
+        let [hostname, port] = this.host?.split(":") || [];
+        this.hostname = hostname;
+        this.port = parseInt(port || (this.protocol == "https:" ? 443 : 80));
+        this.origin = this.protocol + "//" + this.host;
+        this.path = this.pathname + this.search + this.hash;
+        this.href = this.origin + this.path;
+        this.searchParams = new URLSearchParams2(this.search);
+        // this.username = "";
+        // this.password = "";
+    }
+
+    // createObjectURL() {}
+
+    // revokeObjectURL() {}
+
+    // toJSON() {}
+
+    /**
+     *
+     * @returns {String}
+     */
+    toString() {
+        return this.href;
+    }
+}
 
 /**
  *
  */
 class Headers {
     /**
-     * Create headers
-     * @param {Any} init
+     *
+     * @param {Object} init
      */
     constructor(init = {}) {
         for (const name in init) {
-            this.append(name, init[name]);
+            this.set(name, init[name]);
         }
     }
 
     /**
-     * Append value by name, if exists it's create an array of values
-     * @param {Any} name
-     * @param {Any} value
+     *
+     * @param {String} name
+     * @param {String} value
      */
     append(name, value) {
         name = name.toLowerCase();
-        if (this[name]) {
+
+        if (this[name] == undefined) {
+            this[name] = value;
+        } else {
             if (Array.isArray(this[name])) {
                 this[name].push(value);
             } else {
                 this[name] = [this[name], value];
             }
-        } else {
-            this[name] = value;
         }
     }
 
     /**
-     * Delete headers by name
-     * @param {Any} name
+     *
+     * @param {String} name
      */
     delete(name) {
         name = name.toLowerCase();
@@ -55,23 +245,25 @@ class Headers {
     }
 
     /**
-     * Get array of [name,value]
+     *
      * @returns {Array}
      */
     entries() {
         const keys = this.keys();
         const values = [];
-        for (let i = 0; i < keys.length; i++) {
-            const name = keys[i];
-            values.push([name.replace(/(^|[^\w])(\w)/g, ($, $1, $2) => $1 + $2.toUpperCase()), this[name]]);
+
+        for (const name of keys) {
+            let key = name;
+            key = key.replace(/(^|-)(\w)/g, ($, $1, $2) => $1 + $2.toLowerCase());
+            values.push([key, this[name]]);
         }
         return values;
     }
 
     /**
-     * Get headers by name
-     * @param {Any} name
-     * @returns {Any}
+     *
+     * @param {String} name
+     * @returns {String/Array}
      */
     get(name) {
         name = name.toLowerCase();
@@ -79,8 +271,8 @@ class Headers {
     }
 
     /**
-     * Check headers name exists
-     * @param {Any} name
+     *
+     * @param {String} name
      * @returns {Boolean}
      */
     has(name) {
@@ -89,7 +281,7 @@ class Headers {
     }
 
     /**
-     * Get array of headers names
+     *
      * @returns {Array}
      */
     keys() {
@@ -97,9 +289,9 @@ class Headers {
     }
 
     /**
-     * Set value by name
-     * @param {Any} name
-     * @param {Any} value
+     *
+     * @param {String} name
+     * @param {String/Array} value
      */
     set(name, value) {
         name = name.toLowerCase();
@@ -107,14 +299,14 @@ class Headers {
     }
 
     /**
-     * Get Array of heades value
+     *
      * @returns {Array}
      */
     values() {
         const keys = this.keys();
         const values = [];
-        for (let i = 0; i < keys.length; i++) {
-            const name = keys[i];
+
+        for (const name of keys) {
             values.push(this[name]);
         }
         return values;
@@ -122,197 +314,193 @@ class Headers {
 }
 
 /**
- * 
+ *
  */
 class Request {
-    constructor(input='', options={}) {
+    /**
+     *
+     * @param {String} input
+     * @param {Object} options
+     * @property {String} options.body
+     * @property {String} options.credentials=include - `omit`, `same-origin`, `include`
+     * @property {Object} options.headers
+     * @property {String} options.method
+     * @property {String} options.redirect=follow - `follow`, `error`, `manual`
+     * @property {Boolean} options.keepalive
+     * @property {String} options.url
+     * @property {String} options.protocol
+     * @property {String} options.hostname
+     * @property {Number} options.port
+     * @property {String} options.path
+     * @property {Object} options.agent
+     * @property {Boolean} options.insecureHTTPParser=true
+     * @property {Number} options.timeout=60000
+     */
+    constructor(input = "", options = {}) {
+        // this.input = input;
+        input = new URL2(input);
         this.body = options.body;
         // this.bodyUsed = options.bodyUsed;
         // this.cache = options.cache;
-        // this.credentials = options.credentials;
+        this.credentials = options.credentials || "include";
         // this.destination = options.destination;
-
+        this.headers = new Headers(options.headers);
         // this.integrity = options.integrity;
-        /**
-         * @type {String}
-         */
-        this.method = options.method;
+        this.method = options.method || "GET";
         // this.mode = options.mode;
         // this.priority = options.priority;
-        // this.redirect = options.redirect;
+        this.redirect = options.redirect || "follow";
         // this.referrer = options.referrer;
         // this.referrerPolicy = options.referrerPolicy;
-        // this.url=options.url
-
-        // this.url = new URL(input);
-        /**
-         * @type {URL}
-         */
-        this.url = input;
-
-        // default headers
-        options.headers = {
-            ...options.headers,
-            host: this.url.host,
-        };
-
-        /**
-         * @type {Object}
-         */
-        this.headers = new Headers(options.headers);
-
-        const port = this.url.protocol == "https:" ? 443 : 80;
-
-        // this.stream = options;
-
-        // http.request
-        /**
-         * @type {Any}
-         */
-        this.agent = options.agent || null;
-
-        /**
-         * @type {String}
-         */
-        this.hostname = this.url.hostname;
-
-        /**
-         * @type {Boolean}
-         */
+        this.keepalive = options.keepalive;
+        if (this.keepalive) {
+            this.headers.set("connection", "keep-alive");
+        }
+        // else {
+        //     this.headers.set("connection", "close");
+        // }
+        this.url = input.href;
+        this.protocol = options.protocol || input.protocol;
+        this.hostname = options.hostname || input.hostname;
+        this.port = options.port || input.port;
+        this.path = options.path || input.path;
+        this.agent = options.agent;
         this.insecureHTTPParser = options.insecureHTTPParser || true;
-
-        /**
-         * @type {String}
-         */
-        this.path = this.url.pathname + this.url.search;
-
-        /**
-         * @type {Number}
-         */
-        this.port = parseInt(this.url.port || port);
-
-        /**
-         * @type {String}
-         */
-        this.protocol = this.url.protocol;
-
-        /**
-         * @type {Number}
-         */
-        this.timeout = options.timeout || 1000 * 60; //60s/1m
+        this.timeout = options.timeout || 60000;
     }
+
     // arrayBuffer() {}
+
     // blob() {}
+
     // clone() {}
+
     // formData() {}
+
     // json() {}
+
     // text() {}
 }
 
 /**
- * 
+ *
  */
 class Response {
     /**
-     * 
-     * @param {Array} body 
-     * @param {Object} options 
+     *
+     * @param {Stream} body
+     * @param {Object} options
+     * @property {Stream} options.body
+     * @property {Boolean} options.bodyUsed
+     * @property {Object} options.headers
+     * @property {Number} options.status
+     * @property {String} options.statusText
+     * @property {Boolean} options.ok
      */
-    constructor(body = [], options = {}) {
+    constructor(body, options = {}) {
         this.body = body;
-        // this.body=options.body
-        // this.bodyUsed = options.bodyUsed;
+        this.bodyUsed = false;
         this.headers = new Headers(options.headers);
-        // this.ok = options.ok;
         // this.redirected = options.redirected;
-        this.status = options.statusCode;
-        this.statusText = options.statusMessage;
+        this.status = options.statusCode || 200;
+        this.statusText = options.statusMessage || http.STATUS_CODES[this.status];
+        this.ok = this.status >= 200 && this.status < 300;
         // this.type = options.type;
-        // this.url = this.request.url;
-        // this.request={}
-        this.stream = options;
+        // this.url = options.url;
+
+        if (this.headers.get("content-encoding") == "gzip") {
+            this.body = zlib.createGunzip();
+        } else if (this.headers.get("content-encoding") == "deflate") {
+            this.body = zlib.createInflate();
+        } else if (this.headers.get("content-encoding") == "br") {
+            this.body = zlib.createBrotliDecompress();
+        }
+
+        if (this.body !== body) {
+            body.pipe(this.body);
+        }
     }
 
-    /**
-     * 
-     * @returns {Buffer}
-     */
-    arrayBuffer() {
-        return Buffer.concat(this.body);
-    }
+    // arrayBuffer() {}
+
     // blob() {}
+
     // clone() {}
+
     // error() {}
+
     // formData() {}
 
     /**
-     * 
+     *
      * @returns {Object}
      */
-    async json() {
-        return JSON.parse(this.arrayBuffer());
+    json() {
+        return new Promise((resolve, reject) => {
+            const buffer = [];
+            this.body.on("error", reject);
+            this.body.on("data", (chunk) => {
+                buffer.push(chunk);
+            });
+            this.body.on("end", () => {
+                this.bodyUsed = true;
+                resolve(JSON.parse(Buffer.concat(buffer)));
+            });
+        });
     }
+
     // redirect() {}
 
     /**
-     * 
+     *
      * @returns {String}
      */
-    async text() {
-        return this.arrayBuffer().toString();
+    text() {
+        return new Promise((resolve, reject) => {
+            const buffer = [];
+            this.body.on("error", reject);
+            this.body.on("data", (chunk) => {
+                buffer.push(chunk);
+            });
+            this.body.on("end", () => {
+                this.bodyUsed = true;
+                resolve(Buffer.concat(buffer).toString());
+            });
+        });
     }
 }
 
 /**
- * 
- * @param {String} resource -
- * @param {Object} options -
+ *
+ * @param {String} resource
+ * @param {Object} options
  * @returns {Promise}
  */
 function fetch(resource = "", options = {}) {
-    resource=new URL(resource)
-    options.url=resource
-    const pool=storage.get(resource.hostname,options)
-    if(!options.headers){
-        options.headers={}
-    }
-    options.headers.cookie=pool.cookie
     const request = new Request(resource, options);
-
-    const protocol = request.url.protocol == "https:" ? https : http;
-
+    const storage = StorageManager.storage(request.hostname, options);
+    if (request.credentials == "include" && storage.cookie) {
+        request.headers.append("cookie", storage.cookie);
+    }
+    const protocol = request.protocol == "https:" ? https : http;
     return new Promise((resolve, reject) => {
-        const req = protocol.request(request, async (res) => {
-            const response = new Response([], res);
-            response.url = request.url;
-
-            if(response.headers.has('set-cookie')){
-                pool.cookie=response.headers.get('set-cookie')
+        const req = protocol.request(request);
+        req.on("error", reject);
+        req.on("response", (res) => {
+            const response = new Response(res, {
+                statusCode: res.statusCode,
+                statusText: res.statusMessage,
+                headers: res.headers,
+            });
+            if (response.headers.has("set-cookie")) {
+                storage.cookie = response.headers.get("set-cookie");
             }
-
-            // 
-            let stream = res;
-
-            if (response.headers.get("content-encoding") == "br") {
-                stream = zlib.createBrotliDecompress();
-            } else if (response.headers.get("content-encoding") == "gzip") {
-                stream = zlib.createGunzip();
-            } else if (response.headers.get("content-encoding") == "deflate") {
-                stream = zlib.createInflate();
+            if (request.redirect == "follow" && response.headers.has("location")) {
+                return fetch(response.headers.get("location")).then(resolve).catch(reject);
             }
-
-            if (stream !== res) {
-                res.pipe(stream);
-            }
-
-            for await (const chunk of stream) {
-                response.body.push(chunk);
-            }
-            // 
-
             resolve(response);
         });
-        req.on("error", reject);
+
         if (request.body) {
             req.write(request.body);
         }
@@ -320,8 +508,11 @@ function fetch(resource = "", options = {}) {
     });
 }
 
+fetch.URLSearchParams2 = URLSearchParams2;
+fetch.URL2 = URL2;
 fetch.Headers = Headers;
 fetch.Request = Request;
 fetch.Response = Response;
-
 module.exports = fetch;
+
+// jsdoc2md fetch/index.js > fetch/README.md
