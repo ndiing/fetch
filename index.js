@@ -484,10 +484,6 @@ function fetch(resource = "", options = {}) {
 
         const protocol = request.protocol == "https:" ? https : http;
 
-        if (request.headers.get("connection") == "keep-alive" && !request.agent) {
-            request.agent = new protocol.Agent({ keepAlive: true });
-        }
-
         request.body = protocol.request(request);
         request.body.on("error", reject);
         request.body.on("response", (res) => {
