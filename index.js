@@ -477,34 +477,41 @@ class Response {
  * @returns {Promise}
  */
 function fetch(resource = "", options = {}) {
-    const request = new Request(resource, options);
-    const storage = StorageManager.storage(request.hostname, options);
-    if (request.credentials == "include" && storage.cookie) {
-        request.headers.append("cookie", storage.cookie);
-    }
-    const protocol = request.protocol == "https:" ? https : http;
     return new Promise((resolve, reject) => {
-        const req = protocol.request(request);
-        req.on("error", reject);
-        req.on("response", (res) => {
+        const request = new Request(resource, options);
+
+        const storage = StorageManager.storage(request.hostname, options);
+        if (request.credentials == "include" && storage.cookie) {
+            request.headers.append("cookie", storage.cookie);
+        }
+
+        const protocol = request.protocol == "https:" ? https : http;
+
+        request.body = protocol.request(request);
+        request.body.on("error", reject);
+        request.body.on("response", (res) => {
             const response = new Response(res, {
                 statusCode: res.statusCode,
                 statusText: res.statusMessage,
                 headers: res.headers,
             });
+
             if (response.headers.has("set-cookie")) {
                 storage.cookie = response.headers.get("set-cookie");
             }
+
             if (request.redirect == "follow" && response.headers.has("location")) {
                 return fetch(response.headers.get("location")).then(resolve).catch(reject);
             }
+
             resolve(response);
         });
 
-        if (request.body) {
-            req.write(request.body);
+        if (options.body) {
+            request.body.write(options.body);
         }
-        req.end();
+        
+        request.body.end();
     });
 }
 
