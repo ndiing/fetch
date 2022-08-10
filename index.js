@@ -254,7 +254,7 @@ class Headers {
 
         for (const name of keys) {
             let key = name;
-            key = key.replace(/(^|-)(\w)/g, ($, $1, $2) => $1 + $2.toLowerCase());
+            key = key.replace(/(^|[^\w])(\w)/g, ($, $1, $2) => $1 + $2.toLowerCase());
             values.push([key, this[name]]);
         }
         return values;
