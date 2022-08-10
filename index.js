@@ -1,7 +1,7 @@
 const http = require("http");
 const https = require("https");
 const zlib = require("zlib");
-const StorageManager = require('@ndiing/storage');
+const StorageManager = require("@ndiing/storage");
 
 /**
  * ### Install
@@ -356,9 +356,6 @@ class Request {
         if (this.keepalive) {
             this.headers.set("connection", "keep-alive");
         }
-        // else {
-        //     this.headers.set("connection", "close");
-        // }
         this.url = input.href;
         this.protocol = options.protocol || input.protocol;
         this.hostname = options.hostname || input.hostname;
@@ -487,6 +484,10 @@ function fetch(resource = "", options = {}) {
 
         const protocol = request.protocol == "https:" ? https : http;
 
+        if (request.headers.get("connection") == "keep-alive" && !request.agent) {
+            request.agent = new protocol.Agent({ keepAlive: true });
+        }
+
         request.body = protocol.request(request);
         request.body.on("error", reject);
         request.body.on("response", (res) => {
@@ -510,7 +511,7 @@ function fetch(resource = "", options = {}) {
         if (options.body) {
             request.body.write(options.body);
         }
-        
+
         request.body.end();
     });
 }
