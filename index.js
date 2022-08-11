@@ -422,60 +422,14 @@ class Request {
         input = new URL2(input);
 
         /**
-         * @type {Object}
-         */
-        this.headers = new Headers({
-            Host: input.host,
-            "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36`,
-            Accept: `*/*`,
-            "Accept-Language": `*`,
-            "Accept-Encoding": `*`,
-            // "Accept-Encoding": `gzip, deflate, br`,
-            // 'Referer': `https://developer.mozilla.org/testpage.html`,
-            // 'Connection': `keep-alive`,
-            // 'Upgrade-Insecure-Requests': `1`,
-            // 'If-Modified-Since': `Mon, 18 Jul 2016 02:36:04 GMT`,
-            // 'If-None-Match': `"c561c68d0ba92bbeb8b0fff2a9199f722e3a621a"`,
-            // 'Cache-Control': `max-age=0`,
-            ...options.headers,
-        });
-        // this.body;
-        // this.bodyUsed;
-        // this.cache; // default, no-store, reload, no-cache, force-cache, and only-if-cached,
-
-        /**
-         * @type {String}
-         */
-        this.credentials = options.credentials || "include"; // omit, same-origin, include
-        // this.destination;
-        // this.integrity;
-
-        /**
          * @type {String}
          */
         this.method = options.method || "GET";
-        // this.mode;
-        // this.priority;
-
-        /**
-         * @type {String}
-         */
-        this.redirect = options.redirect || "follow"; // follow, error, manual
-        // this.referrer;
-        // this.referrerPolicy;
 
         /**
          * @type {String}
          */
         this.url = options.url || input.href;
-
-        /**
-         * @type {Boolean}
-         */
-        this.keepalive = options.keepalive;
-        if (this.keepalive) {
-            this.headers.set("Connection", "keep-alive");
-        }
 
         /**
          * @type {String}
@@ -511,6 +465,53 @@ class Request {
          * @type {Number}
          */
         this.timeout = options.timeout;
+
+        /**
+         * @type {Object}
+         */
+        this.headers = new Headers({
+            Host: input.host,
+            "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36`,
+            Accept: `*/*`,
+            "Accept-Language": `*`,
+            "Accept-Encoding": `*`,
+            // "Accept-Encoding": `gzip, deflate, br`,
+            // 'Referer': `https://developer.mozilla.org/testpage.html`,
+            // 'Connection': `keep-alive`,
+            // 'Upgrade-Insecure-Requests': `1`,
+            // 'If-Modified-Since': `Mon, 18 Jul 2016 02:36:04 GMT`,
+            // 'If-None-Match': `"c561c68d0ba92bbeb8b0fff2a9199f722e3a621a"`,
+            // 'Cache-Control': `max-age=0`,
+            ...options.headers,
+        });
+        // this.body;
+        // this.bodyUsed;
+        // this.cache; // default, no-store, reload, no-cache, force-cache, and only-if-cached,
+
+        /**
+         * @type {String}
+         */
+        this.credentials = options.credentials || "include"; // omit, same-origin, include
+        // this.destination;
+        // this.integrity;
+
+        // this.mode;
+        // this.priority;
+
+        /**
+         * @type {String}
+         */
+        this.redirect = options.redirect || "follow"; // follow, error, manual
+        // this.referrer;
+        // this.referrerPolicy;
+
+        /**
+         * @type {Boolean}
+         */
+        this.keepalive = options.keepalive;
+        if (this.keepalive) {
+            this.headers.set("Connection", "keep-alive");
+        }
     }
 
     // arrayBuffer() {}
@@ -532,13 +533,6 @@ class Response {
      */
     constructor(body, options) {
         /**
-         * @type {Object}
-         */
-        this.headers = new Headers(options.headers);
-        // this.body;
-        // this.bodyUsed;
-
-        /**
          * @type {Number}
          */
         this.status = options.status || options.statusCode;
@@ -552,6 +546,13 @@ class Response {
          * @type {Boolean}
          */
         this.ok = options.status >= 200 && options.status < 300;
+        /**
+         * @type {Object}
+         */
+        this.headers = new Headers(options.headers);
+        // this.body;
+        // this.bodyUsed;
+
         // this.redirected;
         // this.type;
         // this.url;
