@@ -1,6 +1,8 @@
 const http = require("http");
 const https = require("https");
 const zlib = require("zlib");
+const { Readable } = require("stream");
+const { Blob } = require("buffer");
 const StorageManager = require("@ndiing/storage");
 
 /**
@@ -413,18 +415,57 @@ class Headers {
  *
  */
 class Request {
-    /**
-     *
-     * @param {String} input
-     * @param {Object} options
-     */
     constructor(input, options = {}) {
+        if (input instanceof Request) {
+            input = input.url;
+            options = {
+                ...input,
+                ...options,
+            };
+        }
         input = new URL2(input);
+        // this.body = options.body;
+
+        // this.bodyUsed = options.bodyUsed;
+        // this.cache = options.cache; //default, no-store, reload, no-cache, force-cache, and only-if-cached
+
+        /**
+         * @type {String}
+         */
+        this.credentials = options.credentials || "same-origin"; //omit, same-origin, include
+
+        if (this.credentials !== "omit") {
+            this.storage = StorageManager.storage(input.hostname);
+
+            if (this.storage.cookie) {
+                options.headers = {
+                    Cookie: this.storage.cookie,
+                    ...options.headers,
+                };
+            }
+        }
+
+        // this.destination = options.destination;
+
+        /**
+         * @type {Object}
+         */
+        this.headers = new Headers(options.headers);
+        // this.integrity = options.integrity;
 
         /**
          * @type {String}
          */
         this.method = options.method || "GET";
+        // this.mode = options.mode || "cors"; //cors, no-cors, or same-origin
+        // this.priority = options.priority;
+
+        /**
+         * @type {String}
+         */
+        this.redirect = options.redirect || "follow";
+        // this.referrer = options.referrer;
+        // this.referrerPolicy = options.referrerPolicy; //no-referrer, no-referrer-when-downgrade, same-origin, origin, strict-origin, origin-when-cross-origin, strict-origin-when-cross-origin, or unsafe-url
 
         /**
          * @type {String}
@@ -432,14 +473,34 @@ class Request {
         this.url = options.url || input.href;
 
         /**
-         * @type {String}
+         * @type {Undefined}
          */
-        this.protocol = options.protocol || input.protocol;
+        this.keepalive = options.keepalive;
+        if (this.keepalive) {
+            this.headers.set("Connection", "keep-alive");
+        }
+
+        // this.signal = options.signal;
+
+        /**
+         * @type {Undefined}
+         */
+        this.agent = options.agent;
 
         /**
          * @type {String}
          */
         this.hostname = options.hostname || input.hostname;
+
+        /**
+         * @type {Boolean}
+         */
+        this.insecureHTTPParser = options.insecureHTTPParser || true;
+
+        /**
+         * @type {String}
+         */
+        this.path = options.path || input.path;
 
         /**
          * @type {Number}
@@ -449,76 +510,36 @@ class Request {
         /**
          * @type {String}
          */
-        this.path = options.path || input.path;
+        this.protocol = options.protocol || input.protocol;
 
         /**
-         * @type {String/Boolean/Object}
-         */
-        this.agent = options.agent;
-
-        /**
-         * @type {Boolean}
-         */
-        this.insecureHTTPParser = options.insecureHTTPParser || true;
-
-        /**
-         * @type {Number}
+         * @type {Undefined}
          */
         this.timeout = options.timeout;
+
+        let readable = options.body;
+        if (!(readable instanceof Readable)) {
+            readable = new Readable();
+            readable.push(options.body);
+            readable.push(null);
+        }
 
         /**
          * @type {Object}
          */
-        this.headers = new Headers({
-            Host: input.host,
-            "User-Agent": `Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36`,
-            Accept: `*/*`,
-            "Accept-Language": `*`,
-            "Accept-Encoding": `*`,
-            // "Accept-Encoding": `gzip, deflate, br`,
-            // 'Referer': `https://developer.mozilla.org/testpage.html`,
-            // 'Connection': `keep-alive`,
-            // 'Upgrade-Insecure-Requests': `1`,
-            // 'If-Modified-Since': `Mon, 18 Jul 2016 02:36:04 GMT`,
-            // 'If-None-Match': `"c561c68d0ba92bbeb8b0fff2a9199f722e3a621a"`,
-            // 'Cache-Control': `max-age=0`,
-            ...options.headers,
-        });
-        // this.body;
-        // this.bodyUsed;
-        // this.cache; // default, no-store, reload, no-cache, force-cache, and only-if-cached,
-
-        /**
-         * @type {String}
-         */
-        this.credentials = options.credentials || "include"; // omit, same-origin, include
-        // this.destination;
-        // this.integrity;
-
-        // this.mode;
-        // this.priority;
-
-        /**
-         * @type {String}
-         */
-        this.redirect = options.redirect || "follow"; // follow, error, manual
-        // this.referrer;
-        // this.referrerPolicy;
-
-        /**
-         * @type {Boolean}
-         */
-        this.keepalive = options.keepalive;
-        if (this.keepalive) {
-            this.headers.set("Connection", "keep-alive");
-        }
+        this.body = readable;
     }
 
     // arrayBuffer() {}
+
     // blob() {}
+
     // clone() {}
+
     // formData() {}
+
     // json() {}
+
     // text() {}
 }
 
@@ -526,166 +547,185 @@ class Request {
  *
  */
 class Response {
-    /**
-     *
-     * @param {Stream} body
-     * @param {Object} options
-     */
-    constructor(body, options) {
-        /**
-         * @type {Number}
-         */
-        this.status = options.status || options.statusCode;
+    constructor(body, options = {}) {
+        // this.body = body;
 
         /**
-         * @type {String}
+         * @type {Undefined}
          */
-        this.statusText = options.statusText || options.statusMessage;
+        this.bodyUsed = options.bodyUsed;
 
-        /**
-         * @type {Boolean}
-         */
-        this.ok = options.status >= 200 && options.status < 300;
         /**
          * @type {Object}
          */
         this.headers = new Headers(options.headers);
-        // this.body;
-        // this.bodyUsed;
 
-        // this.redirected;
-        // this.type;
-        // this.url;
-
-        const contentEncoding = this.headers.get("content-encoding");
-        let readableStream;
-        if (contentEncoding == "gzip") {
-            readableStream = zlib.createGunzip();
-        } else if (contentEncoding == "deflate") {
-            readableStream = zlib.createInflate();
-        } else if (contentEncoding == "br") {
-            readableStream = zlib.createBrotliDecompress();
-        }
-        if (readableStream) {
-            body.pipe(readableStream);
+        // Set-Cookie:
+        if (options.request.storage && this.headers.has("set-cookie")) {
+            options.request.storage.cookie = this.headers.get("set-cookie");
         }
 
         /**
-         * @type {Stream}
+         * @type {Undefined}
          */
-        this.body = readableStream || body;
+        this.redirected = options.redirected;
+
+        /**
+         * @type {Number}
+         */
+        this.status = options.status || 200;
+
+        /**
+         * @type {String}
+         */
+        this.statusText = options.statusText || http.STATUS_CODES[this.status];
+
+        /**
+         * @type {Boolean}
+         */
+        this.ok = this.status >= 200 && this.status < 300;
+
+        /**
+         * @type {String}
+         */
+        this.type = options.type || "basic";
+
+        /**
+         * @type {Undefined}
+         */
+        this.url = options.request?.url;
+
+        let readable = body;
+        const encoding = this.headers.get("content-encoding");
+
+        if (!(body instanceof Readable)) {
+            readable = new Readable();
+            readable.push(body);
+            readable.push(null);
+
+            body = readable;
+
+            if (encoding == "gzip") {
+                readable = body.pipe(zlib.createGzip());
+            } else if (encoding == "deflate") {
+                readable = body.pipe(zlib.createDeflate());
+            } else if (encoding == "br") {
+                readable = body.pipe(zlib.createBrotliCompress());
+            }
+
+            body = readable;
+        }
+
+        if (encoding == "gzip") {
+            readable = body.pipe(zlib.createGunzip());
+        } else if (encoding == "deflate") {
+            readable = body.pipe(zlib.createInflate());
+        } else if (encoding == "br") {
+            readable = body.pipe(zlib.createBrotliDecompress());
+        }
+
+        /**
+         * @type {Object}
+         */
+        this.body = readable;
+
+        if (options.request?.redirect == "follow" && this.headers.has("location")) {
+            this.redirected = this.headers.get("location");
+            return this.redirect(this.redirected);
+        }
     }
 
-    /**
-     *
-     * @returns {Promise}
-     */
-    buffer() {
+    read() {
         return new Promise((resolve, reject) => {
             const buffer = [];
             this.body.on("error", reject);
             this.body.on("data", (chunk) => {
                 buffer.push(chunk);
             });
+
             this.body.on("end", () => {
+                this.bodyUsed = true;
                 resolve(Buffer.concat(buffer));
             });
         });
     }
-    // arrayBuffer() {}
-    // blob() {}
+
+    /**
+     *
+     * @returns {ArrayBuffer}
+     */
+    arrayBuffer() {
+        return this.read().then((buffer) => buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength));
+    }
+
+    /**
+     *
+     * @returns {Blob}
+     */
+    blob() {
+        return this.read().then((buffer) => new Blob(buffer));
+    }
+
     // clone() {}
+
     // error() {}
+
     // formData() {}
 
     /**
      *
-     * @returns {Promise}
+     * @returns {Object}
      */
     json() {
-        return new Promise((resolve, reject) => {
-            this.buffer()
-                .then((buffer) => resolve(JSON.parse(buffer)))
-                .catch(reject);
-        });
+        return this.read().then((buffer) => JSON.parse(buffer));
     }
-    // redirect() {}
 
     /**
      *
-     * @returns {Promise}
+     * @param {String} url
+     * @param {Number} status
+     * @returns {Stream}
+     */
+    redirect(url, status) {
+        return fetch(url);
+    }
+
+    /**
+     *
+     * @returns {String}
      */
     text() {
-        return new Promise((resolve, reject) => {
-            this.buffer()
-                .then((buffer) => resolve("" + buffer))
-                .catch(reject);
-        });
+        return this.read().then((buffer) => buffer.toString());
     }
 }
 
 /**
- * ### Default `options.headers`
- * ```json
- * {
- *     "host": "${host}",
- *     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
- *     "accept": "*\/*",
- *     "accept-language": "*"
- * }
- * ```
- * @param {String} resource
+ *
+ * @param {String/Request} resource
  * @param {Object} options
- * @param {Object} options.headers
- * @param {String} options.credentials=include
- * @param {String} options.method=GET
- * @param {String} options.redirect=follow
- * @param {String} options.protocol=http:
- * @param {String} options.hostname=localhost
- * @param {Number} options.port=80
- * @param {String} options.path=/
- * @param {String} options.agent
- * @param {Boolean} options.insecureHTTPParser=true
- * @param {Number} options.timeout
- * @param {Boolean} options.keepalive
  * @returns {Promise}
  */
 function fetch(resource, options = {}) {
     return new Promise((resolve, reject) => {
-        const request = new Request(resource, options);
-        const protocol = request.protocol == "https:" ? https : http;
-        const storage = StorageManager.storage(request.hostname, options);
-
-        if (request.credentials == "include" && storage.cookie) {
-            request.headers.set("cookie", storage.cookie);
+        let request = resource;
+        if (!(request instanceof Request)) {
+            request = new Request(request, options);
         }
 
-        request.body = protocol.request(request);
-        request.body.on("error", reject);
-        request.body.on("response", (res) => {
+        const protocol = request.protocol == "https:" ? https : http;
+        const req = protocol.request(request);
+        req.on("error", reject);
+        req.on("response", (res) => {
             const response = new Response(res, {
-                headers: res.headers,
                 status: res.statusCode,
-                statusText: res.statusMessage,
+                headers: res.headers,
+                request,
             });
-
-            if (response.headers.has("set-cookie")) {
-                storage.cookie = response.headers.get("set-cookie");
-            }
-
-            if (request.redirect == "follow" && response.headers.has("location")) {
-                return fetch(response.headers.get("location")).then(resolve).catch(reject);
-            }
 
             resolve(response);
         });
 
-        if (options.body) {
-            options.body = Buffer.from(options.body);
-            request.body.write(options.body);
-        }
-
-        request.body.end();
+        request.body.pipe(req);
     });
 }
 
