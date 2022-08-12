@@ -451,7 +451,7 @@ class Request {
 
         // Default headers
         options.headers = {
-            Host: input.host,
+            host: input.host,
             ...options.headers
         }
 
