@@ -297,6 +297,10 @@ class URL2 {
          */
         this.path = this.pathname + this.search + this.hash; //URL2
     }
+
+    toString(){
+        return this.href
+    }
 }
 
 // console.log(new URL2("https://www.google.com/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8"));
