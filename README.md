@@ -46,30 +46,35 @@
         * [.set(name)](#module_fetch..Headers+set)
         * [.values()](#module_fetch..Headers+values) ⇒ <code>Array</code>
     * [~Request](#module_fetch..Request)
-        * [new Request(input, options)](#new_module_fetch..Request_new)
-        * [.headers](#module_fetch..Request+headers) : <code>Object</code>
         * [.credentials](#module_fetch..Request+credentials) : <code>String</code>
+        * [.headers](#module_fetch..Request+headers) : <code>Object</code>
         * [.method](#module_fetch..Request+method) : <code>String</code>
         * [.redirect](#module_fetch..Request+redirect) : <code>String</code>
         * [.url](#module_fetch..Request+url) : <code>String</code>
-        * [.keepalive](#module_fetch..Request+keepalive) : <code>Boolean</code>
-        * [.protocol](#module_fetch..Request+protocol) : <code>String</code>
+        * [.keepalive](#module_fetch..Request+keepalive) : <code>Undefined</code>
+        * [.agent](#module_fetch..Request+agent) : <code>Undefined</code>
         * [.hostname](#module_fetch..Request+hostname) : <code>String</code>
-        * [.port](#module_fetch..Request+port) : <code>Number</code>
-        * [.path](#module_fetch..Request+path) : <code>String</code>
-        * [.agent](#module_fetch..Request+agent) : <code>String/Boolean/Object</code>
         * [.insecureHTTPParser](#module_fetch..Request+insecureHTTPParser) : <code>Boolean</code>
-        * [.timeout](#module_fetch..Request+timeout) : <code>Number</code>
+        * [.path](#module_fetch..Request+path) : <code>String</code>
+        * [.port](#module_fetch..Request+port) : <code>Number</code>
+        * [.protocol](#module_fetch..Request+protocol) : <code>String</code>
+        * [.timeout](#module_fetch..Request+timeout) : <code>Undefined</code>
+        * [.body](#module_fetch..Request+body) : <code>Object</code>
     * [~Response](#module_fetch..Response)
-        * [new Response(body, options)](#new_module_fetch..Response_new)
+        * [.bodyUsed](#module_fetch..Response+bodyUsed) : <code>Undefined</code>
         * [.headers](#module_fetch..Response+headers) : <code>Object</code>
+        * [.redirected](#module_fetch..Response+redirected) : <code>Undefined</code>
         * [.status](#module_fetch..Response+status) : <code>Number</code>
         * [.statusText](#module_fetch..Response+statusText) : <code>String</code>
         * [.ok](#module_fetch..Response+ok) : <code>Boolean</code>
-        * [.body](#module_fetch..Response+body) : <code>Stream</code>
-        * [.buffer()](#module_fetch..Response+buffer) ⇒ <code>Promise</code>
-        * [.json()](#module_fetch..Response+json) ⇒ <code>Promise</code>
-        * [.text()](#module_fetch..Response+text) ⇒ <code>Promise</code>
+        * [.type](#module_fetch..Response+type) : <code>String</code>
+        * [.url](#module_fetch..Response+url) : <code>Undefined</code>
+        * [.body](#module_fetch..Response+body) : <code>Object</code>
+        * [.arrayBuffer()](#module_fetch..Response+arrayBuffer) ⇒ <code>ArrayBuffer</code>
+        * [.blob()](#module_fetch..Response+blob) ⇒ <code>Blob</code>
+        * [.json()](#module_fetch..Response+json) ⇒ <code>Object</code>
+        * [.redirect(url, status)](#module_fetch..Response+redirect) ⇒ <code>Stream</code>
+        * [.text()](#module_fetch..Response+text) ⇒ <code>String</code>
     * [~fetch(resource, options)](#module_fetch..fetch) ⇒ <code>Promise</code>
 
 <a name="module_fetch..URLSearchParams2"></a>
@@ -364,37 +369,28 @@ URL!=URL2URL > AbsoluteURL2 > Relative
 **Kind**: inner class of [<code>fetch</code>](#module_fetch)  
 
 * [~Request](#module_fetch..Request)
-    * [new Request(input, options)](#new_module_fetch..Request_new)
-    * [.headers](#module_fetch..Request+headers) : <code>Object</code>
     * [.credentials](#module_fetch..Request+credentials) : <code>String</code>
+    * [.headers](#module_fetch..Request+headers) : <code>Object</code>
     * [.method](#module_fetch..Request+method) : <code>String</code>
     * [.redirect](#module_fetch..Request+redirect) : <code>String</code>
     * [.url](#module_fetch..Request+url) : <code>String</code>
-    * [.keepalive](#module_fetch..Request+keepalive) : <code>Boolean</code>
-    * [.protocol](#module_fetch..Request+protocol) : <code>String</code>
+    * [.keepalive](#module_fetch..Request+keepalive) : <code>Undefined</code>
+    * [.agent](#module_fetch..Request+agent) : <code>Undefined</code>
     * [.hostname](#module_fetch..Request+hostname) : <code>String</code>
-    * [.port](#module_fetch..Request+port) : <code>Number</code>
-    * [.path](#module_fetch..Request+path) : <code>String</code>
-    * [.agent](#module_fetch..Request+agent) : <code>String/Boolean/Object</code>
     * [.insecureHTTPParser](#module_fetch..Request+insecureHTTPParser) : <code>Boolean</code>
-    * [.timeout](#module_fetch..Request+timeout) : <code>Number</code>
+    * [.path](#module_fetch..Request+path) : <code>String</code>
+    * [.port](#module_fetch..Request+port) : <code>Number</code>
+    * [.protocol](#module_fetch..Request+protocol) : <code>String</code>
+    * [.timeout](#module_fetch..Request+timeout) : <code>Undefined</code>
+    * [.body](#module_fetch..Request+body) : <code>Object</code>
 
-<a name="new_module_fetch..Request_new"></a>
-
-#### new Request(input, options)
-
-| Param | Type |
-| --- | --- |
-| input | <code>String</code> | 
-| options | <code>Object</code> | 
-
-<a name="module_fetch..Request+headers"></a>
-
-#### request.headers : <code>Object</code>
-**Kind**: instance property of [<code>Request</code>](#module_fetch..Request)  
 <a name="module_fetch..Request+credentials"></a>
 
 #### request.credentials : <code>String</code>
+**Kind**: instance property of [<code>Request</code>](#module_fetch..Request)  
+<a name="module_fetch..Request+headers"></a>
+
+#### request.headers : <code>Object</code>
 **Kind**: instance property of [<code>Request</code>](#module_fetch..Request)  
 <a name="module_fetch..Request+method"></a>
 
@@ -410,35 +406,39 @@ URL!=URL2URL > AbsoluteURL2 > Relative
 **Kind**: instance property of [<code>Request</code>](#module_fetch..Request)  
 <a name="module_fetch..Request+keepalive"></a>
 
-#### request.keepalive : <code>Boolean</code>
+#### request.keepalive : <code>Undefined</code>
 **Kind**: instance property of [<code>Request</code>](#module_fetch..Request)  
-<a name="module_fetch..Request+protocol"></a>
+<a name="module_fetch..Request+agent"></a>
 
-#### request.protocol : <code>String</code>
+#### request.agent : <code>Undefined</code>
 **Kind**: instance property of [<code>Request</code>](#module_fetch..Request)  
 <a name="module_fetch..Request+hostname"></a>
 
 #### request.hostname : <code>String</code>
 **Kind**: instance property of [<code>Request</code>](#module_fetch..Request)  
-<a name="module_fetch..Request+port"></a>
+<a name="module_fetch..Request+insecureHTTPParser"></a>
 
-#### request.port : <code>Number</code>
+#### request.insecureHTTPParser : <code>Boolean</code>
 **Kind**: instance property of [<code>Request</code>](#module_fetch..Request)  
 <a name="module_fetch..Request+path"></a>
 
 #### request.path : <code>String</code>
 **Kind**: instance property of [<code>Request</code>](#module_fetch..Request)  
-<a name="module_fetch..Request+agent"></a>
+<a name="module_fetch..Request+port"></a>
 
-#### request.agent : <code>String/Boolean/Object</code>
+#### request.port : <code>Number</code>
 **Kind**: instance property of [<code>Request</code>](#module_fetch..Request)  
-<a name="module_fetch..Request+insecureHTTPParser"></a>
+<a name="module_fetch..Request+protocol"></a>
 
-#### request.insecureHTTPParser : <code>Boolean</code>
+#### request.protocol : <code>String</code>
 **Kind**: instance property of [<code>Request</code>](#module_fetch..Request)  
 <a name="module_fetch..Request+timeout"></a>
 
-#### request.timeout : <code>Number</code>
+#### request.timeout : <code>Undefined</code>
+**Kind**: instance property of [<code>Request</code>](#module_fetch..Request)  
+<a name="module_fetch..Request+body"></a>
+
+#### request.body : <code>Object</code>
 **Kind**: instance property of [<code>Request</code>](#module_fetch..Request)  
 <a name="module_fetch..Response"></a>
 
@@ -446,28 +446,32 @@ URL!=URL2URL > AbsoluteURL2 > Relative
 **Kind**: inner class of [<code>fetch</code>](#module_fetch)  
 
 * [~Response](#module_fetch..Response)
-    * [new Response(body, options)](#new_module_fetch..Response_new)
+    * [.bodyUsed](#module_fetch..Response+bodyUsed) : <code>Undefined</code>
     * [.headers](#module_fetch..Response+headers) : <code>Object</code>
+    * [.redirected](#module_fetch..Response+redirected) : <code>Undefined</code>
     * [.status](#module_fetch..Response+status) : <code>Number</code>
     * [.statusText](#module_fetch..Response+statusText) : <code>String</code>
     * [.ok](#module_fetch..Response+ok) : <code>Boolean</code>
-    * [.body](#module_fetch..Response+body) : <code>Stream</code>
-    * [.buffer()](#module_fetch..Response+buffer) ⇒ <code>Promise</code>
-    * [.json()](#module_fetch..Response+json) ⇒ <code>Promise</code>
-    * [.text()](#module_fetch..Response+text) ⇒ <code>Promise</code>
+    * [.type](#module_fetch..Response+type) : <code>String</code>
+    * [.url](#module_fetch..Response+url) : <code>Undefined</code>
+    * [.body](#module_fetch..Response+body) : <code>Object</code>
+    * [.arrayBuffer()](#module_fetch..Response+arrayBuffer) ⇒ <code>ArrayBuffer</code>
+    * [.blob()](#module_fetch..Response+blob) ⇒ <code>Blob</code>
+    * [.json()](#module_fetch..Response+json) ⇒ <code>Object</code>
+    * [.redirect(url, status)](#module_fetch..Response+redirect) ⇒ <code>Stream</code>
+    * [.text()](#module_fetch..Response+text) ⇒ <code>String</code>
 
-<a name="new_module_fetch..Response_new"></a>
+<a name="module_fetch..Response+bodyUsed"></a>
 
-#### new Response(body, options)
-
-| Param | Type |
-| --- | --- |
-| body | <code>Stream</code> | 
-| options | <code>Object</code> | 
-
+#### response.bodyUsed : <code>Undefined</code>
+**Kind**: instance property of [<code>Response</code>](#module_fetch..Response)  
 <a name="module_fetch..Response+headers"></a>
 
 #### response.headers : <code>Object</code>
+**Kind**: instance property of [<code>Response</code>](#module_fetch..Response)  
+<a name="module_fetch..Response+redirected"></a>
+
+#### response.redirected : <code>Undefined</code>
 **Kind**: instance property of [<code>Response</code>](#module_fetch..Response)  
 <a name="module_fetch..Response+status"></a>
 
@@ -481,43 +485,51 @@ URL!=URL2URL > AbsoluteURL2 > Relative
 
 #### response.ok : <code>Boolean</code>
 **Kind**: instance property of [<code>Response</code>](#module_fetch..Response)  
+<a name="module_fetch..Response+type"></a>
+
+#### response.type : <code>String</code>
+**Kind**: instance property of [<code>Response</code>](#module_fetch..Response)  
+<a name="module_fetch..Response+url"></a>
+
+#### response.url : <code>Undefined</code>
+**Kind**: instance property of [<code>Response</code>](#module_fetch..Response)  
 <a name="module_fetch..Response+body"></a>
 
-#### response.body : <code>Stream</code>
+#### response.body : <code>Object</code>
 **Kind**: instance property of [<code>Response</code>](#module_fetch..Response)  
-<a name="module_fetch..Response+buffer"></a>
+<a name="module_fetch..Response+arrayBuffer"></a>
 
-#### response.buffer() ⇒ <code>Promise</code>
+#### response.arrayBuffer() ⇒ <code>ArrayBuffer</code>
+**Kind**: instance method of [<code>Response</code>](#module_fetch..Response)  
+<a name="module_fetch..Response+blob"></a>
+
+#### response.blob() ⇒ <code>Blob</code>
 **Kind**: instance method of [<code>Response</code>](#module_fetch..Response)  
 <a name="module_fetch..Response+json"></a>
 
-#### response.json() ⇒ <code>Promise</code>
+#### response.json() ⇒ <code>Object</code>
 **Kind**: instance method of [<code>Response</code>](#module_fetch..Response)  
+<a name="module_fetch..Response+redirect"></a>
+
+#### response.redirect(url, status) ⇒ <code>Stream</code>
+**Kind**: instance method of [<code>Response</code>](#module_fetch..Response)  
+
+| Param | Type |
+| --- | --- |
+| url | <code>String</code> | 
+| status | <code>Number</code> | 
+
 <a name="module_fetch..Response+text"></a>
 
-#### response.text() ⇒ <code>Promise</code>
+#### response.text() ⇒ <code>String</code>
 **Kind**: instance method of [<code>Response</code>](#module_fetch..Response)  
 <a name="module_fetch..fetch"></a>
 
 ### fetch~fetch(resource, options) ⇒ <code>Promise</code>
-### Default `options.headers````json{    "host": "${host}",    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",    "accept": "*\/*",    "accept-language": "*"}```
-
 **Kind**: inner method of [<code>fetch</code>](#module_fetch)  
 
-| Param | Type | Default |
-| --- | --- | --- |
-| resource | <code>String</code> |  | 
-| options | <code>Object</code> |  | 
-| options.headers | <code>Object</code> |  | 
-| options.credentials | <code>String</code> | <code>include</code> | 
-| options.method | <code>String</code> | <code>GET</code> | 
-| options.redirect | <code>String</code> | <code>follow</code> | 
-| options.protocol | <code>String</code> | <code>http:</code> | 
-| options.hostname | <code>String</code> | <code>localhost</code> | 
-| options.port | <code>Number</code> | <code>80</code> | 
-| options.path | <code>String</code> | <code>/</code> | 
-| options.agent | <code>String</code> |  | 
-| options.insecureHTTPParser | <code>Boolean</code> | <code>true</code> | 
-| options.timeout | <code>Number</code> |  | 
-| options.keepalive | <code>Boolean</code> |  | 
+| Param | Type |
+| --- | --- |
+| resource | <code>String/Request</code> | 
+| options | <code>Object</code> | 
 
