@@ -449,6 +449,12 @@ class Request {
 
         // this.destination = options.destination;
 
+        // Default headers
+        options.headers = {
+            Host: input.host,
+            ...options.headers
+        }
+
         /**
          * @type {Object}
          */
