@@ -1,4 +1,30 @@
+const {URL2} = require('./index')
 const fetch = require('./index')
+
+const http = require("http");
+// const { URL2 } = require("@ndiing/fetch");
+// const fetch = require("@ndiing/fetch");
+
+const reverseProxy = http.createServer().listen(80);
+// localhost       == https://jsonplaceholder.typicode.com
+// localhost/posts == https://jsonplaceholder.typicode.com/posts
+// localhost/guide == https://jsonplaceholder.typicode.com/guide
+reverseProxy.on("request", (req, res) => {
+    // set base url
+    const url = new URL2(req.url, "https://jsonplaceholder.typicode.com");
+    req.headers = {
+        ...req.headers,
+        host: url.host,// rewrite host
+    };
+    req.body = req;// send readable stream
+    const request = fetch("" + url, req);
+    request.then((response) => {
+        // pump response
+        res.writeHead(response.status, response.headers);
+        response.body.pipe(res);
+    });
+});
+// just simple like that...
 
 // Getting a resource
 // fetch('https://google.com')
