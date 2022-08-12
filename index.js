@@ -747,3 +747,5 @@ fetch.Headers = Headers;
 fetch.Request = Request;
 fetch.Response = Response;
 module.exports = fetch;
+
+// jsdoc2md fetch/index.js > fetch/README.md
