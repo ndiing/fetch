@@ -298,8 +298,8 @@ class URL2 {
         this.path = this.pathname + this.search + this.hash; //URL2
     }
 
-    toString(){
-        return this.href
+    toString() {
+        return this.href;
     }
 }
 
@@ -357,8 +357,8 @@ class Headers {
         const keys = this.keys();
         const values = [];
         for (const name of keys) {
-            let key=name
-            key=key.replace(/(^|-)(\w)/g,($,$1,$2)=>$1+$2.toUpperCase())
+            let key = name;
+            key = key.replace(/(^|-)(\w)/g, ($, $1, $2) => $1 + $2.toUpperCase());
             values.push([key, this[name]]);
         }
 
@@ -427,9 +427,13 @@ class Request {
             options = {
                 ...input,
                 ...options,
+                headers: {
+                    ...input.headers,
+                    ...options.headers,
+                },
             };
         }
-        input = new URL2(input);
+        this.input = new URL2(input);
         // this.body = options.body;
 
         // this.bodyUsed = options.bodyUsed;
@@ -441,7 +445,7 @@ class Request {
         this.credentials = options.credentials || "same-origin"; //omit, same-origin, include
 
         if (this.credentials !== "omit") {
-            this.storage = StorageManager.storage(input.hostname);
+            this.storage = StorageManager.storage(this.input.hostname);
 
             if (this.storage.cookie) {
                 options.headers = {
@@ -455,9 +459,9 @@ class Request {
 
         // Default headers
         options.headers = {
-            host: input.host,
-            ...options.headers
-        }
+            host: this.input.host,
+            ...options.headers,
+        };
 
         /**
          * @type {Object}
@@ -482,7 +486,7 @@ class Request {
         /**
          * @type {String}
          */
-        this.url = options.url || input.href;
+        this.url = options.url || this.input.href;
 
         /**
          * @type {Undefined}
@@ -502,7 +506,7 @@ class Request {
         /**
          * @type {String}
          */
-        this.hostname = options.hostname || input.hostname;
+        this.hostname = options.hostname || this.input.hostname;
 
         /**
          * @type {Boolean}
@@ -512,17 +516,17 @@ class Request {
         /**
          * @type {String}
          */
-        this.path = options.path || input.path;
+        this.path = options.path || this.input.path;
 
         /**
          * @type {Number}
          */
-        this.port = options.port || input.port;
+        this.port = options.port || this.input.port;
 
         /**
          * @type {String}
          */
-        this.protocol = options.protocol || input.protocol;
+        this.protocol = options.protocol || this.input.protocol;
 
         /**
          * @type {Undefined}
@@ -642,7 +646,7 @@ class Response {
         this.body = readable;
 
         if (options.request?.redirect == "follow" && this.headers.has("location")) {
-            this.redirected = this.headers.get("location");
+            this.redirected = "" + new URL2(this.headers.get("location"), options.request?.input?.origin);
             return this.redirect(this.redirected);
         }
     }
@@ -723,6 +727,7 @@ function fetch(resource, options = {}) {
         if (!(request instanceof Request)) {
             request = new Request(request, options);
         }
+        console.log(request);
 
         const protocol = request.protocol == "https:" ? https : http;
         const req = protocol.request(request);
