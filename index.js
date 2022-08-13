@@ -39,9 +39,14 @@ const StorageManager = require("@ndiing/storage");
  * .then(console.log)
  *
  * // Request.credentials
+ * // Load `Cookie` from ./data/{userDataDir}/{profileDirectory}.json
+ * // from previously saved using `Set-Cookie` when options.credentials not set to `omit`
  * fetch("https://mitra.tokopedia.com/")
  * .then(res=>res.text())
  * .then(console.log)
+ * // when recive `response.headers.has('Set-Cookie')` values are saved to local `.json` file
+ * // you can set from `options.userDataDir='./data'` and `options.profileDirectory='default'`
+ * // or by default in `./data/${host}/default.json`
  * ```
  * @module fetch
  */
