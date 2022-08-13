@@ -14,20 +14,18 @@ const StorageManager = require("@ndiing/storage");
  */
 
 /**
- *
+ * URLSearchParams2
  */
 class URLSearchParams2 {
     /**
-     * URLSearchParams!=URLSearchParams2
-     * URLSearchParams > Iterator
-     * URLSearchParams2 > Object
+     *
      * @param {String} init
      */
     constructor(init = "") {
         init = ("" + init)
             .replace(/[^\?]+\?/, "")
-            .replace(/#[^#]+/, "")
             .replace(/^\?/, "")
+            .replace(/#[^#]+/, "")
             .matchAll(/([^\=&]+?)\=([^\=&]+?)?(&|$)/g);
         for (const [, name, value] of init) {
             this.append(name, value);
@@ -64,23 +62,20 @@ class URLSearchParams2 {
      * @returns {Array}
      */
     entries() {
-        const keys = this.keys();
         const values = [];
-        for (const name of keys) {
+        for (const name of this.keys()) {
             values.push([name, this[name]]);
         }
-
         return values;
     }
 
     /**
      *
-     * @param {Function} callback
+     * @param {String} callback
      */
     forEach(callback) {
-        const keys = this.keys();
-        for (const name of keys) {
-            callback(this[name], name);
+        for (const name of this.keys()) {
+            callback(this.getAll(name), name);
         }
     }
 
@@ -90,11 +85,7 @@ class URLSearchParams2 {
      * @returns {String}
      */
     get(name) {
-        if (Array.isArray(this[name])) {
-            return this[name][this[name].length - 1];
-        }
-
-        return this[name];
+        return Array.isArray(this[name]) ? this[name][this[name].length - 1] : this[name];
     }
 
     /**
@@ -120,8 +111,6 @@ class URLSearchParams2 {
      * @returns {Array}
      */
     keys() {
-        // URLSearchParams > Retrieve All Keys
-        // URLSearchParams2 > Retrieve Last Keys
         return Object.getOwnPropertyNames(this);
     }
 
@@ -133,7 +122,6 @@ class URLSearchParams2 {
     set(name, value) {
         this[name] = value;
     }
-
     sort() {}
 
     /**
@@ -141,14 +129,10 @@ class URLSearchParams2 {
      * @returns {String}
      */
     toString() {
-        // URLSearchParams > name=1&name=2&name=3&group=b
-        // URLSearchParams2 > name=1,2,3&group=b
-        const keys = this.keys();
         const values = [];
-        for (const name of keys) {
-            values.push([name, this[name]].join("="));
+        for (const name of this.keys()) {
+            values.push([name, this.getAll(name)].join("="));
         }
-
         return values.join("&");
     }
 
@@ -157,168 +141,133 @@ class URLSearchParams2 {
      * @returns {Array}
      */
     values() {
-        const keys = this.keys();
         const values = [];
-        for (const name of keys) {
-            // URLSearchParams > Retrieve All Value
-            // URLSearchParams2 > Retrieve Last Value
-            const value = Array.isArray(this[name]) ? this[name][this[name].length - 1] : this[name];
-            values.push(value);
+        for (const name of this.keys()) {
+            values.push(this.get(name));
         }
-
         return values;
     }
 }
 
-// console.log(new URLSearchParams("?name=1&name=2&name=3&group=b").entries());
-// console.log(new URLSearchParams2("?name=1&name=2&name=3&group=b").entries());
-// console.log(new URLSearchParams2("?q=&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8#content"));
-// console.log(new URLSearchParams2("?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8#content"));
-// console.log(new URLSearchParams2("q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8#content"));
-// console.log(new URLSearchParams2("https://www.google.com/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8#content"));
-// console.log(new URLSearchParams2("https://www.google.com:8888/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8#content"));
-// console.log(new URLSearchParams2("/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8#content"));
-// console.log(new URLSearchParams2("/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8#content"));
+// // @test
+// [
+//     //
+//     // '',
+//     "https://www.google.com:3000/search?q=url&oq=url&aqs=chrome..69i57j0i131i433i512j69i59j0i131i433i512l2j69i60l3.1216j0j7&sourceid=chrome&ie=UTF-8#hash",
+//     // "https://www.google.com/search?q=url&oq=url&aqs=chrome..69i57j0i131i433i512j69i59j0i131i433i512l2j69i60l3.1216j0j7&sourceid=chrome&ie=UTF-8#hash",
+//     // "/search?q=url&oq=url&aqs=chrome..69i57j0i131i433i512j69i59j0i131i433i512l2j69i60l3.1216j0j7&sourceid=chrome&ie=UTF-8#hash",
+// ].forEach((link) => {
+//     var searchParams = (new URLSearchParams2(link));
+//     console.log('append', searchParams.append('name','value'))
+//     console.log('delete', searchParams.delete('name'))
+//     console.log('entries', searchParams.entries())
+//     console.log('forEach', searchParams.forEach(console.log))
+//     console.log('get', searchParams.get('name'))
+//     console.log('getAll', searchParams.getAll('name'))
+//     console.log('has', searchParams.has('name'))
+//     console.log('keys', searchParams.keys())
+//     console.log('set', searchParams.set('name','value'))
+//     // console.log('sort', searchParams.sort())
+//     console.log('toString', searchParams.toString())
+//     console.log('values', searchParams.values())
+//     // try {
+//     //     console.log(new URLSearchParams(link).toString());
+//     // } catch (error) {}
+// });
 
 /**
- *
+ * URL2
+ * @property {string} href=http://localhost
+ * @property {string} protocol=http:
+ * @property {string} scheme=http
+ * @property {string} authority=//localhost
+ * @property {string} origin=http://localhost
+ * @property {string} host=localhost
+ * @property {string} hostname=localhost
+ * @property {number} port=80
+ * @property {string} pathname=/
+ * @property {string} search
+ * @property {string} query
+ * @property {object} searchParams
+ * @property {string} hash
+ * @property {string} fragment
+ * @property {string} path=/
  */
 class URL2 {
-    /**
-     * URL!=URL2
-     * URL > Absolute
-     * URL2 > Relative
-     * @param {String} url
-     * @param {String} base
-     */
-    constructor(url = "", base = "") {
+    constructor(url = "", base = "http://localhost") {
         // https://www.rfc-editor.org/rfc/rfc3986#appendix-B
-        const absolute = /^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?/;
-        const hier = /^(([^:/?#]+):)(\/\/([^/?#]*))/;
-        if (!hier.test(url)) {
-            base = base || "http://localhost";
+        if (!/^(([^:/?#]+):)(\/\/([^/?#]*))/.test(url)) {
             url = base + url;
         }
 
-        // prettier-ignore
-        const [
-            href,// 'https://www.google.com/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8',
-            protocol,// 'https:',
-            scheme,// 'https',
-            authority,// '//www.google.com',
-            host,// 'www.google.com',
-            pathname,// '/search',
-            search='',// '?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8',
-            query='',// 'q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8',
-            hash='',
-            fragment='',
-        ] = ("" + url).match(absolute);
-        // prettier-ignore
-        let [
-            ,
-            hostname,
-            ,
-            port=protocol=='https:'?443:80,
-        ] = host.match(/([^\:]+)(\:([^\:]+))?$/);
-        port = parseInt(port);
+        const regexp = /^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?/;
+        const [href, protocol, scheme, authority, host, pathname = "", search = "", query = "", hash = "", fragment = ""] = ("" + url).match(regexp);
+        const [hostname, port] = host.split(":");
 
-        /**
-         * @type {String}
-         */
         this.href = href;
-
-        /**
-         * @type {String}
-         */
         this.protocol = protocol;
-
-        /**
-         * @type {String}
-         */
-        this.scheme = scheme; //URL2
-
-        /**
-         * @type {String}
-         */
-        this.authority = authority; //URL2
-
-        /**
-         * @type {String}
-         */
+        this.scheme = scheme;
+        this.authority = authority;
         this.origin = this.protocol + this.authority;
-
-        /**
-         * @type {String}
-         */
         this.host = host;
-
-        /**
-         * @type {String}
-         */
-        this.hostname = hostname; //URL2
-
-        /**
-         * @type {Number}
-         */
-        this.port = port; //URL2 > Number
-
-        /**
-         * @type {String}
-         */
+        this.hostname = hostname;
+        this.port = parseInt(port || (protocol == "https:" ? 443 : 80));
         this.pathname = pathname || "/";
-
-        /**
-         * @type {String}
-         */
         this.search = search;
-
-        /**
-         * @type {Object}
-         */
-        this.searchParams = new URLSearchParams2(this.search);
-
-        /**
-         * @type {String}
-         */
-        this.query = query; //URL2
-
-        /**
-         * @type {String}
-         */
+        this.query = query;
+        this.searchParams = new URLSearchParams2(this.query);
         this.hash = hash;
-
-        /**
-         * @type {String}
-         */
-        this.fragment = fragment; //URL2
-
-        /**
-         * @type {String}
-         */
-        this.path = this.pathname + this.search + this.hash; //URL2
+        this.fragment = fragment;
+        this.path = this.pathname + this.search + this.hash;
     }
 
+    // static createObjectURL() {}
+
+    // static revokeObjectURL() {}
+
+    // toJSON() {}
+
+    /**
+     *
+     * @returns {String}
+     */
     toString() {
         return this.href;
     }
 }
 
-// console.log(new URL2("https://www.google.com/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8"));
-// console.log(new URL2("https://www.google.com:8888/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8"));
-// console.log(new URL2("/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8", "https://www.google.com"));
-// console.log(new URL2("/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l9.2009j0j7&sourceid=chrome&ie=UTF-8", ""));
+// // @test
+// [
+//     //
+//     '',
+//     // "https://www.google.com:3000/search?q=url&oq=url&aqs=chrome..69i57j0i131i433i512j69i59j0i131i433i512l2j69i60l3.1216j0j7&sourceid=chrome&ie=UTF-8#hash",
+//     // "https://www.google.com/search?q=url&oq=url&aqs=chrome..69i57j0i131i433i512j69i59j0i131i433i512l2j69i60l3.1216j0j7&sourceid=chrome&ie=UTF-8#hash",
+//     // "/search?q=url&oq=url&aqs=chrome..69i57j0i131i433i512j69i59j0i131i433i512l2j69i60l3.1216j0j7&sourceid=chrome&ie=UTF-8#hash",
+// ].forEach((link) => {
+//     console.log(new URL2(link));
+//     // try {
+//     //     console.log(new URL(link).toJSON());
+//     //     console.log(new URL(link).toString());
+//     // } catch (error) {}
+// });
 
 /**
- *
+ * Headers
  */
 class Headers {
     /**
      *
-     * @param {Object} init
+     * @param {String} init
      */
     constructor(init = {}) {
-        for (const name in init) {
-            this.append(name, init[name]);
+        if (Array.isArray(init)) {
+            for (const [name, value] of init) {
+                this.append(name, value);
+            }
+        } else {
+            for (const name in init) {
+                this.append(name, init[name]);
+            }
         }
     }
 
@@ -354,21 +303,17 @@ class Headers {
      * @returns {Array}
      */
     entries() {
-        const keys = this.keys();
         const values = [];
-        for (const name of keys) {
-            let key = name;
-            key = key.replace(/(^|-)(\w)/g, ($, $1, $2) => $1 + $2.toUpperCase());
-            values.push([key, this[name]]);
+        for (const name of this.keys()) {
+            values.push([name, this.get(name)]);
         }
-
         return values;
     }
 
     /**
      *
      * @param {String} name
-     * @returns {String}
+     * @returns {String/Array}
      */
     get(name) {
         name = name.toLowerCase();
@@ -396,6 +341,7 @@ class Headers {
     /**
      *
      * @param {String} name
+     * @param {String} value
      */
     set(name, value) {
         name = name.toLowerCase();
@@ -407,143 +353,117 @@ class Headers {
      * @returns {Array}
      */
     values() {
-        const keys = this.keys();
         const values = [];
-        for (const name of keys) {
-            values.push(this[name]);
+        for (const name of this.keys()) {
+            values.push(this.get(name));
         }
-
         return values;
     }
 }
 
+// // @test
+// const httpHeaders = { 'Content-Type' : 'image/jpeg', 'X-My-Custom-Header' : 'Zeke are cool' };
+// const myHeaders = new Headers(httpHeaders);
+// console.log(myHeaders)
+
+// const secondHeadersObj = new Headers(myHeaders);
+// secondHeadersObj.get('Content-Type'); // Would return 'image/jpeg' — it inherits it from the first headers object
+
+// const headers = [
+//     ["Set-Cookie", "greeting=hello"],
+//     ["Set-Cookie", "name=world"],
+// ];
+// const myHeaders = new Headers(headers);
+// console.log(myHeaders);
+
 /**
- *
+ * Request
+ * @property {String} body
+ * @property {String} bodyUsed
+ * @property {String} cache
+ * @property {String} credentials
+ * @property {String} destination
+ * @property {String} headers
+ * @property {String} integrity
+ * @property {String} method
+ * @property {String} mode
+ * @property {String} priority
+ * @property {String} redirect
+ * @property {String} referrer
+ * @property {String} referrerPolicy
+ * @property {String} url
+ * @property {String} agent
+ * @property {String} hostname
+ * @property {String} insecureHTTPParser
+ * @property {String} path
+ * @property {String} port
+ * @property {String} protocol
+ * @property {String} timeout
  */
 class Request {
-    constructor(input, options = {}) {
+    constructor(input = "", options = {}) {
+        // input=url
+        // input=Request
         if (input instanceof Request) {
             input = input.url;
             options = {
                 ...input,
                 ...options,
                 headers: {
-                    ...input.headers,
-                    ...options.headers,
+                    ...input?.headers,
+                    ...options?.headers,
                 },
             };
         }
         this.input = new URL2(input);
-        // this.body = options.body;
 
-        // this.bodyUsed = options.bodyUsed;
-        // this.cache = options.cache; //default, no-store, reload, no-cache, force-cache, and only-if-cached
-
-        /**
-         * @type {String}
-         */
-        this.credentials = options.credentials || "same-origin"; //omit, same-origin, include
-
-        if (this.credentials !== "omit") {
-            this.storage = StorageManager.storage(this.input.hostname);
-
-            if (this.storage.cookie) {
-                options.headers = {
-                    Cookie: this.storage.cookie,
-                    ...options.headers,
-                };
-            }
+        this.body = options.body;
+        if (!(options.body instanceof Readable)) {
+            this.body = new Readable();
+            this.body.push(options.body);
+            this.body.push(null);
         }
 
-        // this.destination = options.destination;
+        this.bodyUsed = options.bodyUsed;
+        this.cache = options.cache; //default, reload, no-cache
+        this.credentials = options.credentials || "same-origin"; //omit, same-origin, include
+        this.destination = options.destination;
 
-        // Default headers
         options.headers = {
-            host: this.input.host,
+            Host: this.input.host,
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
+            // 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            Accept: "*/*",
+            // 'Accept-Language': 'en-US,en;q=0.5',
+            "Accept-Language": "*",
+            // 'Accept-Encoding': 'gzip, deflate, br',
+            "Accept-Encoding": "*",
+            // 'Referer': 'https://developer.mozilla.org/testpage.html',
+            // 'Connection': 'keep-alive',
+            // 'Upgrade-Insecure-Requests': '1',
+            // 'If-Modified-Since': 'Mon, 18 Jul 2016 02:36:04 GMT',
+            // 'If-None-Match': '"c561c68d0ba92bbeb8b0fff2a9199f722e3a621a"',
+            "Cache-Control": "max-age=0",
             ...options.headers,
         };
-
-        /**
-         * @type {Object}
-         */
         this.headers = new Headers(options.headers);
-        // this.integrity = options.integrity;
 
-        /**
-         * @type {String}
-         */
+        this.integrity = options.integrity;
         this.method = options.method || "GET";
-        // this.mode = options.mode || "cors"; //cors, no-cors, or same-origin
-        // this.priority = options.priority;
-
-        /**
-         * @type {String}
-         */
-        this.redirect = options.redirect || "follow";
-        // this.referrer = options.referrer;
-        // this.referrerPolicy = options.referrerPolicy; //no-referrer, no-referrer-when-downgrade, same-origin, origin, strict-origin, origin-when-cross-origin, strict-origin-when-cross-origin, or unsafe-url
-
-        /**
-         * @type {String}
-         */
+        this.mode = options.mode || "cors"; //cors, no-cors, same-origin, navigate
+        this.priority = options.priority; //high, low, auto
+        this.redirect = options.redirect ?? "follow"; //follow, error, or manual
+        this.referrer = options.referrer || "about:client";
+        this.referrerPolicy = options.referrerPolicy;
         this.url = options.url || this.input.href;
 
-        /**
-         * @type {Undefined}
-         */
-        this.keepalive = options.keepalive;
-        if (this.keepalive) {
-            this.headers.set("Connection", "keep-alive");
-        }
-
-        // this.signal = options.signal;
-
-        /**
-         * @type {Undefined}
-         */
         this.agent = options.agent;
-
-        /**
-         * @type {String}
-         */
         this.hostname = options.hostname || this.input.hostname;
-
-        /**
-         * @type {Boolean}
-         */
-        this.insecureHTTPParser = options.insecureHTTPParser || true;
-
-        /**
-         * @type {String}
-         */
+        this.insecureHTTPParser = options.insecureHTTPParser ?? true;
         this.path = options.path || this.input.path;
-
-        /**
-         * @type {Number}
-         */
         this.port = options.port || this.input.port;
-
-        /**
-         * @type {String}
-         */
         this.protocol = options.protocol || this.input.protocol;
-
-        /**
-         * @type {Undefined}
-         */
-        this.timeout = options.timeout;
-
-        let readable = options.body;
-        if (!(readable instanceof Readable)) {
-            readable = new Readable();
-            readable.push(options.body);
-            readable.push(null);
-        }
-
-        /**
-         * @type {Object}
-         */
-        this.body = readable;
+        this.timeout = options.timeout || 1000 * 60 * 60;
     }
 
     // arrayBuffer() {}
@@ -559,95 +479,69 @@ class Request {
     // text() {}
 }
 
+// // @test
+// const oldRequest = new Request("https://github.com/mdn/content/issues/12959", { headers: { From: "webmaster@example.org" } });
+// oldRequest.headers.get("From"); // "webmaster@example.org"
+// console.log(oldRequest);
+// const newRequest = new Request(oldRequest, { headers: { From: "developer@example.org" } });
+// newRequest.headers.get("From"); // "developer@example.org"
+// console.log(newRequest);
+
+// const request = new Request("/myEndpoint", {
+//     method: "POST",
+//     body: "Hello world",
+// });
+
+// request.body; // ReadableStream
+// console.log(request);
+
 /**
- *
+ * Response
+ * @property {String} body
+ * @property {String} bodyUsed
+ * @property {String} headers
+ * @property {String} redirected
+ * @property {String} status
+ * @property {String} statusText
+ * @property {String} ok
+ * @property {String} type
+ * @property {String} url
  */
 class Response {
     constructor(body, options = {}) {
-        // this.body = body;
-
-        /**
-         * @type {Undefined}
-         */
         this.bodyUsed = options.bodyUsed;
-
-        /**
-         * @type {Object}
-         */
         this.headers = new Headers(options.headers);
-
-        // Set-Cookie:
-        if (options.request.storage && this.headers.has("set-cookie")) {
-            options.request.storage.cookie = this.headers.get("set-cookie");
-        }
-
-        /**
-         * @type {Undefined}
-         */
         this.redirected = options.redirected;
-
-        /**
-         * @type {Number}
-         */
         this.status = options.status || 200;
-
-        /**
-         * @type {String}
-         */
         this.statusText = options.statusText || http.STATUS_CODES[this.status];
+        this.ok = options.ok || (this.status >= 200 && this.status < 300);
+        this.type = options.type || "cors";
+        this.url = options.url || options.request?.url;
 
-        /**
-         * @type {Boolean}
-         */
-        this.ok = this.status >= 200 && this.status < 300;
-
-        /**
-         * @type {String}
-         */
-        this.type = options.type || "basic";
-
-        /**
-         * @type {Undefined}
-         */
-        this.url = options.request?.url;
-
-        let readable = body;
-        const encoding = this.headers.get("content-encoding");
-
+        // options{request{input}}
+        if (body instanceof Blob) {
+            body = Buffer.from([body]);
+        }
+        this.body = body;
         if (!(body instanceof Readable)) {
-            readable = new Readable();
-            readable.push(body);
-            readable.push(null);
-
-            body = readable;
-
-            if (encoding == "gzip") {
-                readable = body.pipe(zlib.createGzip());
-            } else if (encoding == "deflate") {
-                readable = body.pipe(zlib.createDeflate());
-            } else if (encoding == "br") {
-                readable = body.pipe(zlib.createBrotliCompress());
-            }
-
-            body = readable;
+            this.body = new Readable();
+            this.body.push(body);
+            this.body.push(null);
         }
 
-        if (encoding == "gzip") {
-            readable = body.pipe(zlib.createGunzip());
-        } else if (encoding == "deflate") {
-            readable = body.pipe(zlib.createInflate());
-        } else if (encoding == "br") {
-            readable = body.pipe(zlib.createBrotliDecompress());
+        // DecompressionStream(format)
+        if (this.headers.get("Content-Encoding") == "gzip") {
+            this.body = this.body.pipe(zlib.createGunzip());
+        } else if (this.headers.get("Content-Encoding") == "deflate") {
+            this.body = this.body.pipe(zlib.createInflate());
+        } else if (this.headers.get("Content-Encoding") == "br") {
+            this.body = this.body.pipe(zlib.createBrotliDecompress());
         }
 
-        /**
-         * @type {Object}
-         */
-        this.body = readable;
-
-        if (options.request?.redirect == "follow" && this.headers.has("location")) {
-            this.redirected = "" + new URL2(this.headers.get("location"), options.request?.input?.origin);
-            return this.redirect(this.redirected);
+        // Location: /index.html
+        if (options.request?.redirect == "follow" && this.headers.has("Location")) {
+            const url = new URL2(this.headers.get("Location"), options.request?.input?.origin);
+            return this.redirect(url);
         }
     }
 
@@ -658,9 +552,7 @@ class Response {
             this.body.on("data", (chunk) => {
                 buffer.push(chunk);
             });
-
             this.body.on("end", () => {
-                this.bodyUsed = true;
                 resolve(Buffer.concat(buffer));
             });
         });
@@ -668,7 +560,7 @@ class Response {
 
     /**
      *
-     * @returns {ArrayBuffer}
+     * @returns {arrayBuffer}
      */
     arrayBuffer() {
         return this.read().then((buffer) => buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength));
@@ -676,7 +568,7 @@ class Response {
 
     /**
      *
-     * @returns {Blob}
+     * @returns {blob}
      */
     blob() {
         return this.read().then((buffer) => new Blob(buffer));
@@ -690,7 +582,7 @@ class Response {
 
     /**
      *
-     * @returns {Object}
+     * @returns {json}
      */
     json() {
         return this.read().then((buffer) => JSON.parse(buffer));
@@ -698,9 +590,9 @@ class Response {
 
     /**
      *
-     * @param {String} url
-     * @param {Number} status
-     * @returns {Stream}
+     * @param {*} url
+     * @param {*} status
+     * @returns {Response}
      */
     redirect(url, status) {
         return fetch(url);
@@ -708,24 +600,38 @@ class Response {
 
     /**
      *
-     * @returns {String}
+     * @returns {text}
      */
     text() {
-        return this.read().then((buffer) => buffer.toString());
+        return this.read().then((buffer) => "" + buffer);
     }
 }
 
+// // @test
+// const myBlob = new Blob();
+// const myOptions = { status: 200, statusText: 'SuperSmashingGreat!' };
+// const myResponse = new Response(myBlob, myOptions);
+// console.log(myResponse)
+
+// const myString = '';
+// const myOptions = { status: 200, statusText: "SuperSmashingGreat!" };
+// const myResponse = new Response(myString, myOptions);
+// console.log(myResponse);
+
 /**
- *
- * @param {String/Request} resource
- * @param {Object} options
+ * 
+ * @param {String} resource 
+ * @param {Object} options 
  * @returns {Promise}
  */
-function fetch(resource, options = {}) {
+function fetch(resource = "", options = {}) {
     return new Promise((resolve, reject) => {
-        let request = resource;
-        if (!(request instanceof Request)) {
-            request = new Request(request, options);
+        const request = new Request(resource, options);
+        const storage = StorageManager.storage(request.hostname);
+
+        // console.log(storage.cookie)
+        if (request.credentials !== "omit" && storage.cookie) {
+            request.headers.set("Cookie", storage.cookie);
         }
 
         const protocol = request.protocol == "https:" ? https : http;
@@ -733,23 +639,58 @@ function fetch(resource, options = {}) {
         req.on("error", reject);
         req.on("response", (res) => {
             const response = new Response(res, {
-                status: res.statusCode,
                 headers: res.headers,
+                status: res.statusCode,
                 request,
             });
 
+            if (response.headers.has("Set-Cookie")) {
+                storage.cookie = response.headers.get("Set-Cookie");
+            }
+
             resolve(response);
         });
-
         request.body.pipe(req);
     });
 }
+
+// // @test
+
+// // json
+// fetch("https://jsonplaceholder.typicode.com/posts")
+// .then(res=>res.json())
+// .then(console.log)
+
+// // text
+// fetch("https://jsonplaceholder.typicode.com")
+// .then(res=>res.text())
+// .then(console.log)
+
+// // End-to-end compression
+// fetch("https://jsonplaceholder.typicode.com/posts",{
+//     headers:{
+//         'Accept-Encoding': 'gzip, deflate, br',
+//     }
+// })
+// .then(res=>res.json())
+// .then(console.log)
+
+// // Redirections in HTTP
+// fetch("https://jsonplaceholder.typicode.com/guide",{
+//     redirect:'manual',//follow
+// })
+// .then(res=>res.text())
+// .then(console.log)
+
+// // Request.credentials
+// fetch("https://mitra.tokopedia.com/");
+// .then(res=>res.text())
+// .then(console.log)
 
 fetch.URLSearchParams2 = URLSearchParams2;
 fetch.URL2 = URL2;
 fetch.Headers = Headers;
 fetch.Request = Request;
 fetch.Response = Response;
-module.exports = fetch;
 
-// jsdoc2md fetch/index.js > fetch/README.md
+module.exports = fetch;
