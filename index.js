@@ -10,6 +10,39 @@ const StorageManager = require("@ndiing/storage");
  * ```
  * npm install @ndiing/fetch
  * ```
+ * ### Usage
+ * ```js
+ * // json
+ * fetch("https://jsonplaceholder.typicode.com/posts")
+ * .then(res=>res.json())
+ * .then(console.log)
+ *
+ * // text
+ * fetch("https://jsonplaceholder.typicode.com")
+ * .then(res=>res.text())
+ * .then(console.log)
+ *
+ * // End-to-end compression
+ * fetch("https://jsonplaceholder.typicode.com/posts",{
+ *     headers:{
+ *         'Accept-Encoding': 'gzip, deflate, br',
+ *     }
+ * })
+ * .then(res=>res.json())
+ * .then(console.log)
+ *
+ * // Redirections in HTTP
+ * fetch("https://jsonplaceholder.typicode.com/guide",{
+ *     redirect:'manual',//follow
+ * })
+ * .then(res=>res.text())
+ * .then(console.log)
+ *
+ * // Request.credentials
+ * fetch("https://mitra.tokopedia.com/")
+ * .then(res=>res.text())
+ * .then(console.log)
+ * ```
  * @module fetch
  */
 
@@ -400,7 +433,7 @@ class Headers {
 
 /**
  * Request
- * 
+ *
  * options.headers
  * ```http
  * host: ${this.input.host}
