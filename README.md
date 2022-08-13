@@ -38,7 +38,7 @@
         * [.json()](#module_fetch..Response+json) ⇒ <code>json</code>
         * [.redirect(url, status)](#module_fetch..Response+redirect) ⇒ <code>Response</code>
         * [.text()](#module_fetch..Response+text) ⇒ <code>text</code>
-    * [~fetch(resource, options)](#module_fetch..fetch) ⇒ <code>Promise</code>
+    * [~fetch()](#module_fetch..fetch)
 
 <a name="module_fetch..URLSearchParams2"></a>
 
@@ -291,36 +291,36 @@ The `Headers.values()` method returns an `array` allowing to go through all valu
 <a name="module_fetch..Request"></a>
 
 ### fetch~Request
-The `Request` interface of the `Fetch API` represents a resource request.options.headers```httphost: ${this.input.host}user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36accept: *\/*accept-language: *accept-encoding: *cache-control: max-age=0```
+The `Request` interface of the `Fetch API` represents a resource request.```js// Default options.headers{    Host: `${this.input.host}`,    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",    Accept: "*\/*",    "Accept-Language": "*",    "Accept-Encoding": "*",    "Cache-Control": "max-age=0"}```
 
 **Kind**: inner class of [<code>fetch</code>](#module_fetch)  
 **Properties**
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| input | <code>String</code> |  | <p>Defines the resource that you wish to fetch. This can either be:</p><ul><li>A string containing the direct URL of the resource you want to fetch.</li><li>A Request object, effectively creating a copy. Note the following behavioral updates to retain security while making the constructor less likely to throw exceptions:</ul><ul><li>If this object exists on another origin to the constructor call, the Request.referrer is stripped out.</li><li>If this object has a Request.mode of navigate, the mode value is converted to same-origin.</li></ul></li> |
-| options | <code>Object</code> |  |  |
-| options.body | <code>String</code> |  |  |
+| input | <code>String</code> |  | Defines the resource that you wish to fetch. |
+| options | <code>Object</code> |  | An object containing any custom settings that you want to apply to the request. |
+| options.body | <code>String</code> |  | Any `body` that you want to add to your request: this can be a `Blob`, an `ArrayBuffer`, a `TypedArray`, a `DataView`, a `FormData`, a `URLSearchParams`, a `string`, or a ReadableStream object. Note that a request using the `GET` or `HEAD` method cannot have a `body`. |
 | options.bodyUsed | <code>String</code> |  |  |
 | options.cache | <code>String</code> |  | default, reload, no-cache |
-| options.credentials | <code>String</code> | <code>same-origin</code> | omit, same-origin, include |
+| options.credentials | <code>String</code> | <code>same-origin</code> | The request credentials you want to use for the request: `omit`, `same-origin`, or `include`. The default is `same-origin`. |
 | options.destination | <code>String</code> |  |  |
-| options.headers | <code>String</code> |  |  |
+| options.headers | <code>String</code> |  | Any headers you want to add to your request, contained within a Headers object or an object literal with String values. |
 | options.integrity | <code>String</code> |  |  |
-| options.method | <code>String</code> | <code>GET</code> |  |
-| options.mode | <code>String</code> | <code>cors</code> | cors, no-cors, same-origin, navigate |
+| options.method | <code>String</code> | <code>GET</code> | The request method, e.g., `GET`, `POST`. The default is `GET`. |
+| options.mode | <code>String</code> | <code>cors</code> |  |
 | options.priority | <code>String</code> |  |  |
-| options.redirect | <code>String</code> | <code>follow</code> | follow, error, or manual |
+| options.redirect | <code>String</code> | <code>follow</code> | The redirect mode to use: `follow`, `error`, or `manual`. The default is `follow`. |
 | options.referrer | <code>String</code> |  |  |
 | options.referrerPolicy | <code>String</code> |  |  |
 | options.url | <code>String</code> |  |  |
-| options.agent | <code>String</code> |  |  |
-| options.hostname | <code>String</code> |  |  |
-| options.insecureHTTPParser | <code>String</code> | <code>true</code> |  |
-| options.path | <code>String</code> |  |  |
-| options.port | <code>String</code> |  |  |
-| options.protocol | <code>String</code> |  |  |
-| options.timeout | <code>String</code> |  |  |
+| options.agent | <code>String</code> |  | Controls Agent behavior. |
+| options.hostname | <code>String</code> |  | Alias for host. To support url.parse(), hostname will be used if both host and hostname are specified. |
+| options.insecureHTTPParser | <code>String</code> | <code>true</code> | Use an insecure HTTP parser that accepts invalid HTTP headers when true. Using the insecure parser should be avoided. See --insecure-http-parser for more information. Default: false |
+| options.path | <code>String</code> |  | Request path. Should include query string if any. E.G. '/index.html?page=12'. An exception is thrown when the request path contains illegal characters. Currently, only spaces are rejected but that may change in the future. Default: '/'. |
+| options.port | <code>String</code> |  | Port of remote server. Default: defaultPort if set, else 80. |
+| options.protocol | <code>String</code> |  | Protocol to use. Default: 'http:'. |
+| options.timeout | <code>String</code> |  | A number specifying the socket timeout in milliseconds. This will set the timeout before the socket is connected. |
 
 <a name="module_fetch..Response"></a>
 
@@ -378,11 +378,35 @@ Response
 **Kind**: instance method of [<code>Response</code>](#module_fetch..Response)  
 <a name="module_fetch..fetch"></a>
 
-### fetch~fetch(resource, options) ⇒ <code>Promise</code>
-**Kind**: inner method of [<code>fetch</code>](#module_fetch)  
+### fetch~fetch()
+The `Request` interface of the `Fetch API` represents a resource request.```js// Default options.headers{    Host: `${this.input.host}`,    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",    Accept: "*\/*",    "Accept-Language": "*",    "Accept-Encoding": "*",    "Cache-Control": "max-age=0"}```
 
-| Param | Type |
-| --- | --- |
-| resource | <code>String</code> | 
-| options | <code>Object</code> | 
+**Kind**: inner method of [<code>fetch</code>](#module_fetch)  
+**Properties**
+
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| resource | <code>String</code> |  | Defines the resource that you wish to fetch. |
+| options | <code>Object</code> |  | An object containing any custom settings that you want to apply to the request. |
+| options.body | <code>String</code> |  | Any `body` that you want to add to your request: this can be a `Blob`, an `ArrayBuffer`, a `TypedArray`, a `DataView`, a `FormData`, a `URLSearchParams`, a `string`, or a ReadableStream object. Note that a request using the `GET` or `HEAD` method cannot have a `body`. |
+| options.bodyUsed | <code>String</code> |  |  |
+| options.cache | <code>String</code> |  | default, reload, no-cache |
+| options.credentials | <code>String</code> | <code>same-origin</code> | The request credentials you want to use for the request: `omit`, `same-origin`, or `include`. The default is `same-origin`. |
+| options.destination | <code>String</code> |  |  |
+| options.headers | <code>String</code> |  | Any headers you want to add to your request, contained within a Headers object or an object literal with String values. |
+| options.integrity | <code>String</code> |  |  |
+| options.method | <code>String</code> | <code>GET</code> | The request method, e.g., `GET`, `POST`. The default is `GET`. |
+| options.mode | <code>String</code> | <code>cors</code> |  |
+| options.priority | <code>String</code> |  |  |
+| options.redirect | <code>String</code> | <code>follow</code> | The redirect mode to use: `follow`, `error`, or `manual`. The default is `follow`. |
+| options.referrer | <code>String</code> |  |  |
+| options.referrerPolicy | <code>String</code> |  |  |
+| options.url | <code>String</code> |  |  |
+| options.agent | <code>String</code> |  | Controls Agent behavior. |
+| options.hostname | <code>String</code> |  | Alias for host. To support url.parse(), hostname will be used if both host and hostname are specified. |
+| options.insecureHTTPParser | <code>String</code> | <code>true</code> | Use an insecure HTTP parser that accepts invalid HTTP headers when true. Using the insecure parser should be avoided. See --insecure-http-parser for more information. Default: false |
+| options.path | <code>String</code> |  | Request path. Should include query string if any. E.G. '/index.html?page=12'. An exception is thrown when the request path contains illegal characters. Currently, only spaces are rejected but that may change in the future. Default: '/'. |
+| options.port | <code>String</code> |  | Port of remote server. Default: defaultPort if set, else 80. |
+| options.protocol | <code>String</code> |  | Protocol to use. Default: 'http:'. |
+| options.timeout | <code>String</code> |  | A number specifying the socket timeout in milliseconds. This will set the timeout before the socket is connected. |
 

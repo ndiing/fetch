@@ -431,7 +431,7 @@ class Headers {
         for (const name of this.keys()) {
             values.push([
                 //
-                name.replace(/(^|-)(\w)/g,($,$1,$2)=>$1+$2.toUpperCase()),
+                name.replace(/(^|-)(\w)/g, ($, $1, $2) => $1 + $2.toUpperCase()),
                 this.get(name),
             ]);
         }
@@ -445,7 +445,7 @@ class Headers {
      */
     get(name) {
         name = name.toLowerCase();
-        return this[name]||null;
+        return this[name] || null;
     }
 
     /**
@@ -529,38 +529,40 @@ class Headers {
 /**
  * The `Request` interface of the `Fetch API` represents a resource request.
  *
- * options.headers
- * ```http
- * host: ${this.input.host}
- * user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
- * accept: *\/*
- * accept-language: *
- * accept-encoding: *
- * cache-control: max-age=0
+ * ```js
+ * // Default options.headers
+ * {
+ *     Host: `${this.input.host}`,
+ *     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
+ *     Accept: "*\/*",
+ *     "Accept-Language": "*",
+ *     "Accept-Encoding": "*",
+ *     "Cache-Control": "max-age=0"
+ * }
  * ```
- * @property {String} input - <p>Defines the resource that you wish to fetch. This can either be:</p><ul><li>A string containing the direct URL of the resource you want to fetch.</li><li>A Request object, effectively creating a copy. Note the following behavioral updates to retain security while making the constructor less likely to throw exceptions:</ul><ul><li>If this object exists on another origin to the constructor call, the Request.referrer is stripped out.</li><li>If this object has a Request.mode of navigate, the mode value is converted to same-origin.</li></ul></li>
- * @property {Object} options
- * @property {String} options.body
+ * @property {String} input - Defines the resource that you wish to fetch.
+ * @property {Object} options - An object containing any custom settings that you want to apply to the request.
+ * @property {String} options.body - Any `body` that you want to add to your request: this can be a `Blob`, an `ArrayBuffer`, a `TypedArray`, a `DataView`, a `FormData`, a `URLSearchParams`, a `string`, or a ReadableStream object. Note that a request using the `GET` or `HEAD` method cannot have a `body`.
  * @property {String} options.bodyUsed
  * @property {String} options.cache - default, reload, no-cache
- * @property {String} options.credentials=same-origin - omit, same-origin, include
+ * @property {String} options.credentials=same-origin - The request credentials you want to use for the request: `omit`, `same-origin`, or `include`. The default is `same-origin`.
  * @property {String} options.destination
- * @property {String} options.headers
+ * @property {String} options.headers - Any headers you want to add to your request, contained within a Headers object or an object literal with String values.
  * @property {String} options.integrity
- * @property {String} options.method=GET
- * @property {String} options.mode=cors - cors, no-cors, same-origin, navigate
+ * @property {String} options.method=GET - The request method, e.g., `GET`, `POST`. The default is `GET`.
+ * @property {String} options.mode=cors
  * @property {String} options.priority
- * @property {String} options.redirect=follow - follow, error, or manual
+ * @property {String} options.redirect=follow - The redirect mode to use: `follow`, `error`, or `manual`. The default is `follow`.
  * @property {String} options.referrer
  * @property {String} options.referrerPolicy
  * @property {String} options.url
- * @property {String} options.agent
- * @property {String} options.hostname
- * @property {String} options.insecureHTTPParser=true
- * @property {String} options.path
- * @property {String} options.port
- * @property {String} options.protocol
- * @property {String} options.timeout
+ * @property {String} options.agent - Controls Agent behavior.
+ * @property {String} options.hostname - Alias for host. To support url.parse(), hostname will be used if both host and hostname are specified.
+ * @property {String} options.insecureHTTPParser=true - Use an insecure HTTP parser that accepts invalid HTTP headers when true. Using the insecure parser should be avoided. See --insecure-http-parser for more information. Default: false
+ * @property {String} options.path - Request path. Should include query string if any. E.G. '/index.html?page=12'. An exception is thrown when the request path contains illegal characters. Currently, only spaces are rejected but that may change in the future. Default: '/'.
+ * @property {String} options.port - Port of remote server. Default: defaultPort if set, else 80.
+ * @property {String} options.protocol - Protocol to use. Default: 'http:'.
+ * @property {String} options.timeout -  A number specifying the socket timeout in milliseconds. This will set the timeout before the socket is connected.
  */
 class Request {
     constructor(input = "", options = {}) {
@@ -781,10 +783,42 @@ class Response {
 // console.log(myResponse);
 
 /**
+ * The `Request` interface of the `Fetch API` represents a resource request.
  *
- * @param {String} resource
- * @param {Object} options
- * @returns {Promise}
+ * ```js
+ * // Default options.headers
+ * {
+ *     Host: `${this.input.host}`,
+ *     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
+ *     Accept: "*\/*",
+ *     "Accept-Language": "*",
+ *     "Accept-Encoding": "*",
+ *     "Cache-Control": "max-age=0"
+ * }
+ * ```
+ * @property {String} resource - Defines the resource that you wish to fetch.
+ * @property {Object} options - An object containing any custom settings that you want to apply to the request.
+ * @property {String} options.body - Any `body` that you want to add to your request: this can be a `Blob`, an `ArrayBuffer`, a `TypedArray`, a `DataView`, a `FormData`, a `URLSearchParams`, a `string`, or a ReadableStream object. Note that a request using the `GET` or `HEAD` method cannot have a `body`.
+ * @property {String} options.bodyUsed
+ * @property {String} options.cache - default, reload, no-cache
+ * @property {String} options.credentials=same-origin - The request credentials you want to use for the request: `omit`, `same-origin`, or `include`. The default is `same-origin`.
+ * @property {String} options.destination
+ * @property {String} options.headers - Any headers you want to add to your request, contained within a Headers object or an object literal with String values.
+ * @property {String} options.integrity
+ * @property {String} options.method=GET - The request method, e.g., `GET`, `POST`. The default is `GET`.
+ * @property {String} options.mode=cors
+ * @property {String} options.priority
+ * @property {String} options.redirect=follow - The redirect mode to use: `follow`, `error`, or `manual`. The default is `follow`.
+ * @property {String} options.referrer
+ * @property {String} options.referrerPolicy
+ * @property {String} options.url
+ * @property {String} options.agent - Controls Agent behavior.
+ * @property {String} options.hostname - Alias for host. To support url.parse(), hostname will be used if both host and hostname are specified.
+ * @property {String} options.insecureHTTPParser=true - Use an insecure HTTP parser that accepts invalid HTTP headers when true. Using the insecure parser should be avoided. See --insecure-http-parser for more information. Default: false
+ * @property {String} options.path - Request path. Should include query string if any. E.G. '/index.html?page=12'. An exception is thrown when the request path contains illegal characters. Currently, only spaces are rejected but that may change in the future. Default: '/'.
+ * @property {String} options.port - Port of remote server. Default: defaultPort if set, else 80.
+ * @property {String} options.protocol - Protocol to use. Default: 'http:'.
+ * @property {String} options.timeout -  A number specifying the socket timeout in milliseconds. This will set the timeout before the socket is connected.
  */
 function fetch(resource = "", options = {}) {
     return new Promise((resolve, reject) => {
