@@ -239,7 +239,45 @@ class URLSearchParams2 {
 // // }
 
 /**
- * URL2
+ * ### Examples
+ *
+ * ```js
+ * // Parse url with port
+ * var url = new URL2('https://www.google.com:3000/search?q=url&oq=URL&aqs=chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9&sourceid=chrome&ie=UTF-8')
+ * console.log(url)
+ *
+ * // Parse url
+ * var url = new URL2('https://www.google.com/search?q=url&oq=URL&aqs=chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9&sourceid=chrome&ie=UTF-8')
+ * console.log(url)
+ *
+ * // Parse url without origin
+ * var url = new URL2('/search?q=url&oq=URL&aqs=chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9&sourceid=chrome&ie=UTF-8')
+ * console.log(url)
+ * // Output will fallback to http://localhost
+ * // URL2 {
+ * //     href: 'http://localhost/search?q=url&oq=URL&aqs=chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9&sourceid=chrome&ie=UTF-8',
+ * //     protocol: 'http:',
+ * //     scheme: 'http',
+ * //     authority: '//localhost',
+ * //     origin: 'http://localhost',
+ * //     host: 'localhost',
+ * //     hostname: 'localhost',
+ * //     port: 80,
+ * //     pathname: '/search',
+ * //     search: '?q=url&oq=URL&aqs=chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9&sourceid=chrome&ie=UTF-8',
+ * //     query: 'q=url&oq=URL&aqs=chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9&sourceid=chrome&ie=UTF-8',
+ * //     searchParams: URLSearchParams2 {
+ * //         q: 'url',
+ * //         oq: 'URL',
+ * //         aqs: 'chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9',
+ * //         sourceid: 'chrome',
+ * //         ie: 'UTF-8'
+ * //     },
+ * //     hash: '',
+ * //     fragment: '',
+ * //     path: '/search?q=url&oq=URL&aqs=chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9&sourceid=chrome&ie=UTF-8'
+ * // }
+ * ```
  * @property {string} href=http://localhost
  * @property {string} protocol=http:
  * @property {string} scheme=http
@@ -300,19 +338,42 @@ class URL2 {
 }
 
 // // @test
-// [
-//     //
-//     '',
-//     // "https://www.google.com:3000/search?q=url&oq=url&aqs=chrome..69i57j0i131i433i512j69i59j0i131i433i512l2j69i60l3.1216j0j7&sourceid=chrome&ie=UTF-8#hash",
-//     // "https://www.google.com/search?q=url&oq=url&aqs=chrome..69i57j0i131i433i512j69i59j0i131i433i512l2j69i60l3.1216j0j7&sourceid=chrome&ie=UTF-8#hash",
-//     // "/search?q=url&oq=url&aqs=chrome..69i57j0i131i433i512j69i59j0i131i433i512l2j69i60l3.1216j0j7&sourceid=chrome&ie=UTF-8#hash",
-// ].forEach((link) => {
-//     console.log(new URL2(link));
-//     // try {
-//     //     console.log(new URL(link).toJSON());
-//     //     console.log(new URL(link).toString());
-//     // } catch (error) {}
-// });
+
+// // Parse url with port
+// var url = new URL2('https://www.google.com:3000/search?q=url&oq=URL&aqs=chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9&sourceid=chrome&ie=UTF-8')
+// console.log(url)
+
+// // Parse url
+// var url = new URL2('https://www.google.com/search?q=url&oq=URL&aqs=chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9&sourceid=chrome&ie=UTF-8')
+// console.log(url)
+
+// // Parse url without origin
+// var url = new URL2('/search?q=url&oq=URL&aqs=chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9&sourceid=chrome&ie=UTF-8')
+// console.log(url)
+// // Output will fallback to http://localhost
+// // URL2 {
+// //     href: 'http://localhost/search?q=url&oq=URL&aqs=chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9&sourceid=chrome&ie=UTF-8',
+// //     protocol: 'http:',
+// //     scheme: 'http',
+// //     authority: '//localhost',
+// //     origin: 'http://localhost',
+// //     host: 'localhost',
+// //     hostname: 'localhost',
+// //     port: 80,
+// //     pathname: '/search',
+// //     search: '?q=url&oq=URL&aqs=chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9&sourceid=chrome&ie=UTF-8',
+// //     query: 'q=url&oq=URL&aqs=chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9&sourceid=chrome&ie=UTF-8',
+// //     searchParams: URLSearchParams2 {
+// //         q: 'url',
+// //         oq: 'URL',
+// //         aqs: 'chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9',
+// //         sourceid: 'chrome',
+// //         ie: 'UTF-8'
+// //     },
+// //     hash: '',
+// //     fragment: '',
+// //     path: '/search?q=url&oq=URL&aqs=chrome.0.69i59i433i512j0i433i512j69i59j0i433i512j0i512j69i60l3.1752j0j9&sourceid=chrome&ie=UTF-8'
+// // }
 
 /**
  * Headers
