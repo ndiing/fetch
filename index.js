@@ -234,8 +234,8 @@ class URL2 {
         }
 
         const regexp = /^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?/;
-        const [href, protocol, scheme, authority, host, pathname = "", search = "", query = "", hash = "", fragment = ""] = ("" + url).match(regexp);
-        const [hostname, port] = host.split(":");
+        const [href, protocol, scheme, authority, host='', pathname = "", search = "", query = "", hash = "", fragment = ""] = ("" + url).match(regexp);
+        const [hostname, port] = (''+host).split(":");
 
         this.href = href;
         this.protocol = protocol;
