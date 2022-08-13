@@ -359,6 +359,18 @@ class Headers {
         }
         return values;
     }
+
+    /**
+     *
+     * @returns {String}
+     */
+    toString() {
+        let values = "";
+        for (const name of this.keys()) {
+            values += `${name}: ${this.get(name)}\r\n`;
+        }
+        return values;
+    }
 }
 
 // // @test
@@ -376,29 +388,51 @@ class Headers {
 // const myHeaders = new Headers(headers);
 // console.log(myHeaders);
 
+// const headers = new Headers({
+//     Host: "${this.input.host}",
+//     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
+//     Accept: "*/*",
+//     "Accept-Language": "*",
+//     "Accept-Encoding": "*",
+//     "Cache-Control": "max-age=0",
+// });
+// console.log(''+headers)
+
 /**
  * Request
- * @property {String} body
- * @property {String} bodyUsed
- * @property {String} cache
- * @property {String} credentials
- * @property {String} destination
- * @property {String} headers
- * @property {String} integrity
- * @property {String} method
- * @property {String} mode
- * @property {String} priority
- * @property {String} redirect
- * @property {String} referrer
- * @property {String} referrerPolicy
- * @property {String} url
- * @property {String} agent
- * @property {String} hostname
- * @property {String} insecureHTTPParser
- * @property {String} path
- * @property {String} port
- * @property {String} protocol
- * @property {String} timeout
+ * 
+ * options.headers
+ * ```http
+ * host: ${this.input.host}
+ * user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+ * accept: *\/*
+ * accept-language: *
+ * accept-encoding: *
+ * cache-control: max-age=0
+ * ```
+ * @property {String} input
+ * @property {Object} options
+ * @property {String} options.body
+ * @property {String} options.bodyUsed
+ * @property {String} options.cache - default, reload, no-cache
+ * @property {String} options.credentials=same-origin - omit, same-origin, include
+ * @property {String} options.destination
+ * @property {String} options.headers
+ * @property {String} options.integrity
+ * @property {String} options.method=GET
+ * @property {String} options.mode=cors - cors, no-cors, same-origin, navigate
+ * @property {String} options.priority
+ * @property {String} options.redirect=follow - follow, error, or manual
+ * @property {String} options.referrer
+ * @property {String} options.referrerPolicy
+ * @property {String} options.url
+ * @property {String} options.agent
+ * @property {String} options.hostname
+ * @property {String} options.insecureHTTPParser=true
+ * @property {String} options.path
+ * @property {String} options.port
+ * @property {String} options.protocol
+ * @property {String} options.timeout
  */
 class Request {
     constructor(input = "", options = {}) {
@@ -619,9 +653,9 @@ class Response {
 // console.log(myResponse);
 
 /**
- * 
- * @param {String} resource 
- * @param {Object} options 
+ *
+ * @param {String} resource
+ * @param {Object} options
  * @returns {Promise}
  */
 function fetch(resource = "", options = {}) {

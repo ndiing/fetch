@@ -30,6 +30,7 @@
         * [.keys()](#module_fetch..Headers+keys) ⇒ <code>Array</code>
         * [.set(name, value)](#module_fetch..Headers+set)
         * [.values()](#module_fetch..Headers+values) ⇒ <code>Array</code>
+        * [.toString()](#module_fetch..Headers+toString) ⇒ <code>String</code>
     * [~Request](#module_fetch..Request)
     * [~Response](#module_fetch..Response)
         * [.arrayBuffer()](#module_fetch..Response+arrayBuffer) ⇒ <code>arrayBuffer</code>
@@ -196,6 +197,7 @@ Headers
     * [.keys()](#module_fetch..Headers+keys) ⇒ <code>Array</code>
     * [.set(name, value)](#module_fetch..Headers+set)
     * [.values()](#module_fetch..Headers+values) ⇒ <code>Array</code>
+    * [.toString()](#module_fetch..Headers+toString) ⇒ <code>String</code>
 
 <a name="new_module_fetch..Headers_new"></a>
 
@@ -264,37 +266,43 @@ Headers
 
 #### headers.values() ⇒ <code>Array</code>
 **Kind**: instance method of [<code>Headers</code>](#module_fetch..Headers)  
+<a name="module_fetch..Headers+toString"></a>
+
+#### headers.toString() ⇒ <code>String</code>
+**Kind**: instance method of [<code>Headers</code>](#module_fetch..Headers)  
 <a name="module_fetch..Request"></a>
 
 ### fetch~Request
-Request
+Requestoptions.headers```httphost: ${this.input.host}user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36accept: *\/*accept-language: *accept-encoding: *cache-control: max-age=0```
 
 **Kind**: inner class of [<code>fetch</code>](#module_fetch)  
 **Properties**
 
-| Name | Type |
-| --- | --- |
-| body | <code>String</code> | 
-| bodyUsed | <code>String</code> | 
-| cache | <code>String</code> | 
-| credentials | <code>String</code> | 
-| destination | <code>String</code> | 
-| headers | <code>String</code> | 
-| integrity | <code>String</code> | 
-| method | <code>String</code> | 
-| mode | <code>String</code> | 
-| priority | <code>String</code> | 
-| redirect | <code>String</code> | 
-| referrer | <code>String</code> | 
-| referrerPolicy | <code>String</code> | 
-| url | <code>String</code> | 
-| agent | <code>String</code> | 
-| hostname | <code>String</code> | 
-| insecureHTTPParser | <code>String</code> | 
-| path | <code>String</code> | 
-| port | <code>String</code> | 
-| protocol | <code>String</code> | 
-| timeout | <code>String</code> | 
+| Name | Type | Default | Description |
+| --- | --- | --- | --- |
+| input | <code>String</code> |  |  |
+| options | <code>Object</code> |  |  |
+| options.body | <code>String</code> |  |  |
+| options.bodyUsed | <code>String</code> |  |  |
+| options.cache | <code>String</code> |  | default, reload, no-cache |
+| options.credentials | <code>String</code> | <code>same-origin</code> | omit, same-origin, include |
+| options.destination | <code>String</code> |  |  |
+| options.headers | <code>String</code> |  |  |
+| options.integrity | <code>String</code> |  |  |
+| options.method | <code>String</code> | <code>GET</code> |  |
+| options.mode | <code>String</code> | <code>cors</code> | cors, no-cors, same-origin, navigate |
+| options.priority | <code>String</code> |  |  |
+| options.redirect | <code>String</code> | <code>follow</code> | follow, error, or manual |
+| options.referrer | <code>String</code> |  |  |
+| options.referrerPolicy | <code>String</code> |  |  |
+| options.url | <code>String</code> |  |  |
+| options.agent | <code>String</code> |  |  |
+| options.hostname | <code>String</code> |  |  |
+| options.insecureHTTPParser | <code>String</code> | <code>true</code> |  |
+| options.path | <code>String</code> |  |  |
+| options.port | <code>String</code> |  |  |
+| options.protocol | <code>String</code> |  |  |
+| options.timeout | <code>String</code> |  |  |
 
 <a name="module_fetch..Response"></a>
 
