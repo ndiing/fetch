@@ -48,7 +48,7 @@ const StorageManager = require("@ndiing/storage");
  * // you can set from `options.userDataDir='./data'` and `options.profileDirectory='default'`
  * // or by default in `./data/${host}/default.json`
  * 
- * > fetch `Request.body` and `Response.body` are `ReadableStream`, also redirect `Reponse.redirect(url,status)`, the url value A relative (to the request URL) or absolute URL. another word you can using `.pipe()` method when need to use as `reverse proxy`
+ * // fetch `Request.body` and `Response.body` are `ReadableStream`, also redirect `Reponse.redirect(url,status)`, the url value A relative (to the request URL) or absolute URL. another word you can using `.pipe()` method when need to use as `reverse proxy`
  * ```
  * @module fetch
  */
