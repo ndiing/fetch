@@ -50,15 +50,19 @@ const StorageManager = require("@ndiing/storage");
  * ### Examples
  *
  * ```js
+ * // Parse full URL
  * var searchParams=new URLSearchParams2('https://www.google.com/search?q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
  * console.log(searchParams)
  *
+ * // Parse with /path
  * var searchParams=new URLSearchParams2('/search?q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
  * console.log(searchParams)
  *
+ * // Parse URL.search
  * var searchParams=new URLSearchParams2('?q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
  * console.log(searchParams)
  *
+ * // Parse query
  * var searchParams=new URLSearchParams2('q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
  * console.log(searchParams)
  *
@@ -208,15 +212,19 @@ class URLSearchParams2 {
 
 // // @test
 
+// // Parse full URL
 // var searchParams=new URLSearchParams2('https://www.google.com/search?q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
 // console.log(searchParams)
 
+// // Parse with /path
 // var searchParams=new URLSearchParams2('/search?q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
 // console.log(searchParams)
 
+// // Parse URL.search
 // var searchParams=new URLSearchParams2('?q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
 // console.log(searchParams)
 
+// // Parse query
 // var searchParams=new URLSearchParams2('q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
 // console.log(searchParams)
 
