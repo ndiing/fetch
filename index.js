@@ -727,7 +727,6 @@ function fetch(resource, options = {}) {
         if (!(request instanceof Request)) {
             request = new Request(request, options);
         }
-        console.log(request);
 
         const protocol = request.protocol == "https:" ? https : http;
         const req = protocol.request(request);
