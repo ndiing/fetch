@@ -291,14 +291,14 @@ The `Headers.values()` method returns an `array` allowing to go through all valu
 <a name="module_fetch..Request"></a>
 
 ### fetch~Request
-Requestoptions.headers```httphost: ${this.input.host}user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36accept: *\/*accept-language: *accept-encoding: *cache-control: max-age=0```
+The `Request` interface of the `Fetch API` represents a resource request.options.headers```httphost: ${this.input.host}user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36accept: *\/*accept-language: *accept-encoding: *cache-control: max-age=0```
 
 **Kind**: inner class of [<code>fetch</code>](#module_fetch)  
 **Properties**
 
 | Name | Type | Default | Description |
 | --- | --- | --- | --- |
-| input | <code>String</code> |  |  |
+| input | <code>String</code> |  | <p>Defines the resource that you wish to fetch. This can either be:</p><ul><li>A string containing the direct URL of the resource you want to fetch.</li><li>A Request object, effectively creating a copy. Note the following behavioral updates to retain security while making the constructor less likely to throw exceptions:</ul><ul><li>If this object exists on another origin to the constructor call, the Request.referrer is stripped out.</li><li>If this object has a Request.mode of navigate, the mode value is converted to same-origin.</li></ul></li> |
 | options | <code>Object</code> |  |  |
 | options.body | <code>String</code> |  |  |
 | options.bodyUsed | <code>String</code> |  |  |

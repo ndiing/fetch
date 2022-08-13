@@ -527,7 +527,7 @@ class Headers {
 // console.log(''+headers)
 
 /**
- * Request
+ * The `Request` interface of the `Fetch API` represents a resource request.
  *
  * options.headers
  * ```http
@@ -538,7 +538,7 @@ class Headers {
  * accept-encoding: *
  * cache-control: max-age=0
  * ```
- * @property {String} input
+ * @property {String} input - <p>Defines the resource that you wish to fetch. This can either be:</p><ul><li>A string containing the direct URL of the resource you want to fetch.</li><li>A Request object, effectively creating a copy. Note the following behavioral updates to retain security while making the constructor less likely to throw exceptions:</ul><ul><li>If this object exists on another origin to the constructor call, the Request.referrer is stripped out.</li><li>If this object has a Request.mode of navigate, the mode value is converted to same-origin.</li></ul></li>
  * @property {Object} options
  * @property {String} options.body
  * @property {String} options.bodyUsed
