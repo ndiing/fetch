@@ -47,7 +47,31 @@ const StorageManager = require("@ndiing/storage");
  */
 
 /**
- * URLSearchParams2
+ * ### Examples
+ *
+ * ```js
+ * var searchParams=new URLSearchParams2('https://www.google.com/search?q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
+ * console.log(searchParams)
+ *
+ * var searchParams=new URLSearchParams2('/search?q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
+ * console.log(searchParams)
+ *
+ * var searchParams=new URLSearchParams2('?q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
+ * console.log(searchParams)
+ *
+ * var searchParams=new URLSearchParams2('q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
+ * console.log(searchParams)
+ *
+ * // Output are the same
+ * // URLSearchParams2 will remove before/prefix `?` and after `#`
+ * // URLSearchParams2 {
+ * //     q: 'URLSearchParams',
+ * //     oq: 'URLSearchParams',
+ * //     aqs: 'chrome.0.69i59j0i512l4j69i60l3.24886j0j7',
+ * //     sourceid: 'chrome',
+ * //     ie: 'UTF-8'
+ * // }
+ * ```
  */
 class URLSearchParams2 {
     /**
@@ -183,30 +207,28 @@ class URLSearchParams2 {
 }
 
 // // @test
-// [
-//     //
-//     // '',
-//     "https://www.google.com:3000/search?q=url&oq=url&aqs=chrome..69i57j0i131i433i512j69i59j0i131i433i512l2j69i60l3.1216j0j7&sourceid=chrome&ie=UTF-8#hash",
-//     // "https://www.google.com/search?q=url&oq=url&aqs=chrome..69i57j0i131i433i512j69i59j0i131i433i512l2j69i60l3.1216j0j7&sourceid=chrome&ie=UTF-8#hash",
-//     // "/search?q=url&oq=url&aqs=chrome..69i57j0i131i433i512j69i59j0i131i433i512l2j69i60l3.1216j0j7&sourceid=chrome&ie=UTF-8#hash",
-// ].forEach((link) => {
-//     var searchParams = (new URLSearchParams2(link));
-//     console.log('append', searchParams.append('name','value'))
-//     console.log('delete', searchParams.delete('name'))
-//     console.log('entries', searchParams.entries())
-//     console.log('forEach', searchParams.forEach(console.log))
-//     console.log('get', searchParams.get('name'))
-//     console.log('getAll', searchParams.getAll('name'))
-//     console.log('has', searchParams.has('name'))
-//     console.log('keys', searchParams.keys())
-//     console.log('set', searchParams.set('name','value'))
-//     // console.log('sort', searchParams.sort())
-//     console.log('toString', searchParams.toString())
-//     console.log('values', searchParams.values())
-//     // try {
-//     //     console.log(new URLSearchParams(link).toString());
-//     // } catch (error) {}
-// });
+
+// var searchParams=new URLSearchParams2('https://www.google.com/search?q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
+// console.log(searchParams)
+
+// var searchParams=new URLSearchParams2('/search?q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
+// console.log(searchParams)
+
+// var searchParams=new URLSearchParams2('?q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
+// console.log(searchParams)
+
+// var searchParams=new URLSearchParams2('q=URLSearchParams&oq=URLSearchParams&aqs=chrome.0.69i59j0i512l4j69i60l3.24886j0j7&sourceid=chrome&ie=UTF-8#URLSearchParams')
+// console.log(searchParams)
+
+// // Output are the same
+// // URLSearchParams2 will remove before/prefix `?` and after `#`
+// // URLSearchParams2 {
+// //     q: 'URLSearchParams',
+// //     oq: 'URLSearchParams',
+// //     aqs: 'chrome.0.69i59j0i512l4j69i60l3.24886j0j7',
+// //     sourceid: 'chrome',
+// //     ie: 'UTF-8'
+// // }
 
 /**
  * URL2
@@ -234,8 +256,8 @@ class URL2 {
         }
 
         const regexp = /^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?/;
-        const [href, protocol, scheme, authority, host='', pathname = "", search = "", query = "", hash = "", fragment = ""] = ("" + url).match(regexp);
-        const [hostname, port] = (''+host).split(":");
+        const [href, protocol, scheme, authority, host = "", pathname = "", search = "", query = "", hash = "", fragment = ""] = ("" + url).match(regexp);
+        const [hostname, port] = ("" + host).split(":");
 
         this.href = href;
         this.protocol = protocol;
