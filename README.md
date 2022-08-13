@@ -202,24 +202,30 @@ Headers
 <a name="new_module_fetch..Headers_new"></a>
 
 #### new Headers(init)
+The `Headers()` constructor creates a new `Headers` object.
 
-| Param | Type |
-| --- | --- |
-| init | <code>String</code> | 
+
+| Param | Type | Description |
+| --- | --- | --- |
+| init | <code>object</code> | An object containing any HTTP headers that you want to pre-populate your Headers object with. This can be a simple object literal with String values, an array of name-value pairs, where each pair is a 2-element string array; or an existing Headers object. In the last case, the new Headers object copies its data from the existing Headers object. |
 
 <a name="module_fetch..Headers+append"></a>
 
 #### headers.append(name, value)
+The `append()` method of the `Headers` interface appends a new value onto an existing header inside a `Headers` object, or adds the header if it does not already exist.
+
 **Kind**: instance method of [<code>Headers</code>](#module_fetch..Headers)  
 
-| Param | Type |
-| --- | --- |
-| name | <code>String</code> | 
-| value | <code>String</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>String</code> | The name of the HTTP header you want to add to the `Headers` object. |
+| value | <code>String</code> | The value of the HTTP header you want to add. |
 
 <a name="module_fetch..Headers+delete"></a>
 
 #### headers.delete(name)
+The `delete()` method of the `Headers` interface deletes a header from the current `Headers` object.
+
 **Kind**: instance method of [<code>Headers</code>](#module_fetch..Headers)  
 
 | Param | Type |
@@ -229,19 +235,25 @@ Headers
 <a name="module_fetch..Headers+entries"></a>
 
 #### headers.entries() ⇒ <code>Array</code>
+The `Headers.entries()` method returns an `array` allowing to go through all key/value pairs contained in this object. The both the key and value of each pairs are `String` objects.
+
 **Kind**: instance method of [<code>Headers</code>](#module_fetch..Headers)  
 <a name="module_fetch..Headers+get"></a>
 
 #### headers.get(name) ⇒ <code>String/Array</code>
+The `get()` method of the `Headers` interface returns a byte string of all the values of a header within a `Headers` object with a given name. If the requested header doesn't exist in the `Headers` object, it returns null.
+
 **Kind**: instance method of [<code>Headers</code>](#module_fetch..Headers)  
 
-| Param | Type |
-| --- | --- |
-| name | <code>String</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>String</code> | The name of the HTTP header whose values you want to retrieve from the Headers object. If the given name is not the name of an HTTP header, this method throws a TypeError. The name is case-insensitive. |
 
 <a name="module_fetch..Headers+has"></a>
 
 #### headers.has(name) ⇒ <code>Boolean</code>
+The `has()` method of the `Headers` interface returns a boolean stating whether a `Headers` object contains a certain header.
+
 **Kind**: instance method of [<code>Headers</code>](#module_fetch..Headers)  
 
 | Param | Type |
@@ -251,20 +263,26 @@ Headers
 <a name="module_fetch..Headers+keys"></a>
 
 #### headers.keys() ⇒ <code>Array</code>
+The `Headers.keys()` method returns an `array` allowing to go through all keys contained in this object. The keys are `String` objects.
+
 **Kind**: instance method of [<code>Headers</code>](#module_fetch..Headers)  
 <a name="module_fetch..Headers+set"></a>
 
 #### headers.set(name, value)
+The `set()` method of the `Headers` interface sets a new value for an existing header inside a `Headers` object, or adds the header if it does not already exist.
+
 **Kind**: instance method of [<code>Headers</code>](#module_fetch..Headers)  
 
-| Param | Type |
-| --- | --- |
-| name | <code>String</code> | 
-| value | <code>String</code> | 
+| Param | Type | Description |
+| --- | --- | --- |
+| name | <code>String</code> | The name of the HTTP header you want to set to a new value. If the given name is not the name of an HTTP header, this method throws a TypeError. |
+| value | <code>String</code> | The new value you want to set. |
 
 <a name="module_fetch..Headers+values"></a>
 
 #### headers.values() ⇒ <code>Array</code>
+The `Headers.values()` method returns an `array` allowing to go through all values contained in this object. The values are `String` objects.
+
 **Kind**: instance method of [<code>Headers</code>](#module_fetch..Headers)  
 <a name="module_fetch..Headers+toString"></a>
 

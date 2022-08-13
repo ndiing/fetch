@@ -380,8 +380,8 @@ class URL2 {
  */
 class Headers {
     /**
-     *
-     * @param {String} init
+     * The `Headers()` constructor creates a new `Headers` object.
+     * @param {object} init - An object containing any HTTP headers that you want to pre-populate your Headers object with. This can be a simple object literal with String values, an array of name-value pairs, where each pair is a 2-element string array; or an existing Headers object. In the last case, the new Headers object copies its data from the existing Headers object.
      */
     constructor(init = {}) {
         if (Array.isArray(init)) {
@@ -396,9 +396,9 @@ class Headers {
     }
 
     /**
-     *
-     * @param {String} name
-     * @param {String} value
+     * The `append()` method of the `Headers` interface appends a new value onto an existing header inside a `Headers` object, or adds the header if it does not already exist.
+     * @param {String} name - The name of the HTTP header you want to add to the `Headers` object.
+     * @param {String} value - The value of the HTTP header you want to add.
      */
     append(name, value) {
         name = name.toLowerCase();
@@ -414,7 +414,7 @@ class Headers {
     }
 
     /**
-     *
+     * The `delete()` method of the `Headers` interface deletes a header from the current `Headers` object.
      * @param {String} name
      */
     delete(name) {
@@ -423,29 +423,33 @@ class Headers {
     }
 
     /**
-     *
+     * The `Headers.entries()` method returns an `array` allowing to go through all key/value pairs contained in this object. The both the key and value of each pairs are `String` objects.
      * @returns {Array}
      */
     entries() {
         const values = [];
         for (const name of this.keys()) {
-            values.push([name, this.get(name)]);
+            values.push([
+                //
+                name.replace(/(^|-)(\w)/g,($,$1,$2)=>$1+$2.toUpperCase()),
+                this.get(name),
+            ]);
         }
         return values;
     }
 
     /**
-     *
-     * @param {String} name
+     * The `get()` method of the `Headers` interface returns a byte string of all the values of a header within a `Headers` object with a given name. If the requested header doesn't exist in the `Headers` object, it returns null.
+     * @param {String} name - The name of the HTTP header whose values you want to retrieve from the Headers object. If the given name is not the name of an HTTP header, this method throws a TypeError. The name is case-insensitive.
      * @returns {String/Array}
      */
     get(name) {
         name = name.toLowerCase();
-        return this[name];
+        return this[name]||null;
     }
 
     /**
-     *
+     * The `has()` method of the `Headers` interface returns a boolean stating whether a `Headers` object contains a certain header.
      * @param {String} name
      * @returns {Boolean}
      */
@@ -455,7 +459,7 @@ class Headers {
     }
 
     /**
-     *
+     * The `Headers.keys()` method returns an `array` allowing to go through all keys contained in this object. The keys are `String` objects.
      * @returns {Array}
      */
     keys() {
@@ -463,9 +467,9 @@ class Headers {
     }
 
     /**
-     *
-     * @param {String} name
-     * @param {String} value
+     * The `set()` method of the `Headers` interface sets a new value for an existing header inside a `Headers` object, or adds the header if it does not already exist.
+     * @param {String} name - The name of the HTTP header you want to set to a new value. If the given name is not the name of an HTTP header, this method throws a TypeError.
+     * @param {String} value - The new value you want to set.
      */
     set(name, value) {
         name = name.toLowerCase();
@@ -473,7 +477,7 @@ class Headers {
     }
 
     /**
-     *
+     * The `Headers.values()` method returns an `array` allowing to go through all values contained in this object. The values are `String` objects.
      * @returns {Array}
      */
     values() {
