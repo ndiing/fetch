@@ -379,7 +379,7 @@ Response
 <a name="module_fetch..fetch"></a>
 
 ### fetch~fetch()
-The `Request` interface of the `Fetch API` represents a resource request.```js// Default options.headers{    Host: `${this.input.host}`,    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",    Accept: "*\/*",    "Accept-Language": "*",    "Accept-Encoding": "*",    "Cache-Control": "max-age=0"}```
+The global fetch() method starts the process of fetching a resource from the network, returning a promise which is fulfilled once the response is available.```js// Default options.headers{    Host: `${this.input.host}`,    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",    Accept: "*\/*",    "Accept-Language": "*",    "Accept-Encoding": "*",    "Cache-Control": "max-age=0"}```
 
 **Kind**: inner method of [<code>fetch</code>](#module_fetch)  
 **Properties**

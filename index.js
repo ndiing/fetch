@@ -783,7 +783,7 @@ class Response {
 // console.log(myResponse);
 
 /**
- * The `Request` interface of the `Fetch API` represents a resource request.
+ * The global fetch() method starts the process of fetching a resource from the network, returning a promise which is fulfilled once the response is available.
  *
  * ```js
  * // Default options.headers
