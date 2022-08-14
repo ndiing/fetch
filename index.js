@@ -344,7 +344,7 @@ class URL2 {
         if (searchParams) {
             searchParams = "?" + searchParams;
         }
-        return this.origin + this.path + searchParams + this.hash;
+        return this.origin + this.pathname + searchParams + this.hash;
     }
 }
 
