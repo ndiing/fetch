@@ -340,7 +340,7 @@ class URL2 {
      * @returns {String}
      */
     toString() {
-        return this.href;
+        return this.origin+this.path+(''+this.searchParams)+this.hash;
     }
 }
 
