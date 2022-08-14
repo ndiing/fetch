@@ -1,6 +1,6 @@
 {
   "name": "@ndiing/fetch",
-  "version": "2.2.11",
+  "version": "2.2.12",
   "description": "nodejs fetch module",
   "main": "index.js",
   "scripts": {

@@ -47,7 +47,7 @@ const StorageManager = require("@ndiing/storage");
  * // when recive `response.headers.has('Set-Cookie')` values are saved to local `.json` file
  * // you can set from `options.userDataDir='./data'` and `options.profileDirectory='default'`
  * // or by default in `./data/${host}/default.json`
- * 
+ *
  * // fetch `Request.body` and `Response.body` are `ReadableStream`, also redirect `Reponse.redirect(url,status)`, the url value A relative (to the request URL) or absolute URL. another word you can using `.pipe()` method when need to use as `reverse proxy`
  * ```
  * @module fetch
@@ -340,7 +340,11 @@ class URL2 {
      * @returns {String}
      */
     toString() {
-        return this.origin+this.path+(''+this.searchParams)+this.hash;
+        let searchParams = "" + this.searchParams;
+        if (searchParams) {
+            searchParams = "?" + searchParams;
+        }
+        return this.origin + this.path + searchParams + this.hash;
     }
 }
 
