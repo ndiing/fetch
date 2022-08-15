@@ -1,13 +1,3 @@
-# fetch
-
-[Docs](https://ndiing.github.io/fetch/)
-
-```
-npm install @ndiing/fetch
-```
-### Usage
-
-```js
 const fetch = require('./index')
 
 // @test
@@ -52,5 +42,3 @@ fetch("https://mitra.tokopedia.com/")
 .then((res) => res.text())
 .then(console.log)
 .catch(console.log);
-
-```

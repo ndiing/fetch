@@ -683,39 +683,3 @@ fetch.Request=Request
 fetch.Response=Response
 
 module.exports=fetch
-
-// @test
-
-// request
-// fetch('http://jsonplaceholder.typicode.com/posts')
-// .then(console.log)
-
-// request output json
-// fetch('http://jsonplaceholder.typicode.com/posts')
-// .then(res=>res.json())
-// .then(console.log)
-// .catch(console.log)
-
-// request with compression
-// fetch('http://jsonplaceholder.typicode.com/posts',{
-//     headers:{
-//         'accept-encoding':'gzip, deflate, br'
-//     }
-// })
-// .then(res=>res.json())
-// .then(console.log)
-// .catch(console.log)
-
-// // request with redirect
-// fetch('http://jsonplaceholder.typicode.com/guide',{
-//     redirect:'manual'
-// })
-// .then(res=>res.text())
-// .then(console.log)
-// .catch(console.log)
-
-// request credentials!=='omit', handle cookie/set-cookie
-// fetch("https://mitra.tokopedia.com/")
-// .then((res) => res.text())
-// .then(console.log)
-// .catch(console.log);
