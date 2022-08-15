@@ -395,53 +395,23 @@ class Headers {
  */
 class Request {
     /**
-     * @property {String/Readable} body
-     */
-    /**
-     * @property {String} credentials=same-origin
-     */
-    /**
-     * @property {Object/Headers} headers
-     */
-    /**
-     * @property {String} method=GET
-     */
-    /**
-     * @property {String} redirect=follow
-     */
-    /**
-     * @property {String} url
-     */
-
-    /**
-     * @property {Object} agent
-     */
-    /**
-     * @property {String} hostname
-     */
-    /**
-     * @property {Boolean} insecureHTTPParser
-     */
-    /**
-     * @property {String} path
-     */
-    /**
-     * @property {Number} port
-     */
-    /**
-     * @property {String} protocol
-     */
-    /**
-     * @property {Number} timeout
-     */
-    /**
-     * @property {Boolean} compression
-     */
-
-    /**
      *
      * @param {String/Request} input
      * @param {Object} options
+     * @param {String/Readable} options.body
+     * @param {String} options.credentials=same-origin
+     * @param {Object/Headers} options.headers
+     * @param {String} options.method=GET
+     * @param {String} options.redirect=follow
+     * @param {String} options.url
+     * @param {Object} options.agent
+     * @param {String} options.hostname
+     * @param {Boolean} options.insecureHTTPParser
+     * @param {String} options.path
+     * @param {Number} options.port
+     * @param {String} options.protocol
+     * @param {Number} options.timeout
+     * @param {Boolean} options.compression
      */
     constructor(input = "", options = {}) {
         if (input instanceof Request) {
@@ -535,20 +505,14 @@ class Request {
  *
  */
 class Response {
-    /**
-     * @property {Promise/Response} body
-     */
-    /**
-     * @property {Object/Headers} headers
-     */
-    /**
-     * @property {Number} status
-     */
 
     /**
      *
      * @param {String/Readable} body
      * @param {Object} options
+     * @param {Promise/Response} options.body
+     * @param {Object/Headers} options.headers
+     * @param {Number} options.status
      * @returns {Promise/Response}
      */
     constructor(body = "", options = {}) {
