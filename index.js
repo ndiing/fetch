@@ -660,8 +660,11 @@ function fetch(resource = "", options = {}) {
         const req = protocol.request(request);
         req.on("error", reject);
         req.on("response", (res) => {
-            res.request = request;
-            const response = new Response(res, res);
+            const response = new Response(res, {
+                status:res.statusCode,
+                headers:res.headers,
+                request
+            });
 
             if (response.headers.has("set-cookie")) {
                 storage.cookie = response.headers.get("set-cookie");
