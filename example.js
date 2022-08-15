@@ -1,44 +1,102 @@
-const fetch = require('./index')
+const fetch = require("./index");
 
-// @test
+// // This page is redirecting
+// fetch("https://jsonplaceholder.typicode.com/guide")
+// .then((response) => response.text())
+// .then((html) => console.log(html));
 
-// Using fetch request
-fetch('http://jsonplaceholder.typicode.com/posts')
-.then(console.log)
+// // Avoid redirect
+// fetch("https://jsonplaceholder.typicode.com/guide",{
+//     redirect:'manul'
+// })
+// .then((response) => response.text())
+// .then((html) => console.log(html));
 
-// Get response to JSON format
-fetch('http://jsonplaceholder.typicode.com/posts')
-.then(res=>res.json())
-.then(console.log)
-.catch(console.log)
+// Getting a resource
+// Compressed data
+// fetch("https://jsonplaceholder.typicode.com/posts/1",{
+//     headers:{
+//         'Accept-Encoding':'gzip, deflate, br'
+//     }
+// })
+// .then((response) => response.json())
+// .then((json) => console.log(json));
 
-// Request with compresstion
-// it handle gzip, deflate and br
-fetch('http://jsonplaceholder.typicode.com/posts',{
-    headers:{
-        'accept-encoding':'gzip, deflate, br'
-    }
-})
-.then(res=>res.json())
-.then(console.log)
-.catch(console.log)
+// // Load previous cookie
+// fetch("https://mitra.tokopedia.com/")
+// .then((response) => response.text())
+// .then((text) => console.log(text));
 
-// Request with redirect `manual`
-// default is `follow`
-fetch('http://jsonplaceholder.typicode.com/guide',{
-    redirect:'manual'
-})
-.then(res=>res.text())
-.then(console.log)
-.catch(console.log)
+// // Unload previous cookie
+// fetch("https://mitra.tokopedia.com/",{
+//     credentials:'omit',
+// })
+// .then((response) => response.text())
+// .then((text) => console.log(text));
 
-// Request with previous cookie
-// it also save cookie from `set-cookie` response
-// when options.credential set to not `omit`
-// data will be stored in ./data/${hostname}/default.json
-// also you can set `options.userDataDir` and `options.profileDirectory`
-// it will create as ./${options.userDataDir}/${hostname}/${options.profileDirectory}.json
-fetch("https://mitra.tokopedia.com/")
-.then((res) => res.text())
-.then(console.log)
-.catch(console.log);
+// // Getting a resource
+// fetch("https://jsonplaceholder.typicode.com/posts/1")
+// .then((response) => response.json())
+// .then((json) => console.log(json));
+
+// //   Listing all resources
+// fetch("https://jsonplaceholder.typicode.com/posts")
+// .then((response) => response.json())
+// .then((json) => console.log(json));
+// // Creating a resource
+// fetch("https://jsonplaceholder.typicode.com/posts", {
+//     method: "POST",
+//     body: JSON.stringify({
+//         title: "foo",
+//         body: "bar",
+//         userId: 1,
+//     }),
+//     headers: {
+//         "Content-type": "application/json; charset=UTF-8",
+//     },
+// })
+// .then((response) => response.json())
+// .then((json) => console.log(json));
+
+// // Updating a resource
+// fetch("https://jsonplaceholder.typicode.com/posts/1", {
+//     method: "PUT",
+//     body: JSON.stringify({
+//         id: 1,
+//         title: "foo",
+//         body: "bar",
+//         userId: 1,
+//     }),
+//     headers: {
+//         "Content-type": "application/json; charset=UTF-8",
+//     },
+// })
+// .then((response) => response.json())
+// .then((json) => console.log(json));
+
+// //   Patching a resource
+// fetch("https://jsonplaceholder.typicode.com/posts/1", {
+//     method: "PATCH",
+//     body: JSON.stringify({
+//         title: "foo",
+//     }),
+//     headers: {
+//         "Content-type": "application/json; charset=UTF-8",
+//     },
+// })
+// .then((response) => response.json())
+// .then((json) => console.log(json));
+
+// //   Deleting a resource
+// fetch("https://jsonplaceholder.typicode.com/posts/1", {
+//     method: "DELETE",
+// });
+
+// // This will return all the posts that belong to the first user
+// fetch("https://jsonplaceholder.typicode.com/posts?userId=1")
+// .then((response) => response.json())
+// .then((json) => console.log(json));
+// // This is equivalent to /comments?postId=1
+// fetch("https://jsonplaceholder.typicode.com/posts/1/comments")
+// .then((response) => response.json())
+// .then((json) => console.log(json));

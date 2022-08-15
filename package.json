@@ -1,8 +1,12 @@
 {
-  "name": "@ndiing/fetch",
-  "version": "2.2.24",
-  "description": "nodejs fetch module",
+  "dependencies": {
+    "@ndiinginc/database": "^1.0.0"
+  },
+  "name": "@ndiinginc/fetch",
+  "description": "fetch",
+  "version": "1.0.0",
   "main": "index.js",
+  "devDependencies": {},
   "scripts": {
     "test": "exit 0"
   },
@@ -14,15 +18,13 @@
     "nodejs",
     "fetch",
     "http",
-    "https"
+    "https",
+    "request"
   ],
   "author": "ndiing",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ndiing/fetch/issues"
   },
-  "homepage": "https://github.com/ndiing/fetch#readme",
-  "dependencies": {
-    "@ndiing/storage": "^2.0.0"
-  }
+  "homepage": "https://github.com/ndiing/fetch#readme"
 }

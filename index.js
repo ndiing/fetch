@@ -1,34 +1,23 @@
 const http = require("http");
 const https = require("https");
-const zlib = require("zlib");
 const { Readable } = require("stream");
+const zlib = require("zlib");
 const { Blob } = require("buffer");
-const StorageManager = require("@ndiing/storage");
+const Database = require("@ndiinginc/database");
 
-/**
- *
- */
 class URLSearchParams2 {
-    /**
-     *
-     * @param {String} init
-     */
     constructor(init = "") {
         init = init
-            .replace(/[^\?]+\?/g, "")
-            .replace(/^\?/g, "")
-            .replace(/#[^#]+/g, "")
-            .matchAll(/([^\=&]+?)\=([^\=&]+?)(&|$)/g);
+            .replace(/[^\?]+\?/, "")
+            .replace(/^\?/, "")
+            .replace(/#[^#]+/, "")
+            .matchAll(/([^\=&]+?)\=([^\=&]+?)?(&|$)/g);
+
         for (const [, name, value] of init) {
             this.append(name, value);
         }
     }
 
-    /**
-     *
-     * @param {String} name
-     * @param {String} value
-     */
     append(name, value) {
         if (this[name]) {
             if (Array.isArray(this[name])) {
@@ -41,99 +30,59 @@ class URLSearchParams2 {
         }
     }
 
-    /**
-     *
-     * @param {String} name
-     */
     delete(name) {
         delete this[name];
     }
 
-    /**
-     *
-     * @returns {Array}
-     */
     entries() {
         const values = [];
+
         for (const name of this.keys()) {
             values.push([name, this[name]]);
         }
         return values;
     }
 
-    /**
-     *
-     * @param {Function} callback
-     */
     forEach(callback) {
         for (const name of this.keys()) {
             callback(this[name], name);
         }
     }
 
-    /**
-     *
-     * @param {String} name
-     * @returns {String/array}
-     */
     get(name) {
         return this[name];
     }
 
-    /**
-     *
-     * @param {String} name
-     * @returns {String/Array}
-     */
     getAll(name) {
         return this[name];
     }
 
-    /**
-     *
-     * @param {String} name
-     * @returns {Boolean}
-     */
     has(name) {
         return !!this[name];
     }
 
-    /**
-     *
-     * @returns {Array}
-     */
     keys() {
         return Object.getOwnPropertyNames(this);
     }
 
-    /**
-     *
-     * @param {String} name
-     * @param {String} value
-     */
     set(name, value) {
         this[name] = value;
     }
+
     // sort() {}
 
-    /**
-     *
-     * @returns {String}
-     */
     toString() {
         const values = [];
+
         for (const name of this.keys()) {
             values.push([name, this[name]].join("="));
         }
         return values.join("&");
     }
 
-    /**
-     *
-     * @returns {Array}
-     */
     values() {
         const values = [];
+
         for (const name of this.keys()) {
             values.push(this[name]);
         }
@@ -141,90 +90,30 @@ class URLSearchParams2 {
     }
 }
 
-// @test
-// console.log(new URLSearchParams2("https://www.google.com:3000/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59i512j0i512l6j69i60.1284j0j4&sourceid=chrome&ie=UTF-8#url"));
-// console.log(new URLSearchParams2("https://www.google.com/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59i512j0i512l6j69i60.1284j0j4&sourceid=chrome&ie=UTF-8#url"));
-// console.log(new URLSearchParams2("/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59i512j0i512l6j69i60.1284j0j4&sourceid=chrome&ie=UTF-8#url"));
-// console.log(new URLSearchParams2("?q=new+url&oq=new+URL&aqs=chrome.0.69i59i512j0i512l6j69i60.1284j0j4&sourceid=chrome&ie=UTF-8#url"));
-// console.log(new URLSearchParams2("q=new+url&oq=new+URL&aqs=chrome.0.69i59i512j0i512l6j69i60.1284j0j4&sourceid=chrome&ie=UTF-8#url"));
-// console.log(''+new URLSearchParams2("q=new+url&oq=new+URL&aqs=chrome.0.69i59i512j0i512l6j69i60.1284j0j4&sourceid=chrome&ie=UTF-8"));
-
-/**
- * @see {@link https://www.rfc-editor.org/rfc/rfc3986#appendix-B}
- */
 class URL2 {
-    /**
-     * @property {String} href=http://localhost
-     */
-    /**
-     * @property {String} protocol=http:
-     */
-    /**
-     * @property {String} scheme=http
-     */
-    /**
-     * @property {String} authority=//localhost
-     */
-    /**
-     * @property {String} host=localhost
-     */
-    /**
-     * @property {String} pathname=/
-     */
-    /**
-     * @property {String} search
-     */
-    /**
-     * @property {String} query
-     */
-    /**
-     * @property {String} hash
-     */
-    /**
-     * @property {String} fragment
-     */
-    /**
-     * @property {String} hostname=localhost
-     */
-    /**
-     * @property {Number} port=80
-     */
-    /**
-     * @property {String} origin=http://localhost
-     */
-    /**
-     * @property {Object} searchParams
-     */
-    /**
-     * @property {String} path=/
-     */
-
-    /**
-     *
-     * @param {String} url
-     * @param {String} base=http://localhost
-     */
     constructor(url = "", base = "http://localhost") {
-        if (!/^(([^:/?#]+):)(\/\/([^/?#]*))/.test(url)) {
+        // https://www.rfc-editor.org/rfc/rfc3986
+        const regexpOrigin = /^(([^:/?#]+):)(\/\/([^/?#]*))/;
+
+        if (!regexpOrigin.test(url)) {
             url = base + url;
         }
         const regexp = /^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?/;
-        // prettier-ignore
         const [
-            href,// 'https://www.google.com/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59i512j0i512l6j69i60.1284j0j4&sourceid=chrome&ie=UTF-8#url',
-            protocol,// 'https:',
-            scheme,// 'https',
-            authority,// '//www.google.com',
-            host,// 'www.google.com',
-            pathname='',// '/search',
-            search='',// '?q=new+url&oq=new+URL&aqs=chrome.0.69i59i512j0i512l6j69i60.1284j0j4&sourceid=chrome&ie=UTF-8',
-            query='',// 'q=new+url&oq=new+URL&aqs=chrome.0.69i59i512j0i512l6j69i60.1284j0j4&sourceid=chrome&ie=UTF-8',
-            hash='',// '#url',
-            fragment='',// 'url',
+            href, // 'https://www.google.com/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l6j69i60.2728j0j7&sourceid=chrome&ie=UTF-8#chrome',
+            protocol, // 'https:',
+            scheme, // 'https',
+            authority, // '//www.google.com',
+            host, // 'www.google.com',
+            pathname = "/", // '/search',
+            search = "", // '?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l6j69i60.2728j0j7&sourceid=chrome&ie=UTF-8',
+            query = "", // 'q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l6j69i60.2728j0j7&sourceid=chrome&ie=UTF-8',
+            hash = "", // '#chrome',
+            fragment = "", // 'chrome',
             // index: 0,
-            // input: 'https://www.google.com/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59i512j0i512l6j69i60.1284j0j4&sourceid=chrome&ie=UTF-8#url',
+            // input: 'https://www.google.com/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l6j69i60.2728j0j7&sourceid=chrome&ie=UTF-8#chrome',
             // groups: undefined
-          ]=((''+url).match(regexp))
+        ] = ("" + url).match(regexp);
         const [hostname, port] = ("" + host).split(":");
 
         this.href = href;
@@ -232,13 +121,13 @@ class URL2 {
         this.scheme = scheme;
         this.authority = authority;
         this.host = host;
-        this.pathname = pathname || "/";
+        this.pathname = pathname ?? "/";
         this.search = search;
         this.query = query;
         this.hash = hash;
         this.fragment = fragment;
         this.hostname = hostname;
-        this.port = parseInt(port || (this.protocol == "https:" ? 443 : 80));
+        this.port = port;
 
         this.origin = this.protocol + this.authority;
         // this.password;
@@ -246,16 +135,13 @@ class URL2 {
         // this.username;
         this.path = this.pathname + this.search + this.hash;
     }
-    // createObjectURL() {}
-    // revokeObjectURL() {}
-    // toJSON() {}
+    // createObjectURL(){}
+    // revokeObjectURL(){}
+    // toJSON(){}
 
-    /**
-     *
-     * @returns {String}
-     */
     toString() {
         let searchParams = "" + this.searchParams;
+
         if (searchParams) {
             searchParams = "?" + searchParams;
         }
@@ -263,41 +149,16 @@ class URL2 {
     }
 }
 
-// @test
-// console.log(new URL2("https://www.google.com:3000/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59i512j0i512l6j69i60.1284j0j4&sourceid=chrome&ie=UTF-8#url"));
-// console.log(new URL2("https://www.google.com/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59i512j0i512l6j69i60.1284j0j4&sourceid=chrome&ie=UTF-8#url"));
-// console.log(new URL2("/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59i512j0i512l6j69i60.1284j0j4&sourceid=chrome&ie=UTF-8#url"));
-// console.log(''+new URL2("/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59i512j0i512l6j69i60.1284j0j4&sourceid=chrome&ie=UTF-8#url"));
-
-/**
- *
- */
 class Headers {
-    /**
-     *
-     * @param {Object/Array} init
-     */
     constructor(init = {}) {
-        // init={}
-        // init=[]
         for (const name in init) {
-            if (Array.isArray(init[name])) {
-                for (const value of init[name]) {
-                    this.set(name, value);
-                }
-            } else {
-                this.set(name, init[name]);
-            }
+            this.set(name, init[name]);
         }
     }
 
-    /**
-     *
-     * @param {String} name
-     * @param {String/Array} value
-     */
     append(name, value) {
         name = name.toLowerCase();
+
         if (this[name]) {
             if (Array.isArray(this[name])) {
                 this[name].push(value);
@@ -309,71 +170,42 @@ class Headers {
         }
     }
 
-    /**
-     *
-     * @param {String} name
-     */
     delete(name) {
         name = name.toLowerCase();
         delete this[name];
     }
 
-    /**
-     *
-     * @returns {Array}
-     */
     entries() {
         const values = [];
+
         for (const name of this.keys()) {
             values.push([name.replace(/(^|-)(\w)/g, ($, $1, $2) => $1 + $2.toUpperCase()), this[name]]);
         }
         return values;
     }
 
-    /**
-     *
-     * @param {String} name
-     * @returns {String/Array}
-     */
     get(name) {
         name = name.toLowerCase();
         return this[name];
     }
 
-    /**
-     *
-     * @param {String} name
-     * @returns {Boolean}
-     */
     has(name) {
         name = name.toLowerCase();
         return !!this[name];
     }
 
-    /**
-     *
-     * @returns {Array}
-     */
     keys() {
         return Object.getOwnPropertyNames(this);
     }
 
-    /**
-     *
-     * @param {String} name
-     * @param {String/Array} value
-     */
     set(name, value) {
         name = name.toLowerCase();
         this[name] = value;
     }
 
-    /**
-     *
-     * @returns {Array}
-     */
     values() {
         const values = [];
+
         for (const name of this.keys()) {
             values.push(this[name]);
         }
@@ -381,41 +213,10 @@ class Headers {
     }
 }
 
-// @test
-// console.log(new Headers())
-// console.log(new Headers(new Headers({
-//     'content-type':'text/html'
-// })))
-// console.log(new Headers({
-//     'content-type':'application/json'
-// }).has('Content-Type'))
-
-/**
- *
- */
 class Request {
-    /**
-     *
-     * @param {String/Request} input
-     * @param {Object} options
-     * @param {String/Readable} options.body
-     * @param {String} options.credentials=same-origin
-     * @param {Object/Headers} options.headers
-     * @param {String} options.method=GET
-     * @param {String} options.redirect=follow
-     * @param {String} options.url
-     * @param {Object} options.agent
-     * @param {String} options.hostname
-     * @param {Boolean} options.insecureHTTPParser
-     * @param {String} options.path
-     * @param {Number} options.port
-     * @param {String} options.protocol
-     * @param {Number} options.timeout
-     * @param {Boolean} options.compression
-     */
-    constructor(input = "", options = {}) {
+    constructor(input, options = {}) {
         if (input instanceof Request) {
-            input = input.url;
+            input = "" + input.input;
             options = {
                 ...input,
                 ...options,
@@ -426,45 +227,43 @@ class Request {
             };
         }
         this.input = new URL2(input);
+        this.database=Database.get(this.input.origin)
         this.body = options.body;
+
         if (!(this.body instanceof Readable)) {
             this.body = new Readable();
             this.body.push(options.body);
             this.body.push(null);
         }
-        // this.bodyUsed = options.bodyUsed;
-        // this.cache = options.cache;
-        this.credentials = options.credentials ?? "same-origin"; //omit, same-origin, or include
-        // this.destination = options.destination;
-        options.headers = {
-            // default headers
-            // GET /home.html HTTP/1.1
-            Host: this.input.host,
-            // 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:50.0) Gecko/20100101 Firefox/50.0',
-            // 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            Accept: "*/*",
-            // 'Accept-Language': 'en-US,en;q=0.5',
-            "Accept-Language": "*",
-            // 'Accept-Encoding': 'gzip, deflate, br',
-            // 'Referer': 'https://developer.mozilla.org/testpage.html',
-            // 'Connection': 'keep-alive',
-            // 'Upgrade-Insecure-Requests': '1',
-            // 'If-Modified-Since': 'Mon, 18 Jul 2016 02:36:04 GMT',
-            // 'If-None-Match': '"c561c68d0ba92bbeb8b0fff2a9199f722e3a621a"',
-            // 'Cache-Control': 'max-age=0',
-            ...options.headers,
-        };
+        // this.bodyUsed;
+        // this.cache;
+        this.credentials = options.credentials ?? "same-origin"; //include
+        // this.destination;
+        options.headers={
+            'Host': this.input.host,
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
+            'Accept': '*/*',
+            'Accept-Language': '*',
+            'Accept-Encoding': 'gzip, deflate, br',
+            ...options.headers
+        }
         this.headers = new Headers(options.headers);
-        // this.integrity = options.integrity;
-        this.method = options.method || "GET";
-        // this.mode = options.mode;
-        // this.priority = options.priority;
-        this.redirect = options.redirect ?? "follow"; //follow, error, or manual
-        // this.referrer = options.referrer;
-        // this.referrerPolicy = options.referrerPolicy;
-        this.url = "" + this.input;
 
-        // nodejs req
+        // this.database
+        if(this.credentials!=='omit'&&this.database.cookie){
+            this.headers.set('cookie',this.database.cookie)
+        }
+
+        // this.integrity;
+        this.method = options.method??'GET';
+        // this.mode;
+        // this.priority;
+        this.redirect = options.redirect ?? "follow"; //manual
+        // this.referrer;
+        // this.referrerPolicy;
+        // this.url;
+
+        // https://nodejs.org/api/http.html#httprequestoptions-callback
         this.agent = options.agent;
         this.hostname = options.hostname ?? this.input.hostname;
         this.insecureHTTPParser = options.insecureHTTPParser ?? true;
@@ -472,87 +271,56 @@ class Request {
         this.port = options.port ?? this.input.port;
         this.protocol = options.protocol ?? this.input.protocol;
         this.timeout = options.timeout ?? 1000 * 60 * 60;
-        this.compression = options.compression;
-        if (this.compression||this.headers.has('accept-encoding')) {
-            if(this.headers.has('accept-encoding')){
-                this.headers.set('accept-encoding',this.headers.get('accept-encoding'))
-            }else{
-                this.headers.set("Accept-Encoding", "gzip, deflate, br");
-            }
-        } else {
-            this.headers.set("Accept-Encoding", "*");
-        }
-
-        this.storage = StorageManager.storage(this.hostname, options);
-        if (this.credentials !== "omit" && this.storage.cookie) {
-            this.headers.set("cookie", this.storage.cookie);
-        }
-
     }
+
     // arrayBuffer() {}
+
     // blob() {}
+
     // clone() {}
+
     // formData() {}
+
     // json() {}
+
     // text() {}
 }
 
-// @test
-// console.log(new Request())
-// console.log(new Request(new Request()))
-
-/**
- *
- */
 class Response {
-
-    /**
-     *
-     * @param {String/Readable} body
-     * @param {Object} options
-     * @param {Promise/Response} options.body
-     * @param {Object/Headers} options.headers
-     * @param {Number} options.status
-     * @returns {Promise/Response}
-     */
-    constructor(body = "", options = {}) {
+    constructor(body, options = {}) {
         this.body = body;
+
         if (!(this.body instanceof Readable)) {
             this.body = new Readable();
-            body = Buffer.from(body);
             this.body.push(body);
             this.body.push(null);
         }
-        // this.bodyUsed = options.bodyUsed;
+        // this.bodyUsed;
         this.headers = new Headers(options.headers);
-        // this.ok = options.ok;
-        // this.redirected = options.redirected;
-        this.status = options.status || options.statusCode;
-        // this.statusText = options.statusText;
-        // this.type = options.type;
-        // this.url = options.url;
+        // this.ok;
+        // this.redirected;
+        this.status = options.statusCode ?? options.status ?? 200;
+        // this.statusText;
+        // this.type;
+        // this.url;
+        // console.log(options.request)
 
-        if (options.request?.storage?.cookie&&this.headers.has("set-cookie")) {
-            options.request.storage.cookie = this.headers.get("set-cookie");
+        if(this.headers.has('set-cookie')){
+            options.request.database.cookie=
+            this.headers.get('set-cookie')
         }
 
-        // redirect
         if (options.request?.redirect == "follow" && this.headers.has("location")) {
-            let url = new URL2(this.headers.get("location"), options.request?.input?.origin);
-            return this.redirect(url);
+            const base = options.request.input.origin;
+            const url = this.headers.get("location");
+            return this.redirect("" + new URL2(url, base));
         }
     }
 
-    /**
-     * @private
-     * @returns {Promise}
-     */
     read() {
         return new Promise((resolve, reject) => {
-            let buffer = [];
+            const encoding = this.headers.get("content-encoding");
 
-            // compression
-            let encoding = this.headers.get("content-encoding");
             if (encoding == "gzip") {
                 this.body = this.body.pipe(zlib.createGunzip());
             } else if (encoding == "deflate") {
@@ -560,69 +328,63 @@ class Response {
             } else if (encoding == "br") {
                 this.body = this.body.pipe(zlib.createBrotliDecompress());
             }
-
-            this.body.on("error", reject);
+            const buffer = [];
             this.body.on("data", (chunk) => {
                 buffer.push(chunk);
             });
             this.body.on("end", () => {
                 resolve(Buffer.concat(buffer));
             });
+            this.body.on("error", reject);
         });
     }
 
-    /**
-     *
-     * @returns {Promise/arrayBuffer}
-     */
     arrayBuffer() {
         return this.read().then((buffer) => buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength));
     }
 
-    /**
-     *
-     * @returns {Promise/blob}
-     */
     blob() {
         return this.read().then((buffer) => new Blob([buffer]));
     }
+
     // clone() {}
+
     // error() {}
+
     // formData() {}
 
-    /**
-     *
-     * @returns {Promise/json}
-     */
     json() {
         return this.read().then((buffer) => JSON.parse(buffer));
     }
 
-    /**
-     *
-     * @returns {Promise/Response}
-     */
     redirect(url, status) {
+        if (status) {
+            this.status = status;
+        }
         return fetch(url);
     }
 
-    /**
-     *
-     * @returns {Promise/text/String}
-     */
     text() {
         return this.read().then((buffer) => "" + buffer);
     }
 }
 
-// @test
-// console.log(new Response())
-// console.log(new Response(new Response().body))
-
 /**
  *
- * @param {String/Request} resource
- * @param {Object} options
+ * @param {String/Request} resource - resource
+ * @param {Object} options - options
+ * @param {String} options.body - body
+ * @param {String} options.credentials=same-origin - credentials
+ * @param {String} options.headers={} - headers
+ * @param {String} options.method=GET - method
+ * @param {String} options.redirect=follow - redirect
+ * @param {String} options.agent - agent
+ * @param {String} options.hostname=localhost - hostname
+ * @param {Boolean} options.insecureHTTPParser=true - insecureHTTPParser
+ * @param {String} options.path=/ - path
+ * @param {Number} options.port=80 - port
+ * @param {String} options.protocol=http: - protocol
+ * @param {String} options.timeout=3600000 - timeout
  * @returns {Promise/Response}
  */
 function fetch(resource = "", options = {}) {
@@ -630,20 +392,20 @@ function fetch(resource = "", options = {}) {
         const request = new Request(resource, options);
         const protocol = request.protocol == "https:" ? https : http;
         const req = protocol.request(request);
-        req.on("error", reject);
         req.on("response", (res) => {
-            res.request=request
+            res.request = request;
             const response = new Response(res, res);
             resolve(response);
         });
+        req.on("error", reject);
         request.body.pipe(req);
     });
 }
 
-fetch.URLSearchParams2=URLSearchParams2
-fetch.URL2=URL2
-fetch.Headers=Headers
-fetch.Request=Request
-fetch.Response=Response
+fetch.URLSearchParams2 = URLSearchParams2;
+fetch.URL2 = URL2;
+fetch.Headers = Headers;
+fetch.Request = Request;
+fetch.Response = Response;
 
-module.exports=fetch
+module.exports = fetch;
