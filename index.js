@@ -706,8 +706,10 @@ module.exports=fetch
 // .then(console.log)
 // .catch(console.log)
 
-// request with redirect
-// fetch('http://jsonplaceholder.typicode.com/guide')
+// // request with redirect
+// fetch('http://jsonplaceholder.typicode.com/guide',{
+//     redirect:'manual'
+// })
 // .then(res=>res.text())
 // .then(console.log)
 // .catch(console.log)
