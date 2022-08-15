@@ -673,6 +673,14 @@ function fetch(resource = "", options = {}) {
     });
 }
 
+fetch.URLSearchParams2=URLSearchParams2
+fetch.URL2=URL2
+fetch.Headers=Headers
+fetch.Request=Request
+fetch.Response=Response
+
+module.exports=fetch
+
 // @test
 
 // request
