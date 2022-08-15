@@ -504,7 +504,11 @@ class Request {
         this.timeout = options.timeout ?? 1000 * 60 * 60;
         this.compression = options.compression;
         if (this.compression||this.headers.has('accept-encoding')) {
-            this.headers.set("Accept-Encoding", "gzip, deflate, br");
+            if(this.headers.has('accept-encoding')){
+                this.headers.set('accept-encoding',this.headers.get('accept-encoding'))
+            }else{
+                this.headers.set("Accept-Encoding", "gzip, deflate, br");
+            }
         } else {
             this.headers.set("Accept-Encoding", "*");
         }
