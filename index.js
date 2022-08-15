@@ -508,6 +508,12 @@ class Request {
         } else {
             this.headers.set("Accept-Encoding", "*");
         }
+
+        this.storage = StorageManager.storage(this.hostname, options);
+        if (this.credentials !== "omit" && this.storage.cookie) {
+            this.headers.set("cookie", this.storage.cookie);
+        }
+
     }
     // arrayBuffer() {}
     // blob() {}
@@ -557,6 +563,10 @@ class Response {
         // this.statusText = options.statusText;
         // this.type = options.type;
         // this.url = options.url;
+
+        if (options.request?.storage?.cookie&&this.headers.has("set-cookie")) {
+            options.request.storage.cookie = this.headers.get("set-cookie");
+        }
 
         // redirect
         if (options.request?.redirect == "follow" && this.headers.has("location")) {
@@ -650,26 +660,12 @@ class Response {
 function fetch(resource = "", options = {}) {
     return new Promise((resolve, reject) => {
         const request = new Request(resource, options);
-
-        const storage = StorageManager.storage(request.hostname, options);
-        if (request.credentials !== "omit" && storage.cookie) {
-            request.headers.set("cookie", storage.cookie);
-        }
-
         const protocol = request.protocol == "https:" ? https : http;
         const req = protocol.request(request);
         req.on("error", reject);
         req.on("response", (res) => {
-            const response = new Response(res, {
-                status:res.statusCode,
-                headers:res.headers,
-                request
-            });
-
-            if (response.headers.has("set-cookie")) {
-                storage.cookie = response.headers.get("set-cookie");
-            }
-
+            res.request=request
+            const response = new Response(res, res);
             resolve(response);
         });
         request.body.pipe(req);
