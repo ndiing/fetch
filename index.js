@@ -605,20 +605,20 @@ class Request {
         this.destination = options.destination;
 
         options.headers = {
-            Host: this.input.host,
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
+            host: this.input.host,
+            "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
             // 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            Accept: "*/*",
+            accept: "*/*",
             // 'Accept-Language': 'en-US,en;q=0.5',
-            "Accept-Language": "*",
+            "accept-language": "*",
             // 'Accept-Encoding': 'gzip, deflate, br',
-            "Accept-Encoding": "*",
+            "accept-encoding": "*",
             // 'Referer': 'https://developer.mozilla.org/testpage.html',
             // 'Connection': 'keep-alive',
             // 'Upgrade-Insecure-Requests': '1',
             // 'If-Modified-Since': 'Mon, 18 Jul 2016 02:36:04 GMT',
             // 'If-None-Match': '"c561c68d0ba92bbeb8b0fff2a9199f722e3a621a"',
-            "Cache-Control": "max-age=0",
+            "cache-control": "max-age=0",
             ...options.headers,
         };
         this.headers = new Headers(options.headers);
@@ -705,17 +705,17 @@ class Response {
         }
 
         // DecompressionStream(format)
-        if (this.headers.get("Content-Encoding") == "gzip") {
+        if (this.headers.get("content-encoding") == "gzip") {
             this.body = this.body.pipe(zlib.createGunzip());
-        } else if (this.headers.get("Content-Encoding") == "deflate") {
+        } else if (this.headers.get("content-encoding") == "deflate") {
             this.body = this.body.pipe(zlib.createInflate());
-        } else if (this.headers.get("Content-Encoding") == "br") {
+        } else if (this.headers.get("content-encoding") == "br") {
             this.body = this.body.pipe(zlib.createBrotliDecompress());
         }
 
         // Location: /index.html
-        if (options.request?.redirect == "follow" && this.headers.has("Location")) {
-            const url = new URL2(this.headers.get("Location"), options.request?.input?.origin);
+        if (options.request?.redirect == "follow" && this.headers.has("location")) {
+            const url = new URL2(this.headers.get("location"), options.request?.input?.origin);
             return this.redirect(url);
         }
     }
@@ -838,7 +838,7 @@ function fetch(resource = "", options = {}) {
 
         // console.log(storage.cookie)
         if (request.credentials !== "omit" && storage.cookie) {
-            request.headers.set("Cookie", storage.cookie);
+            request.headers.set("cookie", storage.cookie);
         }
 
         const protocol = request.protocol == "https:" ? https : http;
@@ -851,8 +851,8 @@ function fetch(resource = "", options = {}) {
                 request,
             });
 
-            if (response.headers.has("Set-Cookie")) {
-                storage.cookie = response.headers.get("Set-Cookie");
+            if (response.headers.has("set-cookie")) {
+                storage.cookie = response.headers.get("set-cookie");
             }
 
             resolve(response);
