@@ -179,7 +179,7 @@ class Headers {
         const values = [];
 
         for (const name of this.keys()) {
-            values.push([name.replace(/(^|-)(\w)/g, ($, $1, $2) => $1 + $2.toUpperCase()), this[name]]);
+            values.push([name, this[name]]);
         }
         return values;
     }
