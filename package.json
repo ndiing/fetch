@@ -3,7 +3,7 @@
     "@ndiinginc/database": "^1.0.0"
   },
   "name": "@ndiinginc/fetch",
-  "description": "fetch",
+  "description": "nodejs fetch",
   "version": "1.0.0",
   "main": "index.js",
   "devDependencies": {},
