@@ -149,6 +149,33 @@ class URL2 {
     }
 }
 
+const HEADERS = {
+    "accept-ch": "Accept-CH",
+    "accept-ch-lifetime": "Accept-CH-Lifetime",
+    "content-dpr": "Content-DPR",
+    dnt: "DNT",
+    dpr: "DPR",
+    ect: "ECT",
+    "expect-ct": "Expect-CT",
+    nel: "NEL",
+    rtt: "RTT",
+    "sec-ch-ua": "Sec-CH-UA",
+    "sec-ch-ua-arch": "Sec-CH-UA-Arch",
+    "sec-ch-ua-bitness": "Sec-CH-UA-Bitness",
+    "sec-ch-ua-full-version": "Sec-CH-UA-Full-Version",
+    "sec-ch-ua-full-version-list": "Sec-CH-UA-Full-Version-List",
+    "sec-ch-ua-mobile": "Sec-CH-UA-Mobile",
+    "sec-ch-ua-model": "Sec-CH-UA-Model",
+    "sec-ch-ua-platform": "Sec-CH-UA-Platform",
+    "sec-ch-ua-platform-version": "Sec-CH-UA-Platform-Version",
+    te: "TE",
+    "www-authenticate": "WWW-Authenticate",
+    "x-dns-prefetch-control": "X-DNS-Prefetch-Control",
+    "x-xss-protection": "X-XSS-Protection",
+    "last-event-id": "Last-Event-ID",
+    "x-ua-compatible": "X-UA-Compatible",
+};
+
 class Headers {
     constructor(init = {}) {
         for (const name in init) {
@@ -179,7 +206,11 @@ class Headers {
         const values = [];
 
         for (const name of this.keys()) {
-            values.push([name, this[name]]);
+            const key=
+            HEADERS[name]??
+            name.replace(/(^|-)(\w)/g,($,$1,$2)=>
+            $1+$2.toUpperCase())
+            values.push([key, this[name]]);
         }
         return values;
     }
@@ -213,6 +244,12 @@ class Headers {
     }
 }
 
+// var headers=new Headers()
+// headers.set('content-type','application/json')
+// console.log(headers.get('content-type'))
+// console.log(headers.entries())
+// console.log(headers)
+
 class Request {
     constructor(input, options = {}) {
         if (input instanceof Request) {
@@ -227,7 +264,7 @@ class Request {
             };
         }
         this.input = new URL2(input);
-        this.database=Database.get(this.input.origin)
+        this.database = Database.get(this.input.origin);
         this.body = options.body;
 
         if (!(this.body instanceof Readable)) {
@@ -239,23 +276,23 @@ class Request {
         // this.cache;
         this.credentials = options.credentials ?? "same-origin"; //include
         // this.destination;
-        options.headers={
-            'Host': this.input.host,
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36',
-            'Accept': '*/*',
-            'Accept-Language': '*',
-            'Accept-Encoding': 'gzip, deflate, br',
-            ...options.headers
-        }
+        options.headers = {
+            Host: this.input.host,
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
+            Accept: "*/*",
+            "Accept-Language": "*",
+            "Accept-Encoding": "gzip, deflate, br",
+            ...options.headers,
+        };
         this.headers = new Headers(options.headers);
 
         // this.database
-        if(this.credentials!=='omit'&&this.database.cookie){
-            this.headers.set('cookie',this.database.cookie)
+        if (this.credentials !== "omit" && this.database.cookie) {
+            this.headers.set("cookie", this.database.cookie);
         }
 
         // this.integrity;
-        this.method = options.method??'GET';
+        this.method = options.method ?? "GET";
         // this.mode;
         // this.priority;
         this.redirect = options.redirect ?? "follow"; //manual
@@ -305,9 +342,8 @@ class Response {
         // this.url;
         // console.log(options.request)
 
-        if(this.headers.has('set-cookie')){
-            options.request.database.cookie=
-            this.headers.get('set-cookie')
+        if (this.headers.has("set-cookie")) {
+            options.request.database.cookie = this.headers.get("set-cookie");
         }
 
         if (options.request?.redirect == "follow" && this.headers.has("location")) {
