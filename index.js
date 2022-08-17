@@ -150,31 +150,30 @@ class URL2 {
 }
 
 const HEADERS = {
-    "accept-ch": "Accept-CH",
-    "accept-ch-lifetime": "Accept-CH-Lifetime",
-    "content-dpr": "Content-DPR",
-    dnt: "DNT",
-    dpr: "DPR",
-    ect: "ECT",
-    "expect-ct": "Expect-CT",
-    nel: "NEL",
-    rtt: "RTT",
-    "sec-ch-ua": "Sec-CH-UA",
-    "sec-ch-ua-arch": "Sec-CH-UA-Arch",
-    "sec-ch-ua-bitness": "Sec-CH-UA-Bitness",
-    "sec-ch-ua-full-version": "Sec-CH-UA-Full-Version",
-    "sec-ch-ua-full-version-list": "Sec-CH-UA-Full-Version-List",
-    "sec-ch-ua-mobile": "Sec-CH-UA-Mobile",
-    "sec-ch-ua-model": "Sec-CH-UA-Model",
-    "sec-ch-ua-platform": "Sec-CH-UA-Platform",
-    "sec-ch-ua-platform-version": "Sec-CH-UA-Platform-Version",
-    te: "TE",
-    "www-authenticate": "WWW-Authenticate",
-    "x-dns-prefetch-control": "X-DNS-Prefetch-Control",
-    "x-xss-protection": "X-XSS-Protection",
-    "last-event-id": "Last-Event-ID",
-    "x-ua-compatible": "X-UA-Compatible",
-};
+    'www-authenticate': 'WWW-Authenticate',
+    'accept-ch': 'Accept-CH',
+    'accept-ch-lifetime': 'Accept-CH-Lifetime',
+    'sec-ch-ua': 'Sec-CH-UA',
+    'sec-ch-ua-arch': 'Sec-CH-UA-Arch',  
+    'sec-ch-ua-bitness': 'Sec-CH-UA-Bitness',
+    'sec-ch-ua-full-version': 'Sec-CH-UA-Full-Version',
+    'sec-ch-ua-full-version-list': 'Sec-CH-UA-Full-Version-List',
+    'sec-ch-ua-mobile': 'Sec-CH-UA-Mobile',
+    'sec-ch-ua-model': 'Sec-CH-UA-Model',  'sec-ch-ua-platform': 'Sec-CH-UA-Platform',
+    'sec-ch-ua-platform-version': 'Sec-CH-UA-Platform-Version',
+    'content-dpr': 'Content-DPR',        
+    dpr: 'DPR',
+    ect: 'ECT',
+    rtt: 'RTT',
+    etag: 'ETag',
+    'expect-ct': 'Expect-CT',
+    'x-xss-protection': 'X-XSS-Protection',
+    'last-event-id': 'Last-Event-ID',    
+    nel: 'NEL',
+    te: 'TE',
+    'x-dns-prefetch-control': 'X-DNS-Prefetch-Control',
+    'x-ua-compatible': 'X-UA-Compatible',  dnt: 'DNT'
+  }
 
 class Headers {
     constructor(init = {}) {
@@ -243,12 +242,6 @@ class Headers {
         return values;
     }
 }
-
-// var headers=new Headers()
-// headers.set('content-type','application/json')
-// console.log(headers.get('content-type'))
-// console.log(headers.entries())
-// console.log(headers)
 
 class Request {
     constructor(input, options = {}) {
