@@ -1,4 +1,4 @@
-# fetch
+# [fetch](https://ndiing.github.io/fetch/)
 
 fetch
 
