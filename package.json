@@ -4,7 +4,7 @@
   },
   "name": "@ndiinginc/fetch",
   "description": "nodejs fetch",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "index.js",
   "devDependencies": {},
   "scripts": {
