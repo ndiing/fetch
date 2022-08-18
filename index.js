@@ -336,6 +336,7 @@ class Response {
 
         if (this.headers.has("set-cookie")) {
             options.request.database.cookie = this.headers.get("set-cookie");
+            // console.log(options.request.database.cookie)
         }
 
         if (options.request?.redirect == "follow" && this.headers.has("location")) {
