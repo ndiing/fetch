@@ -150,30 +150,32 @@ class URL2 {
 }
 
 const HEADERS = {
-    'www-authenticate': 'WWW-Authenticate',
-    'accept-ch': 'Accept-CH',
-    'accept-ch-lifetime': 'Accept-CH-Lifetime',
-    'sec-ch-ua': 'Sec-CH-UA',
-    'sec-ch-ua-arch': 'Sec-CH-UA-Arch',  
-    'sec-ch-ua-bitness': 'Sec-CH-UA-Bitness',
-    'sec-ch-ua-full-version': 'Sec-CH-UA-Full-Version',
-    'sec-ch-ua-full-version-list': 'Sec-CH-UA-Full-Version-List',
-    'sec-ch-ua-mobile': 'Sec-CH-UA-Mobile',
-    'sec-ch-ua-model': 'Sec-CH-UA-Model',  'sec-ch-ua-platform': 'Sec-CH-UA-Platform',
-    'sec-ch-ua-platform-version': 'Sec-CH-UA-Platform-Version',
-    'content-dpr': 'Content-DPR',        
-    dpr: 'DPR',
-    ect: 'ECT',
-    rtt: 'RTT',
-    etag: 'ETag',
-    'expect-ct': 'Expect-CT',
-    'x-xss-protection': 'X-XSS-Protection',
-    'last-event-id': 'Last-Event-ID',    
-    nel: 'NEL',
-    te: 'TE',
-    'x-dns-prefetch-control': 'X-DNS-Prefetch-Control',
-    'x-ua-compatible': 'X-UA-Compatible',  dnt: 'DNT'
-  }
+    "www-authenticate": "WWW-Authenticate",
+    "accept-ch": "Accept-CH",
+    "accept-ch-lifetime": "Accept-CH-Lifetime",
+    "sec-ch-ua": "Sec-CH-UA",
+    "sec-ch-ua-arch": "Sec-CH-UA-Arch",
+    "sec-ch-ua-bitness": "Sec-CH-UA-Bitness",
+    "sec-ch-ua-full-version": "Sec-CH-UA-Full-Version",
+    "sec-ch-ua-full-version-list": "Sec-CH-UA-Full-Version-List",
+    "sec-ch-ua-mobile": "Sec-CH-UA-Mobile",
+    "sec-ch-ua-model": "Sec-CH-UA-Model",
+    "sec-ch-ua-platform": "Sec-CH-UA-Platform",
+    "sec-ch-ua-platform-version": "Sec-CH-UA-Platform-Version",
+    "content-dpr": "Content-DPR",
+    dpr: "DPR",
+    ect: "ECT",
+    rtt: "RTT",
+    etag: "ETag",
+    "expect-ct": "Expect-CT",
+    "x-xss-protection": "X-XSS-Protection",
+    "last-event-id": "Last-Event-ID",
+    nel: "NEL",
+    te: "TE",
+    "x-dns-prefetch-control": "X-DNS-Prefetch-Control",
+    "x-ua-compatible": "X-UA-Compatible",
+    dnt: "DNT",
+};
 
 class Headers {
     constructor(init = {}) {
@@ -205,10 +207,7 @@ class Headers {
         const values = [];
 
         for (const name of this.keys()) {
-            const key=
-            HEADERS[name]??
-            name.replace(/(^|-)(\w)/g,($,$1,$2)=>
-            $1+$2.toUpperCase())
+            const key = HEADERS[name] ?? name.replace(/(^|-)(\w)/g, ($, $1, $2) => $1 + $2.toUpperCase());
             values.push([key, this[name]]);
         }
         return values;
@@ -257,7 +256,7 @@ class Request {
             };
         }
         this.input = new URL2(input);
-        this.database = Database.get(this.input.origin);
+        this.database = Database.get(options.origin ?? this.input.origin);
         this.body = options.body;
 
         if (!(this.body instanceof Readable)) {
