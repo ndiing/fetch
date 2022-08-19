@@ -19,6 +19,7 @@ class URLSearchParams2 {
     }
 
     append(name, value) {
+        value=decodeURIComponent(value)
         if (this[name]) {
             if (Array.isArray(this[name])) {
                 this[name].push(value);
@@ -66,6 +67,7 @@ class URLSearchParams2 {
     }
 
     set(name, value) {
+        value=decodeURIComponent(value)
         this[name] = value;
     }
 
@@ -75,7 +77,7 @@ class URLSearchParams2 {
         const values = [];
 
         for (const name of this.keys()) {
-            values.push([name, this[name]].join("="));
+            values.push([name, encodeURIComponent(this[name])].join("="));
         }
         return values.join("&");
     }
@@ -89,6 +91,16 @@ class URLSearchParams2 {
         return values;
     }
 }
+
+
+// console.log(new URLSearchParams2("?brand=XL"))
+// console.log(new URLSearchParams2("?brand=XL"))
+// console.log(new URLSearchParams2("?parent-account-cd=iSxaCQL5VSJqh88Y3f36xYBvlNmYhtV3i5%252BE8ClJ2SH5rLFzanrINRJSdVydOUd2Sgl2pzfa92YF9qATBjgBXg%253D%253D&brand=XL&product-category=XTRA%20COMBO%20FLEX&msisdn-b=6287758437547"))
+// var searchParams=(new URLSearchParams2("?parent-account-cd=iSxaCQL5VSJqh88Y3f36xYBvlNmYhtV3i5%252BE8ClJ2SH5rLFzanrINRJSdVydOUd2Sgl2pzfa92YF9qATBjgBXg%253D%253D&brand=XL&product-category=XTRA%20COMBO%20FLEX&msisdn-b=6287758437547"))
+// console.log(searchParams)
+// console.log(''+searchParams)
+// console.log(new URLSearchParams2("?servicetype=w2p-fulfillment-w2w-other-payro&startdate=2022-08-13&enddate=2022-08-19&q=&startamount=100&endamount=1000000000"))
+
 
 class URL2 {
     constructor(url = "", base = "http://localhost") {
