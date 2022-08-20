@@ -9,6 +9,9 @@ const Database = require("@ndiinginc/database");
  *
  */
 class URLSearchParams2 {
+    /**
+     *
+     */
     constructor(init = "") {
         init = init
             .replace(/[^\?]+\?/, "")
@@ -21,6 +24,9 @@ class URLSearchParams2 {
         }
     }
 
+    /**
+     *
+     */
     append(name, value) {
         value = decodeURIComponent(value);
         if (this[name]) {
@@ -34,10 +40,16 @@ class URLSearchParams2 {
         }
     }
 
+    /**
+     *
+     */
     delete(name) {
         delete this[name];
     }
 
+    /**
+     *
+     */
     entries() {
         const values = [];
 
@@ -47,35 +59,59 @@ class URLSearchParams2 {
         return values;
     }
 
+    /**
+     *
+     */
     forEach(callback) {
         for (const name of this.keys()) {
             callback(this[name], name);
         }
     }
 
+    /**
+     *
+     */
     get(name) {
         return this[name];
     }
 
+    /**
+     *
+     */
     getAll(name) {
         return this[name];
     }
 
+    /**
+     *
+     */
     has(name) {
         return !!this[name];
     }
 
+    /**
+     *
+     */
     keys() {
         return Object.getOwnPropertyNames(this);
     }
 
+    /**
+     *
+     */
     set(name, value) {
         value = decodeURIComponent(value);
         this[name] = value;
     }
 
+    /**
+     *
+     */
     // sort() {}
 
+    /**
+     *
+     */
     toString() {
         const values = [];
 
@@ -85,6 +121,9 @@ class URLSearchParams2 {
         return values.join("&");
     }
 
+    /**
+     *
+     */
     values() {
         const values = [];
 
@@ -107,6 +146,9 @@ class URLSearchParams2 {
  *
  */
 class URL2 {
+    /**
+     *
+     */
     constructor(url = "", base = "http://localhost") {
         // https://www.rfc-editor.org/rfc/rfc3986
         const regexpOrigin = /^(([^:/?#]+):)(\/\/([^/?#]*))/;
@@ -155,6 +197,9 @@ class URL2 {
     // revokeObjectURL(){}
     // toJSON(){}
 
+    /**
+     *
+     */
     toString() {
         let searchParams = "" + this.searchParams;
 
@@ -200,12 +245,18 @@ const HEADERS = {
  *
  */
 class Headers {
+    /**
+     *
+     */
     constructor(init = {}) {
         for (const name in init) {
             this.set(name, init[name]);
         }
     }
 
+    /**
+     *
+     */
     append(name, value) {
         name = name.toLowerCase();
 
@@ -220,11 +271,17 @@ class Headers {
         }
     }
 
+    /**
+     *
+     */
     delete(name) {
         name = name.toLowerCase();
         delete this[name];
     }
 
+    /**
+     *
+     */
     entries() {
         const values = [];
 
@@ -235,25 +292,40 @@ class Headers {
         return values;
     }
 
+    /**
+     *
+     */
     get(name) {
         name = name.toLowerCase();
         return this[name];
     }
 
+    /**
+     *
+     */
     has(name) {
         name = name.toLowerCase();
         return !!this[name];
     }
 
+    /**
+     *
+     */
     keys() {
         return Object.getOwnPropertyNames(this);
     }
 
+    /**
+     *
+     */
     set(name, value) {
         name = name.toLowerCase();
         this[name] = value;
     }
 
+    /**
+     *
+     */
     values() {
         const values = [];
 
@@ -268,6 +340,9 @@ class Headers {
  *
  */
 class Request {
+    /**
+     *
+     */
     constructor(input, options = {}) {
         if (input instanceof Request) {
             input = "" + input.input;
@@ -327,16 +402,34 @@ class Request {
         this.timeout = options.timeout ?? 1000 * 60 * 60;
     }
 
+    /**
+     *
+     */
     // arrayBuffer() {}
 
+    /**
+     *
+     */
     // blob() {}
 
+    /**
+     *
+     */
     // clone() {}
 
+    /**
+     *
+     */
     // formData() {}
 
+    /**
+     *
+     */
     // json() {}
 
+    /**
+     *
+     */
     // text() {}
 }
 
@@ -344,6 +437,9 @@ class Request {
  *
  */
 class Response {
+    /**
+     *
+     */
     constructor(body, options = {}) {
         this.body = body;
 
@@ -374,6 +470,9 @@ class Response {
         }
     }
 
+    /**
+     *
+     */
     read() {
         return new Promise((resolve, reject) => {
             const encoding = this.headers.get("content-encoding");
@@ -396,24 +495,45 @@ class Response {
         });
     }
 
+    /**
+     *
+     */
     arrayBuffer() {
         return this.read().then((buffer) => buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength));
     }
 
+    /**
+     *
+     */
     blob() {
         return this.read().then((buffer) => new Blob([buffer]));
     }
 
+    /**
+     *
+     */
     // clone() {}
 
+    /**
+     *
+     */
     // error() {}
 
+    /**
+     *
+     */
     // formData() {}
 
+    /**
+     *
+     */
     json() {
         return this.read().then((buffer) => JSON.parse(buffer));
     }
 
+    /**
+     *
+     */
     redirect(url, status) {
         if (status) {
             this.status = status;
@@ -421,6 +541,9 @@ class Response {
         return fetch(url);
     }
 
+    /**
+     *
+     */
     text() {
         return this.read().then((buffer) => "" + buffer);
     }
