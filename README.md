@@ -1,115 +1,111 @@
-# [fetch](https://ndiing.github.io/fetch/)
+# URLSearchParams2
 
-fetch
+## [Methods]()
 
-### Install
+[`URLSearchParams2.constructor()`]()
 
-```
-npm install @ndiinginc/fetch
-```
+[`URLSearchParams2.append()`]()
 
-### Usage
+[`URLSearchParams2.delete()`]()
 
-```js
-const fetch = require("@ndiinginc/fetch");
+[`URLSearchParams2.entries()`]()
 
-// This page is redirecting
-fetch("https://jsonplaceholder.typicode.com/guide")
-    .then((response) => response.text())
-    .then((html) => console.log(html));
+[`URLSearchParams2.forEach()`]()
 
-// Avoid redirect
-fetch("https://jsonplaceholder.typicode.com/guide", {
-    redirect: "manul",
-})
-    .then((response) => response.text())
-    .then((html) => console.log(html));
+[`URLSearchParams2.get()`]()
 
-// Getting a Compressed resource
-fetch("https://jsonplaceholder.typicode.com/posts/1", {
-    headers: {
-        "Accept-Encoding": "gzip, deflate, br",
-    },
-})
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+[`URLSearchParams2.getAll()`]()
 
-// Load previous cookie
-fetch("https://mitra.tokopedia.com/")
-    .then((response) => response.text())
-    .then((text) => console.log(text));
+[`URLSearchParams2.has()`]()
 
-// Unload previous cookie
-fetch("https://mitra.tokopedia.com/", {
-    credentials: "omit",
-})
-    .then((response) => response.text())
-    .then((text) => console.log(text));
+[`URLSearchParams2.keys()`]()
 
-// Getting a resource
-fetch("https://jsonplaceholder.typicode.com/posts/1")
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+[`URLSearchParams2.set()`]()
 
-//   Listing all resources
-fetch("https://jsonplaceholder.typicode.com/posts")
-    .then((response) => response.json())
-    .then((json) => console.log(json));
-// Creating a resource
-fetch("https://jsonplaceholder.typicode.com/posts", {
-    method: "POST",
-    body: JSON.stringify({
-        title: "foo",
-        body: "bar",
-        userId: 1,
-    }),
-    headers: {
-        "Content-type": "application/json; charset=UTF-8",
-    },
-})
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+[`URLSearchParams2.sort()`]()
 
-// Updating a resource
-fetch("https://jsonplaceholder.typicode.com/posts/1", {
-    method: "PUT",
-    body: JSON.stringify({
-        id: 1,
-        title: "foo",
-        body: "bar",
-        userId: 1,
-    }),
-    headers: {
-        "Content-type": "application/json; charset=UTF-8",
-    },
-})
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+[`URLSearchParams2.toString()`]()
 
-//   Patching a resource
-fetch("https://jsonplaceholder.typicode.com/posts/1", {
-    method: "PATCH",
-    body: JSON.stringify({
-        title: "foo",
-    }),
-    headers: {
-        "Content-type": "application/json; charset=UTF-8",
-    },
-})
-    .then((response) => response.json())
-    .then((json) => console.log(json));
+[`URLSearchParams2.values()`]()
 
-//   Deleting a resource
-fetch("https://jsonplaceholder.typicode.com/posts/1", {
-    method: "DELETE",
-});
+# URL2
 
-// This will return all the posts that belong to the first user
-fetch("https://jsonplaceholder.typicode.com/posts?userId=1")
-    .then((response) => response.json())
-    .then((json) => console.log(json));
-// This is equivalent to /comments?postId=1
-fetch("https://jsonplaceholder.typicode.com/posts/1/comments")
-    .then((response) => response.json())
-    .then((json) => console.log(json));
-```
+## [Methods]()
+
+[`URL2.constructor()`]()
+
+[`URL2.toString()`]()
+
+# Headers
+
+## [Methods]()
+
+[`Headers.constructor()`]()
+
+[`Headers.append()`]()
+
+[`Headers.delete()`]()
+
+[`Headers.entries()`]()
+
+[`Headers.get()`]()
+
+[`Headers.has()`]()
+
+[`Headers.keys()`]()
+
+[`Headers.set()`]()
+
+[`Headers.values()`]()
+
+# Request
+
+## [Methods]()
+
+[`Request.constructor()`]()
+
+[`Request.arrayBuffer()`]()
+
+[`Request.blob()`]()
+
+[`Request.clone()`]()
+
+[`Request.formData()`]()
+
+[`Request.json()`]()
+
+[`Request.text()`]()
+
+# Response
+
+## [Methods]()
+
+[`Response.constructor()`]()
+
+[`Response.read()`]()
+
+[`Response.arrayBuffer()`]()
+
+[`Response.blob()`]()
+
+[`Response.clone()`]()
+
+[`Response.error()`]()
+
+[`Response.formData()`]()
+
+[`Response.json()`]()
+
+[`Response.redirect()`]()
+
+[`Response.text()`]()
+
+# Global
+
+## [Methods]()
+
+[`Global.fetch()`]()
+
+## [See also]()
+
+-   See also
