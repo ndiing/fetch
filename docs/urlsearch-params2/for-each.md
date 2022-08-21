@@ -14,7 +14,6 @@ forEach(callback);
 ### Parameters
 
 - `callback`
-
 <!-- parameters -->
 
 <!-- return -->

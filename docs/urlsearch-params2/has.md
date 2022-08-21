@@ -14,7 +14,6 @@ has(name);
 ### Parameters
 
 - `name`
-
 <!-- parameters -->
 
 <!-- return -->

@@ -14,9 +14,7 @@ fetch(resource,options);
 ### Parameters
 
 - `resource`
-
 - `options`
-
 <!-- parameters -->
 
 <!-- return -->

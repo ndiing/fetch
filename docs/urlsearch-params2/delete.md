@@ -14,7 +14,6 @@ delete(name);
 ### Parameters
 
 - `name`
-
 <!-- parameters -->
 
 <!-- return -->

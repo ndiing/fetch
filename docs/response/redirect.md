@@ -14,9 +14,7 @@ redirect(url,status);
 ### Parameters
 
 - `url`
-
 - `status`
-
 <!-- parameters -->
 
 <!-- return -->

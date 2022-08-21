@@ -14,7 +14,6 @@ get(name);
 ### Parameters
 
 - `name`
-
 <!-- parameters -->
 
 <!-- return -->
