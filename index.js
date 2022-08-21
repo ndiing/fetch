@@ -5,13 +5,7 @@ const zlib = require("zlib");
 const { Blob } = require("buffer");
 const Database = require("@ndiinginc/database");
 
-/**
- *
- */
 class URLSearchParams2 {
-    /**
-     *
-     */
     constructor(init = "") {
         init = init
             .replace(/[^\?]+\?/, "")
@@ -24,9 +18,6 @@ class URLSearchParams2 {
         }
     }
 
-    /**
-     * Create/Adding value by name
-     */
     append(name, value) {
         value = decodeURIComponent(value);
         if (this[name]) {
@@ -40,16 +31,10 @@ class URLSearchParams2 {
         }
     }
 
-    /**
-     * Delete item by name
-     */
     delete(name) {
         delete this[name];
     }
 
-    /**
-     * Get all
-     */
     entries() {
         const values = [];
 
@@ -59,59 +44,35 @@ class URLSearchParams2 {
         return values;
     }
 
-    /**
-     *
-     */
     forEach(callback) {
         for (const name of this.keys()) {
             callback(this[name], name);
         }
     }
 
-    /**
-     *
-     */
     get(name) {
         return this[name];
     }
 
-    /**
-     *
-     */
     getAll(name) {
         return this[name];
     }
 
-    /**
-     *
-     */
     has(name) {
         return !!this[name];
     }
 
-    /**
-     *
-     */
     keys() {
         return Object.getOwnPropertyNames(this);
     }
 
-    /**
-     *
-     */
     set(name, value) {
         value = decodeURIComponent(value);
         this[name] = value;
     }
 
-    /**
-     *
-     */
     // sort() {}
 
-    /**
-     *
-     */
     toString() {
         const values = [];
 
@@ -121,9 +82,6 @@ class URLSearchParams2 {
         return values.join("&");
     }
 
-    /**
-     *
-     */
     values() {
         const values = [];
 
@@ -134,21 +92,7 @@ class URLSearchParams2 {
     }
 }
 
-// console.log(new URLSearchParams2("?brand=XL"))
-// console.log(new URLSearchParams2("?brand=XL"))
-// console.log(new URLSearchParams2("?parent-account-cd=iSxaCQL5VSJqh88Y3f36xYBvlNmYhtV3i5%252BE8ClJ2SH5rLFzanrINRJSdVydOUd2Sgl2pzfa92YF9qATBjgBXg%253D%253D&brand=XL&product-category=XTRA%20COMBO%20FLEX&msisdn-b=6287758437547"))
-// var searchParams=(new URLSearchParams2("?parent-account-cd=iSxaCQL5VSJqh88Y3f36xYBvlNmYhtV3i5%252BE8ClJ2SH5rLFzanrINRJSdVydOUd2Sgl2pzfa92YF9qATBjgBXg%253D%253D&brand=XL&product-category=XTRA%20COMBO%20FLEX&msisdn-b=6287758437547"))
-// console.log(searchParams)
-// console.log(''+searchParams)
-// console.log(new URLSearchParams2("?servicetype=w2p-fulfillment-w2w-other-payro&startdate=2022-08-13&enddate=2022-08-19&q=&startamount=100&endamount=1000000000"))
-
-/**
- *
- */
 class URL2 {
-    /**
-     *
-     */
     constructor(url = "", base = "http://localhost") {
         // https://www.rfc-editor.org/rfc/rfc3986
         const regexpOrigin = /^(([^:/?#]+):)(\/\/([^/?#]*))/;
@@ -197,9 +141,6 @@ class URL2 {
     // revokeObjectURL(){}
     // toJSON(){}
 
-    /**
-     *
-     */
     toString() {
         let searchParams = "" + this.searchParams;
 
@@ -210,9 +151,6 @@ class URL2 {
     }
 }
 
-/**
- *
- */
 const HTTP_HEADERS = {
     "www-authenticate": "WWW-Authenticate",
     "accept-ch": "Accept-CH",
@@ -241,22 +179,13 @@ const HTTP_HEADERS = {
     dnt: "DNT",
 };
 
-/**
- *
- */
 class Headers {
-    /**
-     *
-     */
     constructor(init = {}) {
         for (const name in init) {
             this.set(name, init[name]);
         }
     }
 
-    /**
-     *
-     */
     append(name, value) {
         name = name.toLowerCase();
 
@@ -271,17 +200,11 @@ class Headers {
         }
     }
 
-    /**
-     *
-     */
     delete(name) {
         name = name.toLowerCase();
         delete this[name];
     }
 
-    /**
-     *
-     */
     entries() {
         const values = [];
 
@@ -292,40 +215,25 @@ class Headers {
         return values;
     }
 
-    /**
-     *
-     */
     get(name) {
         name = name.toLowerCase();
         return this[name];
     }
 
-    /**
-     *
-     */
     has(name) {
         name = name.toLowerCase();
         return !!this[name];
     }
 
-    /**
-     *
-     */
     keys() {
         return Object.getOwnPropertyNames(this);
     }
 
-    /**
-     *
-     */
     set(name, value) {
         name = name.toLowerCase();
         this[name] = value;
     }
 
-    /**
-     *
-     */
     values() {
         const values = [];
 
@@ -336,13 +244,7 @@ class Headers {
     }
 }
 
-/**
- *
- */
 class Request {
-    /**
-     *
-     */
     constructor(input, options = {}) {
         if (input instanceof Request) {
             input = "" + input.input;
@@ -402,44 +304,20 @@ class Request {
         this.timeout = options.timeout ?? 1000 * 60 * 60;
     }
 
-    /**
-     *
-     */
     // arrayBuffer() {}
 
-    /**
-     *
-     */
     // blob() {}
 
-    /**
-     *
-     */
     // clone() {}
 
-    /**
-     *
-     */
     // formData() {}
 
-    /**
-     *
-     */
     // json() {}
 
-    /**
-     *
-     */
     // text() {}
 }
 
-/**
- *
- */
 class Response {
-    /**
-     *
-     */
     constructor(body, options = {}) {
         this.body = body;
 
@@ -456,11 +334,9 @@ class Response {
         // this.statusText;
         // this.type;
         // this.url;
-        // console.log(options.request)
 
         if (this.headers.has("set-cookie")) {
             options.request.database.cookie = this.headers.get("set-cookie");
-            // console.log(options.request.database.cookie)
         }
 
         if (options.request?.redirect == "follow" && this.headers.has("location")) {
@@ -470,9 +346,6 @@ class Response {
         }
     }
 
-    /**
-     *
-     */
     read() {
         return new Promise((resolve, reject) => {
             const encoding = this.headers.get("content-encoding");
@@ -495,45 +368,24 @@ class Response {
         });
     }
 
-    /**
-     *
-     */
     arrayBuffer() {
         return this.read().then((buffer) => buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength));
     }
 
-    /**
-     *
-     */
     blob() {
         return this.read().then((buffer) => new Blob([buffer]));
     }
 
-    /**
-     *
-     */
     // clone() {}
 
-    /**
-     *
-     */
     // error() {}
 
-    /**
-     *
-     */
     // formData() {}
 
-    /**
-     *
-     */
     json() {
         return this.read().then((buffer) => JSON.parse(buffer));
     }
 
-    /**
-     *
-     */
     redirect(url, status) {
         if (status) {
             this.status = status;
@@ -541,32 +393,11 @@ class Response {
         return fetch(url);
     }
 
-    /**
-     *
-     */
     text() {
         return this.read().then((buffer) => "" + buffer);
     }
 }
 
-/**
- *
- * @param {String/Request} resource - resource
- * @param {Object} options - options
- * @param {String} options.body - body
- * @param {String} options.credentials=same-origin - credentials
- * @param {String} options.headers={} - headers
- * @param {String} options.method=GET - method
- * @param {String} options.redirect=follow - redirect
- * @param {String} options.agent - agent
- * @param {String} options.hostname=localhost - hostname
- * @param {Boolean} options.insecureHTTPParser=true - insecureHTTPParser
- * @param {String} options.path=/ - path
- * @param {Number} options.port=80 - port
- * @param {String} options.protocol=http: - protocol
- * @param {String} options.timeout=3600000 - timeout
- * @returns {Promise/Response}
- */
 function fetch(resource = "", options = {}) {
     return new Promise((resolve, reject) => {
         const request = new Request(resource, options);
