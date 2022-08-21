@@ -1,8 +1,14 @@
 # URLSearchParams2
 
-## [Methods]()
+## [Properties]()
 
-[`URLSearchParams2.constructor()`]()
+[`URLSearchParams2.[undefined]`]()
+
+[`URLSearchParams2.[undefined]`]()
+
+[`URLSearchParams2.[undefined]`]()
+
+## [Methods]()
 
 [`URLSearchParams2.append()`]()
 
@@ -22,25 +28,59 @@
 
 [`URLSearchParams2.set()`]()
 
-[`URLSearchParams2.sort()`]()
-
 [`URLSearchParams2.toString()`]()
 
 [`URLSearchParams2.values()`]()
 
 # URL2
 
-## [Methods]()
+## [Properties]()
 
-[`URL2.constructor()`]()
+[`URL2.href`]()
+
+[`URL2.protocol`]()
+
+[`URL2.scheme`]()
+
+[`URL2.authority`]()
+
+[`URL2.host`]()
+
+[`URL2.pathname`]()
+
+[`URL2.search`]()
+
+[`URL2.query`]()
+
+[`URL2.hash`]()
+
+[`URL2.fragment`]()
+
+[`URL2.hostname`]()
+
+[`URL2.port`]()
+
+[`URL2.origin`]()
+
+[`URL2.searchParams`]()
+
+[`URL2.path`]()
+
+## [Methods]()
 
 [`URL2.toString()`]()
 
 # Headers
 
-## [Methods]()
+## [Properties]()
 
-[`Headers.constructor()`]()
+[`Headers.[undefined]`]()
+
+[`Headers.[undefined]`]()
+
+[`Headers.[undefined]`]()
+
+## [Methods]()
 
 [`Headers.append()`]()
 
@@ -60,39 +100,65 @@
 
 # Request
 
-## [Methods]()
+## [Properties]()
 
-[`Request.constructor()`]()
+[`Request.input`]()
 
-[`Request.arrayBuffer()`]()
+[`Request.database`]()
 
-[`Request.blob()`]()
+[`Request.body`]()
 
-[`Request.clone()`]()
+[`Request.body`]()
 
-[`Request.formData()`]()
+[`Request.credentials`]()
 
-[`Request.json()`]()
+[`Request.headers`]()
 
-[`Request.text()`]()
+[`Request.method`]()
+
+[`Request.redirect`]()
+
+[`Request.agent`]()
+
+[`Request.hostname`]()
+
+[`Request.insecureHTTPParser`]()
+
+[`Request.path`]()
+
+[`Request.port`]()
+
+[`Request.protocol`]()
+
+[`Request.timeout`]()
 
 # Response
 
-## [Methods]()
+## [Properties]()
 
-[`Response.constructor()`]()
+[`Response.body`]()
+
+[`Response.body`]()
+
+[`Response.headers`]()
+
+[`Response.status`]()
+
+[`Response.body`]()
+
+[`Response.body`]()
+
+[`Response.body`]()
+
+[`Response.status`]()
+
+## [Methods]()
 
 [`Response.read()`]()
 
 [`Response.arrayBuffer()`]()
 
 [`Response.blob()`]()
-
-[`Response.clone()`]()
-
-[`Response.error()`]()
-
-[`Response.formData()`]()
 
 [`Response.json()`]()
 
@@ -104,8 +170,8 @@
 
 ## [Methods]()
 
-[`Global.fetch()`]()
+[`fetch()`]()
 
 ## [See also]()
 
--   See also
+-   [`link`]()
