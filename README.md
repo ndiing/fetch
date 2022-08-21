@@ -1,47 +1,47 @@
 # URLSearchParams2
 
-<!-- Description -->
+Description
 
 
 
 
 ## [Methods]()
 
-<!-- _Description_ -->
+_Description_
 
-[`append()`]()
+[`append()`](./docs/append.md)
 
-<!-- Description -->
-[`delete()`]()
 
-<!-- Description -->
-[`entries()`]()
+[`delete()`](./docs/delete.md)
 
-<!-- Description -->
-[`forEach()`]()
 
-<!-- Description -->
-[`get()`]()
+[`entries()`](./docs/entries.md)
 
-<!-- Description -->
-[`getAll()`]()
 
-<!-- Description -->
-[`has()`]()
+[`forEach()`](./docs/for-each.md)
 
-<!-- Description -->
-[`keys()`]()
 
-<!-- Description -->
-[`set()`]()
+[`get()`](./docs/get.md)
 
-<!-- Description -->
-[`toString()`]()
 
-<!-- Description -->
-[`values()`]()
+[`getAll()`](./docs/get-all.md)
 
-<!-- Description -->
+
+[`has()`](./docs/has.md)
+
+
+[`keys()`](./docs/keys.md)
+
+
+[`set()`](./docs/set.md)
+
+
+[`toString()`](./docs/to-string.md)
+
+
+[`values()`](./docs/values.md)
+
+
 
 
 
@@ -54,25 +54,27 @@
 <!--  -->
 <!-- Description -->
 <!--  -->
+
 <!-- ## [Example]() -->
 <!--  -->
 <!-- ### [Title]() -->
 <!--  -->
 <!-- Description -->
+
 # URL2
 
-<!-- Description -->
+Description
 
 
 
 
 ## [Methods]()
 
-<!-- _Description_ -->
+_Description_
 
-[`toString()`]()
+[`toString()`](./docs/to-string.md)
 
-<!-- Description -->
+
 
 
 
@@ -85,46 +87,48 @@
 <!--  -->
 <!-- Description -->
 <!--  -->
+
 <!-- ## [Example]() -->
 <!--  -->
 <!-- ### [Title]() -->
 <!--  -->
 <!-- Description -->
+
 # Headers
 
-<!-- Description -->
+Description
 
 
 
 
 ## [Methods]()
 
-<!-- _Description_ -->
+_Description_
 
-[`append()`]()
+[`append()`](./docs/append.md)
 
-<!-- Description -->
-[`delete()`]()
 
-<!-- Description -->
-[`entries()`]()
+[`delete()`](./docs/delete.md)
 
-<!-- Description -->
-[`get()`]()
 
-<!-- Description -->
-[`has()`]()
+[`entries()`](./docs/entries.md)
 
-<!-- Description -->
-[`keys()`]()
 
-<!-- Description -->
-[`set()`]()
+[`get()`](./docs/get.md)
 
-<!-- Description -->
-[`values()`]()
 
-<!-- Description -->
+[`has()`](./docs/has.md)
+
+
+[`keys()`](./docs/keys.md)
+
+
+[`set()`](./docs/set.md)
+
+
+[`values()`](./docs/values.md)
+
+
 
 
 
@@ -137,14 +141,16 @@
 <!--  -->
 <!-- Description -->
 <!--  -->
+
 <!-- ## [Example]() -->
 <!--  -->
 <!-- ### [Title]() -->
 <!--  -->
 <!-- Description -->
+
 # Request
 
-<!-- Description -->
+Description
 
 
 
@@ -161,40 +167,42 @@
 <!--  -->
 <!-- Description -->
 <!--  -->
+
 <!-- ## [Example]() -->
 <!--  -->
 <!-- ### [Title]() -->
 <!--  -->
 <!-- Description -->
+
 # Response
 
-<!-- Description -->
+Description
 
 
 
 
 ## [Methods]()
 
-<!-- _Description_ -->
+_Description_
 
-[`read()`]()
+[`read()`](./docs/read.md)
 
-<!-- Description -->
-[`arrayBuffer()`]()
 
-<!-- Description -->
-[`blob()`]()
+[`arrayBuffer()`](./docs/array-buffer.md)
 
-<!-- Description -->
-[`json()`]()
 
-<!-- Description -->
-[`redirect()`]()
+[`blob()`](./docs/blob.md)
 
-<!-- Description -->
-[`text()`]()
 
-<!-- Description -->
+[`json()`](./docs/json.md)
+
+
+[`redirect()`](./docs/redirect.md)
+
+
+[`text()`](./docs/text.md)
+
+
 
 
 
@@ -207,11 +215,13 @@
 <!--  -->
 <!-- Description -->
 <!--  -->
+
 <!-- ## [Example]() -->
 <!--  -->
 <!-- ### [Title]() -->
 <!--  -->
 <!-- Description -->
+
 
 ## [See also]()
 
