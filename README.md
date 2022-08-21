@@ -10,180 +10,180 @@
 <!-- _Methods._ -->
 
 
-### URLSearchParams2#append()
+## URLSearchParams2#append()
 
 Create/Adding value by name
 
-#### [Syntax]()
+### [Syntax]()
 
     append(name,value)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### URLSearchParams2#delete()
+## URLSearchParams2#delete()
 
 Delete item by name
 
-#### [Syntax]()
+### [Syntax]()
 
     delete(name)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### URLSearchParams2#entries()
+## URLSearchParams2#entries()
 
 Get all
 
-#### [Syntax]()
+### [Syntax]()
 
     entries()
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### URLSearchParams2#forEach()
+## URLSearchParams2#forEach()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     forEach(callback)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### URLSearchParams2#get()
+## URLSearchParams2#get()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     get(name)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### URLSearchParams2#getAll()
+## URLSearchParams2#getAll()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     getAll(name)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### URLSearchParams2#has()
+## URLSearchParams2#has()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     has(name)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### URLSearchParams2#keys()
+## URLSearchParams2#keys()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     keys()
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### URLSearchParams2#set()
+## URLSearchParams2#set()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     set(name,value)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### URLSearchParams2#toString()
+## URLSearchParams2#toString()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     toString()
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### URLSearchParams2#values()
+## URLSearchParams2#values()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     values()
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
 # URL2
@@ -197,20 +197,20 @@ name|type|defaultvalue
 <!-- _Methods._ -->
 
 
-### URL2#toString()
+## URL2#toString()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     toString()
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
 # HTTP_HEADERS
@@ -230,132 +230,132 @@ name|type|defaultvalue
 <!-- _Methods._ -->
 
 
-### Headers#append()
+## Headers#append()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     append(name,value)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### Headers#delete()
+## Headers#delete()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     delete(name)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### Headers#entries()
+## Headers#entries()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     entries()
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### Headers#get()
+## Headers#get()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     get(name)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### Headers#has()
+## Headers#has()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     has(name)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### Headers#keys()
+## Headers#keys()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     keys()
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### Headers#set()
+## Headers#set()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     set(name,value)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### Headers#values()
+## Headers#values()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     values()
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
 # Request
@@ -375,100 +375,100 @@ name|type|defaultvalue
 <!-- _Methods._ -->
 
 
-### Response#read()
+## Response#read()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     read()
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### Response#arrayBuffer()
+## Response#arrayBuffer()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     arrayBuffer()
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### Response#blob()
+## Response#blob()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     blob()
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### Response#json()
+## Response#json()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     json()
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### Response#redirect()
+## Response#redirect()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     redirect(url,status)
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
-### Response#text()
+## Response#text()
 
 
 
-#### [Syntax]()
+### [Syntax]()
 
     text()
 
-##### [Parameters]()
+#### [Parameters]()
 
 name|type|defaultvalue
 ---|---|---
 
-##### [Return value]()
+#### [Return value]()
 
 
 # fetch
