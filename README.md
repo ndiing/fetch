@@ -18,12 +18,6 @@ Create/Adding value by name
 
     append(name,value)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## URLSearchParams2#delete()
@@ -34,12 +28,6 @@ Delete item by name
 
     delete(name)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## URLSearchParams2#entries()
@@ -50,12 +38,6 @@ Get all
 
     entries()
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## URLSearchParams2#forEach()
@@ -66,12 +48,6 @@ name|type|defaultvalue
 
     forEach(callback)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## URLSearchParams2#get()
@@ -82,12 +58,6 @@ name|type|defaultvalue
 
     get(name)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## URLSearchParams2#getAll()
@@ -98,12 +68,6 @@ name|type|defaultvalue
 
     getAll(name)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## URLSearchParams2#has()
@@ -114,12 +78,6 @@ name|type|defaultvalue
 
     has(name)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## URLSearchParams2#keys()
@@ -130,12 +88,6 @@ name|type|defaultvalue
 
     keys()
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## URLSearchParams2#set()
@@ -146,12 +98,6 @@ name|type|defaultvalue
 
     set(name,value)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## URLSearchParams2#toString()
@@ -162,12 +108,6 @@ name|type|defaultvalue
 
     toString()
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## URLSearchParams2#values()
@@ -178,12 +118,6 @@ name|type|defaultvalue
 
     values()
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 # URL2
@@ -205,12 +139,6 @@ name|type|defaultvalue
 
     toString()
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 # HTTP_HEADERS
@@ -238,12 +166,6 @@ name|type|defaultvalue
 
     append(name,value)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## Headers#delete()
@@ -254,12 +176,6 @@ name|type|defaultvalue
 
     delete(name)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## Headers#entries()
@@ -270,12 +186,6 @@ name|type|defaultvalue
 
     entries()
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## Headers#get()
@@ -286,12 +196,6 @@ name|type|defaultvalue
 
     get(name)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## Headers#has()
@@ -302,12 +206,6 @@ name|type|defaultvalue
 
     has(name)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## Headers#keys()
@@ -318,12 +216,6 @@ name|type|defaultvalue
 
     keys()
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## Headers#set()
@@ -334,12 +226,6 @@ name|type|defaultvalue
 
     set(name,value)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## Headers#values()
@@ -350,12 +236,6 @@ name|type|defaultvalue
 
     values()
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 # Request
@@ -383,12 +263,6 @@ name|type|defaultvalue
 
     read()
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## Response#arrayBuffer()
@@ -399,12 +273,6 @@ name|type|defaultvalue
 
     arrayBuffer()
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## Response#blob()
@@ -415,12 +283,6 @@ name|type|defaultvalue
 
     blob()
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## Response#json()
@@ -431,12 +293,6 @@ name|type|defaultvalue
 
     json()
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## Response#redirect()
@@ -447,12 +303,6 @@ name|type|defaultvalue
 
     redirect(url,status)
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 ## Response#text()
@@ -463,12 +313,6 @@ name|type|defaultvalue
 
     text()
 
-#### [Parameters]()
-
-name|type|defaultvalue
----|---|---
-
-#### [Return value]()
 
 
 # fetch
