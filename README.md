@@ -1,78 +1,217 @@
 # URLSearchParams2
 
+<!-- Description -->
+
+
+
+
 ## [Methods]()
 
-[`URLSearchParams2.append()`]()
+<!-- _Description_ -->
 
-[`URLSearchParams2.delete()`]()
+[`append()`]()
 
-[`URLSearchParams2.entries()`]()
+<!-- Description -->
+[`delete()`]()
 
-[`URLSearchParams2.forEach()`]()
+<!-- Description -->
+[`entries()`]()
 
-[`URLSearchParams2.get()`]()
+<!-- Description -->
+[`forEach()`]()
 
-[`URLSearchParams2.getAll()`]()
+<!-- Description -->
+[`get()`]()
 
-[`URLSearchParams2.has()`]()
+<!-- Description -->
+[`getAll()`]()
 
-[`URLSearchParams2.keys()`]()
+<!-- Description -->
+[`has()`]()
 
-[`URLSearchParams2.set()`]()
+<!-- Description -->
+[`keys()`]()
 
-[`URLSearchParams2.toString()`]()
+<!-- Description -->
+[`set()`]()
 
-[`URLSearchParams2.values()`]()
+<!-- Description -->
+[`toString()`]()
 
+<!-- Description -->
+[`values()`]()
+
+<!-- Description -->
+
+
+
+
+<!-- ## [Events]() -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- [`eventName`]() event -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- ## [Example]() -->
+<!--  -->
+<!-- ### [Title]() -->
+<!--  -->
+<!-- Description -->
 # URL2
 
+<!-- Description -->
+
+
+
+
 ## [Methods]()
 
-[`URL2.toString()`]()
+<!-- _Description_ -->
 
+[`toString()`]()
+
+<!-- Description -->
+
+
+
+
+<!-- ## [Events]() -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- [`eventName`]() event -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- ## [Example]() -->
+<!--  -->
+<!-- ### [Title]() -->
+<!--  -->
+<!-- Description -->
 # Headers
 
+<!-- Description -->
+
+
+
+
 ## [Methods]()
 
-[`Headers.append()`]()
+<!-- _Description_ -->
 
-[`Headers.delete()`]()
+[`append()`]()
 
-[`Headers.entries()`]()
+<!-- Description -->
+[`delete()`]()
 
-[`Headers.get()`]()
+<!-- Description -->
+[`entries()`]()
 
-[`Headers.has()`]()
+<!-- Description -->
+[`get()`]()
 
-[`Headers.keys()`]()
+<!-- Description -->
+[`has()`]()
 
-[`Headers.set()`]()
+<!-- Description -->
+[`keys()`]()
 
-[`Headers.values()`]()
+<!-- Description -->
+[`set()`]()
 
+<!-- Description -->
+[`values()`]()
+
+<!-- Description -->
+
+
+
+
+<!-- ## [Events]() -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- [`eventName`]() event -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- ## [Example]() -->
+<!--  -->
+<!-- ### [Title]() -->
+<!--  -->
+<!-- Description -->
 # Request
 
+<!-- Description -->
+
+
+
+
+
+
+
+
+<!-- ## [Events]() -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- [`eventName`]() event -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- ## [Example]() -->
+<!--  -->
+<!-- ### [Title]() -->
+<!--  -->
+<!-- Description -->
 # Response
 
-## [Methods]()
+<!-- Description -->
 
-[`Response.read()`]()
 
-[`Response.arrayBuffer()`]()
 
-[`Response.blob()`]()
-
-[`Response.json()`]()
-
-[`Response.redirect()`]()
-
-[`Response.text()`]()
-
-# Global
 
 ## [Methods]()
 
-[`fetch()`]()
+<!-- _Description_ -->
+
+[`read()`]()
+
+<!-- Description -->
+[`arrayBuffer()`]()
+
+<!-- Description -->
+[`blob()`]()
+
+<!-- Description -->
+[`json()`]()
+
+<!-- Description -->
+[`redirect()`]()
+
+<!-- Description -->
+[`text()`]()
+
+<!-- Description -->
+
+
+
+
+<!-- ## [Events]() -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- [`eventName`]() event -->
+<!--  -->
+<!-- Description -->
+<!--  -->
+<!-- ## [Example]() -->
+<!--  -->
+<!-- ### [Title]() -->
+<!--  -->
+<!-- Description -->
 
 ## [See also]()
 
