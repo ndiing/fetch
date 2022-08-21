@@ -3,7 +3,7 @@
     "@ndiinginc/database": "^1.0.0"
   },
   "name": "@ndiinginc/fetch",
-  "description": "nodejs fetch",
+  "description": "Nodejs fetch module",
   "version": "1.0.9",
   "main": "index.js",
   "devDependencies": {},
@@ -15,7 +15,6 @@
     "url": "git+https://github.com/ndiing/fetch.git"
   },
   "keywords": [
-    "nodejs",
     "fetch",
     "http",
     "https",
