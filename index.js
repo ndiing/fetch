@@ -371,7 +371,7 @@ class Request {
         this.path = options.path ?? this.input.path;
         this.port = options.port ?? this.input.port;
         this.protocol = options.protocol ?? this.input.protocol;
-        this.timeout = options.timeout ?? 1000 * 60 * 60;
+        this.timeout = options.timeout ?? 3600000;
     }
 
     // arrayBuffer() {}
@@ -493,7 +493,22 @@ class Response {
 }
 
 /**
- *
+ * method starts the process of fetching a resource from the network, returning a promise which is fulfilled once the response is available.
+ * @param {String} resource - This defines the resource that you wish to fetch
+ * @param {Object} options - An object containing any custom settings that you want to apply to the request
+ * @param {String} options.body - Any body that you want to add to your request: this can be a Blob, an ArrayBuffer, a TypedArray, a DataView, a FormData, a URLSearchParams, string object or literal, or a ReadableStream object.
+ * @param {String} options.credentials=same-origin - 
+ * @param {Object} options.headers - Any headers you want to add to your request, contained within a Headers object or an object literal with String values.
+ * @param {String} options.method=GET - The request method, e.g., GET, POST. Note that the Origin header is not set on Fetch requests with a method of HEAD or GET.
+ * @param {String} options.redirect=follow - How to handle a redirect response
+ * @param {String} options.agent - 
+ * @param {String} options.hostname=localhost - 
+ * @param {String} options.insecureHTTPParser=true - 
+ * @param {String} options.path=/ - 
+ * @param {Number} options.port=80 - 
+ * @param {String} options.protocol=http: - 
+ * @param {Number} options.timeout=3600000 - 
+ * @returns {Promise}
  */
 function fetch(resource = "", options = {}) {
     return new Promise((resolve, reject) => {
