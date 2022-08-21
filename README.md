@@ -1,328 +1,194 @@
 
+# Global
+
+
+<!-- examples -->
+<!-- examples -->
+
+<!-- properties -->
+## Properties
+
+
+[`HTTP_HEADERS`](./docs//http-headers.md)
+
+
+<!-- properties -->
+
+<!-- staticproperties -->
+<!-- staticproperties -->
+
+<!-- methods -->
+## Methods
+
+
+[`fetch(resource,options)`](./docs//fetch.md)
+
+
+<!-- methods -->
+
+<!-- staticmethods -->
+<!-- staticmethods -->
+
+
 # URLSearchParams2
 
 
+<!-- examples -->
+<!-- examples -->
 
+<!-- properties -->
+<!-- properties -->
 
+<!-- staticproperties -->
+<!-- staticproperties -->
 
-## [Methods]()
+<!-- methods -->
+## Methods
 
-<!-- _Methods._ -->
 
+[`URLSearchParams2#append(name,value)`](./docs/urlsearch-params2/append.md)
 
-## URLSearchParams2#append()
 
-Create/Adding value by name
+[`URLSearchParams2#delete(name)`](./docs/urlsearch-params2/delete.md)
 
-### [Syntax]()
 
-    append(name,value)
+[`URLSearchParams2#entries()`](./docs/urlsearch-params2/entries.md)
 
 
+[`URLSearchParams2#forEach(callback)`](./docs/urlsearch-params2/for-each.md)
 
-## URLSearchParams2#delete()
 
-Delete item by name
+[`URLSearchParams2#get(name)`](./docs/urlsearch-params2/get.md)
 
-### [Syntax]()
 
-    delete(name)
+[`URLSearchParams2#has(name)`](./docs/urlsearch-params2/has.md)
 
 
+[`URLSearchParams2#keys()`](./docs/urlsearch-params2/keys.md)
 
-## URLSearchParams2#entries()
 
-Get all
+[`URLSearchParams2#set(name,value)`](./docs/urlsearch-params2/set.md)
 
-### [Syntax]()
 
-    entries()
+[`URLSearchParams2#toString()`](./docs/urlsearch-params2/to-string.md)
 
 
+[`URLSearchParams2#values()`](./docs/urlsearch-params2/values.md)
 
-## URLSearchParams2#forEach()
 
+<!-- methods -->
 
-
-### [Syntax]()
-
-    forEach(callback)
-
-
-
-## URLSearchParams2#get()
-
-
-
-### [Syntax]()
-
-    get(name)
-
-
-
-## URLSearchParams2#getAll()
-
-
-
-### [Syntax]()
-
-    getAll(name)
-
-
-
-## URLSearchParams2#has()
-
-
-
-### [Syntax]()
-
-    has(name)
-
-
-
-## URLSearchParams2#keys()
-
-
-
-### [Syntax]()
-
-    keys()
-
-
-
-## URLSearchParams2#set()
-
-
-
-### [Syntax]()
-
-    set(name,value)
-
-
-
-## URLSearchParams2#toString()
-
-
-
-### [Syntax]()
-
-    toString()
-
-
-
-## URLSearchParams2#values()
-
-
-
-### [Syntax]()
-
-    values()
-
+<!-- staticmethods -->
+<!-- staticmethods -->
 
 
 # URL2
 
 
+<!-- examples -->
+<!-- examples -->
+
+<!-- properties -->
+<!-- properties -->
+
+<!-- staticproperties -->
+<!-- staticproperties -->
+
+<!-- methods -->
+## Methods
 
 
-
-## [Methods]()
-
-<!-- _Methods._ -->
+[`URL2#toString()`](./docs/url2/to-string.md)
 
 
-## URL2#toString()
+<!-- methods -->
 
-
-
-### [Syntax]()
-
-    toString()
-
-
-
-# HTTP_HEADERS
-
-
-
+<!-- staticmethods -->
+<!-- staticmethods -->
 
 
 # Headers
 
 
+<!-- examples -->
+<!-- examples -->
 
+<!-- properties -->
+<!-- properties -->
 
+<!-- staticproperties -->
+<!-- staticproperties -->
 
-## [Methods]()
+<!-- methods -->
+## Methods
 
-<!-- _Methods._ -->
 
+[`Headers#append(name,value)`](./docs/headers/append.md)
 
-## Headers#append()
 
+[`Headers#delete(name)`](./docs/headers/delete.md)
 
 
-### [Syntax]()
+[`Headers#entries()`](./docs/headers/entries.md)
 
-    append(name,value)
 
+[`Headers#get(name)`](./docs/headers/get.md)
 
 
-## Headers#delete()
+[`Headers#has(name)`](./docs/headers/has.md)
 
 
+[`Headers#keys()`](./docs/headers/keys.md)
 
-### [Syntax]()
 
-    delete(name)
+[`Headers#set(name,value)`](./docs/headers/set.md)
 
 
+[`Headers#values()`](./docs/headers/values.md)
 
-## Headers#entries()
 
+<!-- methods -->
 
-
-### [Syntax]()
-
-    entries()
-
-
-
-## Headers#get()
-
-
-
-### [Syntax]()
-
-    get(name)
-
-
-
-## Headers#has()
-
-
-
-### [Syntax]()
-
-    has(name)
-
-
-
-## Headers#keys()
-
-
-
-### [Syntax]()
-
-    keys()
-
-
-
-## Headers#set()
-
-
-
-### [Syntax]()
-
-    set(name,value)
-
-
-
-## Headers#values()
-
-
-
-### [Syntax]()
-
-    values()
-
-
-
-# Request
-
-
-
+<!-- staticmethods -->
+<!-- staticmethods -->
 
 
 # Response
 
 
+<!-- examples -->
+<!-- examples -->
+
+<!-- properties -->
+<!-- properties -->
+
+<!-- staticproperties -->
+<!-- staticproperties -->
+
+<!-- methods -->
+## Methods
 
 
-
-## [Methods]()
-
-<!-- _Methods._ -->
+[`Response#read()`](./docs/response/read.md)
 
 
-## Response#read()
+[`Response#arrayBuffer()`](./docs/response/array-buffer.md)
 
 
-
-### [Syntax]()
-
-    read()
+[`Response#blob()`](./docs/response/blob.md)
 
 
-
-## Response#arrayBuffer()
-
+[`Response#json()`](./docs/response/json.md)
 
 
-### [Syntax]()
-
-    arrayBuffer()
+[`Response#redirect(url,status)`](./docs/response/redirect.md)
 
 
-
-## Response#blob()
-
+[`Response#text()`](./docs/response/text.md)
 
 
-### [Syntax]()
+<!-- methods -->
 
-    blob()
-
-
-
-## Response#json()
-
-
-
-### [Syntax]()
-
-    json()
-
-
-
-## Response#redirect()
-
-
-
-### [Syntax]()
-
-    redirect(url,status)
-
-
-
-## Response#text()
-
-
-
-### [Syntax]()
-
-    text()
-
-
-
-# fetch
-
-
-
-
-
-# 
-
-
-
+<!-- staticmethods -->
+<!-- staticmethods -->
 

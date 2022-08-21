@@ -5,7 +5,13 @@ const zlib = require("zlib");
 const { Blob } = require("buffer");
 const Database = require("@ndiinginc/database");
 
+/**
+ *
+ */
 class URLSearchParams2 {
+    /**
+     *
+     */
     constructor(init = "") {
         init = init
             .replace(/[^\?]+\?/, "")
@@ -18,6 +24,9 @@ class URLSearchParams2 {
         }
     }
 
+    /**
+     *
+     */
     append(name, value) {
         value = decodeURIComponent(value);
         if (this[name]) {
@@ -31,10 +40,16 @@ class URLSearchParams2 {
         }
     }
 
+    /**
+     *
+     */
     delete(name) {
         delete this[name];
     }
 
+    /**
+     *
+     */
     entries() {
         const values = [];
 
@@ -44,12 +59,18 @@ class URLSearchParams2 {
         return values;
     }
 
+    /**
+     *
+     */
     forEach(callback) {
         for (const name of this.keys()) {
             callback(this[name], name);
         }
     }
 
+    /**
+     *
+     */
     get(name) {
         return this[name];
     }
@@ -58,14 +79,23 @@ class URLSearchParams2 {
         return this[name];
     }
 
+    /**
+     *
+     */
     has(name) {
         return !!this[name];
     }
 
+    /**
+     *
+     */
     keys() {
         return Object.getOwnPropertyNames(this);
     }
 
+    /**
+     *
+     */
     set(name, value) {
         value = decodeURIComponent(value);
         this[name] = value;
@@ -73,6 +103,9 @@ class URLSearchParams2 {
 
     // sort() {}
 
+    /**
+     *
+     */
     toString() {
         const values = [];
 
@@ -82,6 +115,9 @@ class URLSearchParams2 {
         return values.join("&");
     }
 
+    /**
+     *
+     */
     values() {
         const values = [];
 
@@ -92,7 +128,13 @@ class URLSearchParams2 {
     }
 }
 
+/**
+ *
+ */
 class URL2 {
+    /**
+     *
+     */
     constructor(url = "", base = "http://localhost") {
         // https://www.rfc-editor.org/rfc/rfc3986
         const regexpOrigin = /^(([^:/?#]+):)(\/\/([^/?#]*))/;
@@ -101,21 +143,7 @@ class URL2 {
             url = base + url;
         }
         const regexp = /^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?/;
-        const [
-            href, // 'https://www.google.com/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l6j69i60.2728j0j7&sourceid=chrome&ie=UTF-8#chrome',
-            protocol, // 'https:',
-            scheme, // 'https',
-            authority, // '//www.google.com',
-            host, // 'www.google.com',
-            pathname = "/", // '/search',
-            search = "", // '?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l6j69i60.2728j0j7&sourceid=chrome&ie=UTF-8',
-            query = "", // 'q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l6j69i60.2728j0j7&sourceid=chrome&ie=UTF-8',
-            hash = "", // '#chrome',
-            fragment = "", // 'chrome',
-            // index: 0,
-            // input: 'https://www.google.com/search?q=new+url&oq=new+URL&aqs=chrome.0.69i59j0i512l6j69i60.2728j0j7&sourceid=chrome&ie=UTF-8#chrome',
-            // groups: undefined
-        ] = ("" + url).match(regexp);
+        const [href, protocol, scheme, authority, host, pathname = "/", search = "", query = "", hash = "", fragment = ""] = ("" + url).match(regexp);
         const [hostname, port] = ("" + host).split(":");
 
         this.href = href;
@@ -141,6 +169,9 @@ class URL2 {
     // revokeObjectURL(){}
     // toJSON(){}
 
+    /**
+     *
+     */
     toString() {
         let searchParams = "" + this.searchParams;
 
@@ -151,6 +182,9 @@ class URL2 {
     }
 }
 
+/**
+ *
+ */
 const HTTP_HEADERS = {
     "www-authenticate": "WWW-Authenticate",
     "accept-ch": "Accept-CH",
@@ -179,13 +213,22 @@ const HTTP_HEADERS = {
     dnt: "DNT",
 };
 
+/**
+ *
+ */
 class Headers {
+    /**
+     *
+     */
     constructor(init = {}) {
         for (const name in init) {
             this.set(name, init[name]);
         }
     }
 
+    /**
+     *
+     */
     append(name, value) {
         name = name.toLowerCase();
 
@@ -200,11 +243,17 @@ class Headers {
         }
     }
 
+    /**
+     *
+     */
     delete(name) {
         name = name.toLowerCase();
         delete this[name];
     }
 
+    /**
+     *
+     */
     entries() {
         const values = [];
 
@@ -215,25 +264,40 @@ class Headers {
         return values;
     }
 
+    /**
+     *
+     */
     get(name) {
         name = name.toLowerCase();
         return this[name];
     }
 
+    /**
+     *
+     */
     has(name) {
         name = name.toLowerCase();
         return !!this[name];
     }
 
+    /**
+     *
+     */
     keys() {
         return Object.getOwnPropertyNames(this);
     }
 
+    /**
+     *
+     */
     set(name, value) {
         name = name.toLowerCase();
         this[name] = value;
     }
 
+    /**
+     *
+     */
     values() {
         const values = [];
 
@@ -244,7 +308,13 @@ class Headers {
     }
 }
 
+/**
+ *
+ */
 class Request {
+    /**
+     *
+     */
     constructor(input, options = {}) {
         if (input instanceof Request) {
             input = "" + input.input;
@@ -317,7 +387,13 @@ class Request {
     // text() {}
 }
 
+/**
+ *
+ */
 class Response {
+    /**
+     *
+     */
     constructor(body, options = {}) {
         this.body = body;
 
@@ -346,6 +422,9 @@ class Response {
         }
     }
 
+    /**
+     *
+     */
     read() {
         return new Promise((resolve, reject) => {
             const encoding = this.headers.get("content-encoding");
@@ -368,10 +447,16 @@ class Response {
         });
     }
 
+    /**
+     *
+     */
     arrayBuffer() {
         return this.read().then((buffer) => buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength));
     }
 
+    /**
+     *
+     */
     blob() {
         return this.read().then((buffer) => new Blob([buffer]));
     }
@@ -382,10 +467,16 @@ class Response {
 
     // formData() {}
 
+    /**
+     *
+     */
     json() {
         return this.read().then((buffer) => JSON.parse(buffer));
     }
 
+    /**
+     *
+     */
     redirect(url, status) {
         if (status) {
             this.status = status;
@@ -393,11 +484,17 @@ class Response {
         return fetch(url);
     }
 
+    /**
+     *
+     */
     text() {
         return this.read().then((buffer) => "" + buffer);
     }
 }
 
+/**
+ *
+ */
 function fetch(resource = "", options = {}) {
     return new Promise((resolve, reject) => {
         const request = new Request(resource, options);
