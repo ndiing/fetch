@@ -25,7 +25,7 @@ class URLSearchParams2 {
     }
 
     /**
-     *
+     * Create/Adding value by name
      */
     append(name, value) {
         value = decodeURIComponent(value);
@@ -41,14 +41,14 @@ class URLSearchParams2 {
     }
 
     /**
-     *
+     * Delete item by name
      */
     delete(name) {
         delete this[name];
     }
 
     /**
-     *
+     * Get all
      */
     entries() {
         const values = [];
@@ -213,7 +213,7 @@ class URL2 {
 /**
  *
  */
-const HEADERS = {
+const HTTP_HEADERS = {
     "www-authenticate": "WWW-Authenticate",
     "accept-ch": "Accept-CH",
     "accept-ch-lifetime": "Accept-CH-Lifetime",
@@ -286,7 +286,7 @@ class Headers {
         const values = [];
 
         for (const name of this.keys()) {
-            const key = HEADERS[name] ?? name.replace(/(^|-)(\w)/g, ($, $1, $2) => $1 + $2.toUpperCase());
+            const key = HTTP_HEADERS[name] ?? name.replace(/(^|-)(\w)/g, ($, $1, $2) => $1 + $2.toUpperCase());
             values.push([key, this[name]]);
         }
         return values;
