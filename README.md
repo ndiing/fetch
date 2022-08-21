@@ -1,219 +1,484 @@
-## Classes
 
-<dl>
-<dt><a href="#URLSearchParams2">URLSearchParams2</a></dt>
-<dd></dd>
-<dt><a href="#URL2">URL2</a></dt>
-<dd></dd>
-<dt><a href="#Headers">Headers</a></dt>
-<dd></dd>
-<dt><a href="#Request">Request</a></dt>
-<dd></dd>
-<dt><a href="#Response">Response</a></dt>
-<dd></dd>
-</dl>
+# URLSearchParams2
 
-## Constants
 
-<dl>
-<dt><a href="#HTTP_HEADERS">HTTP_HEADERS</a></dt>
-<dd></dd>
-</dl>
 
-## Functions
 
-<dl>
-<dt><a href="#fetch">fetch(resource, options)</a> ⇒ <code>Promise/Response</code></dt>
-<dd></dd>
-</dl>
 
-<a name="URLSearchParams2"></a>
+## [Methods]()
 
-## URLSearchParams2
-**Kind**: global class  
+<!-- _Methods._ -->
 
-* [URLSearchParams2](#URLSearchParams2)
-    * [.append()](#URLSearchParams2+append)
-    * [.delete()](#URLSearchParams2+delete)
-    * [.entries()](#URLSearchParams2+entries)
-    * [.forEach()](#URLSearchParams2+forEach)
-    * [.get()](#URLSearchParams2+get)
-    * [.getAll()](#URLSearchParams2+getAll)
-    * [.has()](#URLSearchParams2+has)
-    * [.keys()](#URLSearchParams2+keys)
-    * [.set()](#URLSearchParams2+set)
-    * [.toString()](#URLSearchParams2+toString)
-    * [.values()](#URLSearchParams2+values)
 
-<a name="URLSearchParams2+append"></a>
+### URLSearchParams2#append()
 
-### urlSearchParams2.append()
 Create/Adding value by name
 
-**Kind**: instance method of [<code>URLSearchParams2</code>](#URLSearchParams2)  
-<a name="URLSearchParams2+delete"></a>
+#### [Syntax]()
 
-### urlSearchParams2.delete()
+    append(name,value)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### URLSearchParams2#delete()
+
 Delete item by name
 
-**Kind**: instance method of [<code>URLSearchParams2</code>](#URLSearchParams2)  
-<a name="URLSearchParams2+entries"></a>
+#### [Syntax]()
 
-### urlSearchParams2.entries()
+    delete(name)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### URLSearchParams2#entries()
+
 Get all
 
-**Kind**: instance method of [<code>URLSearchParams2</code>](#URLSearchParams2)  
-<a name="URLSearchParams2+forEach"></a>
+#### [Syntax]()
 
-### urlSearchParams2.forEach()
-**Kind**: instance method of [<code>URLSearchParams2</code>](#URLSearchParams2)  
-<a name="URLSearchParams2+get"></a>
+    entries()
 
-### urlSearchParams2.get()
-**Kind**: instance method of [<code>URLSearchParams2</code>](#URLSearchParams2)  
-<a name="URLSearchParams2+getAll"></a>
+##### [Parameters]()
 
-### urlSearchParams2.getAll()
-**Kind**: instance method of [<code>URLSearchParams2</code>](#URLSearchParams2)  
-<a name="URLSearchParams2+has"></a>
+name|type|defaultvalue
+---|---|---
 
-### urlSearchParams2.has()
-**Kind**: instance method of [<code>URLSearchParams2</code>](#URLSearchParams2)  
-<a name="URLSearchParams2+keys"></a>
+##### [Return value]()
 
-### urlSearchParams2.keys()
-**Kind**: instance method of [<code>URLSearchParams2</code>](#URLSearchParams2)  
-<a name="URLSearchParams2+set"></a>
 
-### urlSearchParams2.set()
-**Kind**: instance method of [<code>URLSearchParams2</code>](#URLSearchParams2)  
-<a name="URLSearchParams2+toString"></a>
+### URLSearchParams2#forEach()
 
-### urlSearchParams2.toString()
-**Kind**: instance method of [<code>URLSearchParams2</code>](#URLSearchParams2)  
-<a name="URLSearchParams2+values"></a>
 
-### urlSearchParams2.values()
-**Kind**: instance method of [<code>URLSearchParams2</code>](#URLSearchParams2)  
-<a name="URL2"></a>
 
-## URL2
-**Kind**: global class  
-<a name="URL2+toString"></a>
+#### [Syntax]()
 
-### urL2.toString()
-**Kind**: instance method of [<code>URL2</code>](#URL2)  
-<a name="Headers"></a>
+    forEach(callback)
 
-## Headers
-**Kind**: global class  
+##### [Parameters]()
 
-* [Headers](#Headers)
-    * [.append()](#Headers+append)
-    * [.delete()](#Headers+delete)
-    * [.entries()](#Headers+entries)
-    * [.get()](#Headers+get)
-    * [.has()](#Headers+has)
-    * [.keys()](#Headers+keys)
-    * [.set()](#Headers+set)
-    * [.values()](#Headers+values)
+name|type|defaultvalue
+---|---|---
 
-<a name="Headers+append"></a>
+##### [Return value]()
 
-### headers.append()
-**Kind**: instance method of [<code>Headers</code>](#Headers)  
-<a name="Headers+delete"></a>
 
-### headers.delete()
-**Kind**: instance method of [<code>Headers</code>](#Headers)  
-<a name="Headers+entries"></a>
+### URLSearchParams2#get()
 
-### headers.entries()
-**Kind**: instance method of [<code>Headers</code>](#Headers)  
-<a name="Headers+get"></a>
 
-### headers.get()
-**Kind**: instance method of [<code>Headers</code>](#Headers)  
-<a name="Headers+has"></a>
 
-### headers.has()
-**Kind**: instance method of [<code>Headers</code>](#Headers)  
-<a name="Headers+keys"></a>
+#### [Syntax]()
 
-### headers.keys()
-**Kind**: instance method of [<code>Headers</code>](#Headers)  
-<a name="Headers+set"></a>
+    get(name)
 
-### headers.set()
-**Kind**: instance method of [<code>Headers</code>](#Headers)  
-<a name="Headers+values"></a>
+##### [Parameters]()
 
-### headers.values()
-**Kind**: instance method of [<code>Headers</code>](#Headers)  
-<a name="Request"></a>
+name|type|defaultvalue
+---|---|---
 
-## Request
-**Kind**: global class  
-<a name="Response"></a>
+##### [Return value]()
 
-## Response
-**Kind**: global class  
 
-* [Response](#Response)
-    * [.read()](#Response+read)
-    * [.arrayBuffer()](#Response+arrayBuffer)
-    * [.blob()](#Response+blob)
-    * [.json()](#Response+json)
-    * [.redirect()](#Response+redirect)
-    * [.text()](#Response+text)
+### URLSearchParams2#getAll()
 
-<a name="Response+read"></a>
 
-### response.read()
-**Kind**: instance method of [<code>Response</code>](#Response)  
-<a name="Response+arrayBuffer"></a>
 
-### response.arrayBuffer()
-**Kind**: instance method of [<code>Response</code>](#Response)  
-<a name="Response+blob"></a>
+#### [Syntax]()
 
-### response.blob()
-**Kind**: instance method of [<code>Response</code>](#Response)  
-<a name="Response+json"></a>
+    getAll(name)
 
-### response.json()
-**Kind**: instance method of [<code>Response</code>](#Response)  
-<a name="Response+redirect"></a>
+##### [Parameters]()
 
-### response.redirect()
-**Kind**: instance method of [<code>Response</code>](#Response)  
-<a name="Response+text"></a>
+name|type|defaultvalue
+---|---|---
 
-### response.text()
-**Kind**: instance method of [<code>Response</code>](#Response)  
-<a name="HTTP_HEADERS"></a>
+##### [Return value]()
 
-## HTTP\_HEADERS
-**Kind**: global constant  
-<a name="fetch"></a>
 
-## fetch(resource, options) ⇒ <code>Promise/Response</code>
-**Kind**: global function  
+### URLSearchParams2#has()
 
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| resource | <code>String/Request</code> |  | resource |
-| options | <code>Object</code> |  | options |
-| options.body | <code>String</code> |  | body |
-| options.credentials | <code>String</code> | <code>same-origin</code> | credentials |
-| options.headers | <code>String</code> | <code>{}</code> | headers |
-| options.method | <code>String</code> | <code>GET</code> | method |
-| options.redirect | <code>String</code> | <code>follow</code> | redirect |
-| options.agent | <code>String</code> |  | agent |
-| options.hostname | <code>String</code> | <code>localhost</code> | hostname |
-| options.insecureHTTPParser | <code>Boolean</code> | <code>true</code> | insecureHTTPParser |
-| options.path | <code>String</code> | <code>/</code> | path |
-| options.port | <code>Number</code> | <code>80</code> | port |
-| options.protocol | <code>String</code> | <code>http:</code> | protocol |
-| options.timeout | <code>String</code> | <code>3600000</code> | timeout |
+
+
+#### [Syntax]()
+
+    has(name)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### URLSearchParams2#keys()
+
+
+
+#### [Syntax]()
+
+    keys()
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### URLSearchParams2#set()
+
+
+
+#### [Syntax]()
+
+    set(name,value)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### URLSearchParams2#toString()
+
+
+
+#### [Syntax]()
+
+    toString()
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### URLSearchParams2#values()
+
+
+
+#### [Syntax]()
+
+    values()
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+# URL2
+
+
+
+
+
+## [Methods]()
+
+<!-- _Methods._ -->
+
+
+### URL2#toString()
+
+
+
+#### [Syntax]()
+
+    toString()
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+# HTTP_HEADERS
+
+
+
+
+
+# Headers
+
+
+
+
+
+## [Methods]()
+
+<!-- _Methods._ -->
+
+
+### Headers#append()
+
+
+
+#### [Syntax]()
+
+    append(name,value)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### Headers#delete()
+
+
+
+#### [Syntax]()
+
+    delete(name)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### Headers#entries()
+
+
+
+#### [Syntax]()
+
+    entries()
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### Headers#get()
+
+
+
+#### [Syntax]()
+
+    get(name)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### Headers#has()
+
+
+
+#### [Syntax]()
+
+    has(name)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### Headers#keys()
+
+
+
+#### [Syntax]()
+
+    keys()
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### Headers#set()
+
+
+
+#### [Syntax]()
+
+    set(name,value)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### Headers#values()
+
+
+
+#### [Syntax]()
+
+    values()
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+# Request
+
+
+
+
+
+# Response
+
+
+
+
+
+## [Methods]()
+
+<!-- _Methods._ -->
+
+
+### Response#read()
+
+
+
+#### [Syntax]()
+
+    read()
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### Response#arrayBuffer()
+
+
+
+#### [Syntax]()
+
+    arrayBuffer()
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### Response#blob()
+
+
+
+#### [Syntax]()
+
+    blob()
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### Response#json()
+
+
+
+#### [Syntax]()
+
+    json()
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### Response#redirect()
+
+
+
+#### [Syntax]()
+
+    redirect(url,status)
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+### Response#text()
+
+
+
+#### [Syntax]()
+
+    text()
+
+##### [Parameters]()
+
+name|type|defaultvalue
+---|---|---
+
+##### [Return value]()
+
+
+# fetch
+
+
+
+
+
+# 
+
+
+
 
