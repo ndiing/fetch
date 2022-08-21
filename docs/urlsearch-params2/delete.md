@@ -11,6 +11,10 @@ delete(name);
 ```
 
 <!-- parameters -->
+### Parameters
+
+- `name`
+
 <!-- parameters -->
 
 <!-- return -->

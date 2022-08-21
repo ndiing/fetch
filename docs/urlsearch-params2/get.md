@@ -11,6 +11,10 @@ get(name);
 ```
 
 <!-- parameters -->
+### Parameters
+
+- `name`
+
 <!-- parameters -->
 
 <!-- return -->

@@ -11,6 +11,10 @@ forEach(callback);
 ```
 
 <!-- parameters -->
+### Parameters
+
+- `callback`
+
 <!-- parameters -->
 
 <!-- return -->

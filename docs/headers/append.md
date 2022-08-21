@@ -11,6 +11,12 @@ append(name,value);
 ```
 
 <!-- parameters -->
+### Parameters
+
+- `name`
+
+- `value`
+
 <!-- parameters -->
 
 <!-- return -->

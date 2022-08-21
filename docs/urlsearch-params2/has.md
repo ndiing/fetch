@@ -11,6 +11,10 @@ has(name);
 ```
 
 <!-- parameters -->
+### Parameters
+
+- `name`
+
 <!-- parameters -->
 
 <!-- return -->

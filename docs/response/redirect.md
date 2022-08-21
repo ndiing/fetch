@@ -11,6 +11,12 @@ redirect(url,status);
 ```
 
 <!-- parameters -->
+### Parameters
+
+- `url`
+
+- `status`
+
 <!-- parameters -->
 
 <!-- return -->
