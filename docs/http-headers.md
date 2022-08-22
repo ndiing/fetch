@@ -1,19 +1,18 @@
-# HTTP_HEADERS()
+## HTTP_HEADERS()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-HTTP_HEADERS();
+### Syntax
+```
+HTTP_HEADERS()
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+</dl>
 
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

@@ -4,6 +4,32 @@
 npm install @ndiinginc/fetch
 ```
 
+## Global
+
+<!-- properties -->
+### Properties
+<dl>
+    <dt><code><a href="./docs//http-headers.md">HTTP_HEADERS</a></code></dt>
+    <dd></dd>
+</dl>
+<!-- properties -->
+
+<!-- staticproperties -->
+<!-- staticproperties -->
+
+<!-- methods -->
+### Methods
+<dl>
+    <dt><code><a href="./docs//fetch.md">fetch()</a></code></dt>
+    <dd>method starts the process of fetching a resource from the network, returning a promise which is fulfilled once the response is available.</dd>
+</dl>
+<!-- methods -->
+
+<!-- staticmethods -->
+<!-- staticmethods -->
+
+<!-- examples -->
+<!-- examples -->
 ## URLSearchParams2
 
 <!-- properties -->
@@ -57,22 +83,6 @@ npm install @ndiinginc/fetch
     <dt><code><a href="./docs/url2/to-string.md">URL2#toString()</a></code></dt>
     <dd></dd>
 </dl>
-<!-- methods -->
-
-<!-- staticmethods -->
-<!-- staticmethods -->
-
-<!-- examples -->
-<!-- examples -->
-## HTTP_HEADERS
-
-<!-- properties -->
-<!-- properties -->
-
-<!-- staticproperties -->
-<!-- staticproperties -->
-
-<!-- methods -->
 <!-- methods -->
 
 <!-- staticmethods -->
@@ -155,22 +165,6 @@ npm install @ndiinginc/fetch
     <dt><code><a href="./docs/response/text.md">Response#text()</a></code></dt>
     <dd></dd>
 </dl>
-<!-- methods -->
-
-<!-- staticmethods -->
-<!-- staticmethods -->
-
-<!-- examples -->
-<!-- examples -->
-## fetch
-
-<!-- properties -->
-<!-- properties -->
-
-<!-- staticproperties -->
-<!-- staticproperties -->
-
-<!-- methods -->
 <!-- methods -->
 
 <!-- staticmethods -->
