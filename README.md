@@ -152,30 +152,6 @@ npm install @ndiinginc/fetch
 
 <!-- examples -->
 <!-- examples -->
-## Request
-
-<!-- constructor -->
-### Constructor
-<dl>
-    <dt><code><a href="./docs//request.md">Request()</a></code></dt>
-    <dd></dd>
-</dl>
-<!-- constructor -->
-
-<!-- properties -->
-<!-- properties -->
-
-<!-- staticproperties -->
-<!-- staticproperties -->
-
-<!-- methods -->
-<!-- methods -->
-
-<!-- staticmethods -->
-<!-- staticmethods -->
-
-<!-- examples -->
-<!-- examples -->
 ## Response
 
 <!-- constructor -->
