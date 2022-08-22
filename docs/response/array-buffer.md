@@ -1,19 +1,18 @@
-# Response#arrayBuffer()
+## Response#arrayBuffer()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-arrayBuffer();
+### Syntax
+```
+arrayBuffer()
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+</dl>
 
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

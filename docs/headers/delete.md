@@ -1,20 +1,19 @@
-# Headers#delete()
+## Headers#delete()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-delete(name);
+### Syntax
+```
+delete(name)
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+    <dt><code>name</code></dt>
+</dl>
 
-- `name`
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

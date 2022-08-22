@@ -1,20 +1,19 @@
-# Headers#get()
+## Headers#get()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-get(name);
+### Syntax
+```
+get(name)
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+    <dt><code>name</code></dt>
+</dl>
 
-- `name`
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

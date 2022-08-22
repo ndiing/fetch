@@ -1,19 +1,18 @@
-# URLSearchParams2#values()
+## URLSearchParams2#values()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-values();
+### Syntax
+```
+values()
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+</dl>
 
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

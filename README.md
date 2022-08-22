@@ -1,42 +1,10 @@
+# Install
 
-# Global
+```
+npm install @ndiinginc/fetch
+```
 
-
-<!-- examples -->
-<!-- examples -->
-
-<!-- properties -->
-## Properties
-
-
-[`HTTP_HEADERS`](./docs//http-headers.md)
-
-
-
-<!-- properties -->
-
-<!-- staticproperties -->
-<!-- staticproperties -->
-
-<!-- methods -->
-## Methods
-
-
-[`fetch(resource,options)`](./docs//fetch.md)
-
-method starts the process of fetching a resource from the network, returning a promise which is fulfilled once the response is available.
-
-<!-- methods -->
-
-<!-- staticmethods -->
-<!-- staticmethods -->
-
-
-# URLSearchParams2
-
-
-<!-- examples -->
-<!-- examples -->
+## URLSearchParams2
 
 <!-- properties -->
 <!-- properties -->
@@ -45,60 +13,37 @@ method starts the process of fetching a resource from the network, returning a p
 <!-- staticproperties -->
 
 <!-- methods -->
-## Methods
-
-
-[`URLSearchParams2#append(name,value)`](./docs/urlsearch-params2/append.md)
-
-
-
-[`URLSearchParams2#delete(name)`](./docs/urlsearch-params2/delete.md)
-
-
-
-[`URLSearchParams2#entries()`](./docs/urlsearch-params2/entries.md)
-
-
-
-[`URLSearchParams2#forEach(callback)`](./docs/urlsearch-params2/for-each.md)
-
-
-
-[`URLSearchParams2#get(name)`](./docs/urlsearch-params2/get.md)
-
-
-
-[`URLSearchParams2#has(name)`](./docs/urlsearch-params2/has.md)
-
-
-
-[`URLSearchParams2#keys()`](./docs/urlsearch-params2/keys.md)
-
-
-
-[`URLSearchParams2#set(name,value)`](./docs/urlsearch-params2/set.md)
-
-
-
-[`URLSearchParams2#toString()`](./docs/urlsearch-params2/to-string.md)
-
-
-
-[`URLSearchParams2#values()`](./docs/urlsearch-params2/values.md)
-
-
-
+### Methods
+<dl>
+    <dt><code><a href="./docs/urlsearch-params2/append.md">URLSearchParams2#append()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/urlsearch-params2/delete.md">URLSearchParams2#delete()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/urlsearch-params2/entries.md">URLSearchParams2#entries()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/urlsearch-params2/for-each.md">URLSearchParams2#forEach()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/urlsearch-params2/get.md">URLSearchParams2#get()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/urlsearch-params2/has.md">URLSearchParams2#has()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/urlsearch-params2/keys.md">URLSearchParams2#keys()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/urlsearch-params2/set.md">URLSearchParams2#set()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/urlsearch-params2/to-string.md">URLSearchParams2#toString()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/urlsearch-params2/values.md">URLSearchParams2#values()</a></code></dt>
+    <dd></dd>
+</dl>
 <!-- methods -->
 
 <!-- staticmethods -->
 <!-- staticmethods -->
 
-
-# URL2
-
-
 <!-- examples -->
 <!-- examples -->
+## URL2
 
 <!-- properties -->
 <!-- properties -->
@@ -107,24 +52,19 @@ method starts the process of fetching a resource from the network, returning a p
 <!-- staticproperties -->
 
 <!-- methods -->
-## Methods
-
-
-[`URL2#toString()`](./docs/url2/to-string.md)
-
-
-
+### Methods
+<dl>
+    <dt><code><a href="./docs/url2/to-string.md">URL2#toString()</a></code></dt>
+    <dd></dd>
+</dl>
 <!-- methods -->
 
 <!-- staticmethods -->
 <!-- staticmethods -->
 
-
-# Headers
-
-
 <!-- examples -->
 <!-- examples -->
+## HTTP_HEADERS
 
 <!-- properties -->
 <!-- properties -->
@@ -133,52 +73,14 @@ method starts the process of fetching a resource from the network, returning a p
 <!-- staticproperties -->
 
 <!-- methods -->
-## Methods
-
-
-[`Headers#append(name,value)`](./docs/headers/append.md)
-
-
-
-[`Headers#delete(name)`](./docs/headers/delete.md)
-
-
-
-[`Headers#entries()`](./docs/headers/entries.md)
-
-
-
-[`Headers#get(name)`](./docs/headers/get.md)
-
-
-
-[`Headers#has(name)`](./docs/headers/has.md)
-
-
-
-[`Headers#keys()`](./docs/headers/keys.md)
-
-
-
-[`Headers#set(name,value)`](./docs/headers/set.md)
-
-
-
-[`Headers#values()`](./docs/headers/values.md)
-
-
-
 <!-- methods -->
 
 <!-- staticmethods -->
 <!-- staticmethods -->
 
-
-# Response
-
-
 <!-- examples -->
 <!-- examples -->
+## Headers
 
 <!-- properties -->
 <!-- properties -->
@@ -187,35 +89,92 @@ method starts the process of fetching a resource from the network, returning a p
 <!-- staticproperties -->
 
 <!-- methods -->
-## Methods
-
-
-[`Response#read()`](./docs/response/read.md)
-
-
-
-[`Response#arrayBuffer()`](./docs/response/array-buffer.md)
-
-
-
-[`Response#blob()`](./docs/response/blob.md)
-
-
-
-[`Response#json()`](./docs/response/json.md)
-
-
-
-[`Response#redirect(url,status)`](./docs/response/redirect.md)
-
-
-
-[`Response#text()`](./docs/response/text.md)
-
-
-
+### Methods
+<dl>
+    <dt><code><a href="./docs/headers/append.md">Headers#append()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/headers/delete.md">Headers#delete()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/headers/entries.md">Headers#entries()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/headers/get.md">Headers#get()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/headers/has.md">Headers#has()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/headers/keys.md">Headers#keys()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/headers/set.md">Headers#set()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/headers/values.md">Headers#values()</a></code></dt>
+    <dd></dd>
+</dl>
 <!-- methods -->
 
 <!-- staticmethods -->
 <!-- staticmethods -->
 
+<!-- examples -->
+<!-- examples -->
+## Request
+
+<!-- properties -->
+<!-- properties -->
+
+<!-- staticproperties -->
+<!-- staticproperties -->
+
+<!-- methods -->
+<!-- methods -->
+
+<!-- staticmethods -->
+<!-- staticmethods -->
+
+<!-- examples -->
+<!-- examples -->
+## Response
+
+<!-- properties -->
+<!-- properties -->
+
+<!-- staticproperties -->
+<!-- staticproperties -->
+
+<!-- methods -->
+### Methods
+<dl>
+    <dt><code><a href="./docs/response/read.md">Response#read()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/response/array-buffer.md">Response#arrayBuffer()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/response/blob.md">Response#blob()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/response/json.md">Response#json()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/response/redirect.md">Response#redirect()</a></code></dt>
+    <dd></dd>
+    <dt><code><a href="./docs/response/text.md">Response#text()</a></code></dt>
+    <dd></dd>
+</dl>
+<!-- methods -->
+
+<!-- staticmethods -->
+<!-- staticmethods -->
+
+<!-- examples -->
+<!-- examples -->
+## fetch
+
+<!-- properties -->
+<!-- properties -->
+
+<!-- staticproperties -->
+<!-- staticproperties -->
+
+<!-- methods -->
+<!-- methods -->
+
+<!-- staticmethods -->
+<!-- staticmethods -->
+
+<!-- examples -->
+<!-- examples -->

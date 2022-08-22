@@ -1,20 +1,19 @@
-# Headers#has()
+## Headers#has()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-has(name);
+### Syntax
+```
+has(name)
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+    <dt><code>name</code></dt>
+</dl>
 
-- `name`
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

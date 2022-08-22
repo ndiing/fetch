@@ -1,19 +1,18 @@
-# Response#text()
+## Response#text()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-text();
+### Syntax
+```
+text()
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+</dl>
 
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

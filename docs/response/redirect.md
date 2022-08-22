@@ -1,21 +1,20 @@
-# Response#redirect()
+## Response#redirect()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-redirect(url,status);
+### Syntax
+```
+redirect(url,status)
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+    <dt><code>url</code></dt>
+    <dt><code>status</code></dt>
+</dl>
 
-- `url`
-- `status`
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

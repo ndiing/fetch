@@ -1,19 +1,18 @@
-# Response#read()
+## Response#read()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-read();
+### Syntax
+```
+read()
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+</dl>
 
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

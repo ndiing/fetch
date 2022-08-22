@@ -1,20 +1,19 @@
-# URLSearchParams2#forEach()
+## URLSearchParams2#forEach()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-forEach(callback);
+### Syntax
+```
+forEach(callback)
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+    <dt><code>callback</code></dt>
+</dl>
 
-- `callback`
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

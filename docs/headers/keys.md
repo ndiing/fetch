@@ -1,19 +1,18 @@
-# Headers#keys()
+## Headers#keys()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-keys();
+### Syntax
+```
+keys()
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+</dl>
 
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

@@ -1,21 +1,20 @@
-# URLSearchParams2#set()
+## URLSearchParams2#set()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-set(name,value);
+### Syntax
+```
+set(name,value)
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+    <dt><code>name</code></dt>
+    <dt><code>value</code></dt>
+</dl>
 
-- `name`
-- `value`
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

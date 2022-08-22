@@ -1,19 +1,18 @@
-# Response#json()
+## Response#json()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-json();
+### Syntax
+```
+json()
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+</dl>
 
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

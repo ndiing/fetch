@@ -1,19 +1,18 @@
-# Response#blob()
+## Response#blob()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-blob();
+### Syntax
+```
+blob()
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+</dl>
 
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+

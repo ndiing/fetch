@@ -1,21 +1,20 @@
-# URLSearchParams2#append()
+## URLSearchParams2#append()
 
-
-<!-- examples -->
-<!-- examples -->
-
-## Syntax
-
-```js
-append(name,value);
+### Syntax
+```
+append(name,value)
 ```
 
-<!-- parameters -->
 ### Parameters
+<dl>
+    <dt><code>name</code></dt>
+    <dt><code>value</code></dt>
+</dl>
 
-- `name`
-- `value`
-<!-- parameters -->
+### Return value
 
-<!-- return -->
-<!-- return -->
+<dl>
+    <dt>None <code>undefined</code></dt>
+</dl>
+
+
