@@ -6,6 +6,9 @@ npm install @ndiinginc/fetch
 
 ## Global
 
+<!-- constructor -->
+<!-- constructor -->
+
 <!-- properties -->
 ### Properties
 <dl>
@@ -31,6 +34,14 @@ npm install @ndiinginc/fetch
 <!-- examples -->
 <!-- examples -->
 ## URLSearchParams2
+
+<!-- constructor -->
+### Constructor
+<dl>
+    <dt><code><a href="./docs//urlsearch-params2.md">URLSearchParams2()</a></code></dt>
+    <dd></dd>
+</dl>
+<!-- constructor -->
 
 <!-- properties -->
 <!-- properties -->
@@ -71,6 +82,14 @@ npm install @ndiinginc/fetch
 <!-- examples -->
 ## URL2
 
+<!-- constructor -->
+### Constructor
+<dl>
+    <dt><code><a href="./docs//url2.md">URL2()</a></code></dt>
+    <dd></dd>
+</dl>
+<!-- constructor -->
+
 <!-- properties -->
 <!-- properties -->
 
@@ -91,6 +110,14 @@ npm install @ndiinginc/fetch
 <!-- examples -->
 <!-- examples -->
 ## Headers
+
+<!-- constructor -->
+### Constructor
+<dl>
+    <dt><code><a href="./docs//headers.md">Headers()</a></code></dt>
+    <dd></dd>
+</dl>
+<!-- constructor -->
 
 <!-- properties -->
 <!-- properties -->
@@ -127,6 +154,14 @@ npm install @ndiinginc/fetch
 <!-- examples -->
 ## Request
 
+<!-- constructor -->
+### Constructor
+<dl>
+    <dt><code><a href="./docs//request.md">Request()</a></code></dt>
+    <dd></dd>
+</dl>
+<!-- constructor -->
+
 <!-- properties -->
 <!-- properties -->
 
@@ -142,6 +177,14 @@ npm install @ndiinginc/fetch
 <!-- examples -->
 <!-- examples -->
 ## Response
+
+<!-- constructor -->
+### Constructor
+<dl>
+    <dt><code><a href="./docs//response.md">Response()</a></code></dt>
+    <dd></dd>
+</dl>
+<!-- constructor -->
 
 <!-- properties -->
 <!-- properties -->
