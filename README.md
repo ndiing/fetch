@@ -38,7 +38,7 @@ npm install @ndiinginc/fetch
 <!-- constructor -->
 ### Constructor
 <dl>
-    <dt><code><a href="./docs//urlsearch-params2.md">URLSearchParams2()</a></code></dt>
+    <dt><code><a href="./docs//urlsearch-params-2.md">URLSearchParams2()</a></code></dt>
     <dd></dd>
 </dl>
 <!-- constructor -->
@@ -52,25 +52,25 @@ npm install @ndiinginc/fetch
 <!-- methods -->
 ### Methods
 <dl>
-    <dt><code><a href="./docs/urlsearch-params2/append.md">URLSearchParams2#append()</a></code></dt>
+    <dt><code><a href="./docs/urlsearch-params-2/append.md">URLSearchParams2#append()</a></code></dt>
     <dd></dd>
-    <dt><code><a href="./docs/urlsearch-params2/delete.md">URLSearchParams2#delete()</a></code></dt>
+    <dt><code><a href="./docs/urlsearch-params-2/delete.md">URLSearchParams2#delete()</a></code></dt>
     <dd></dd>
-    <dt><code><a href="./docs/urlsearch-params2/entries.md">URLSearchParams2#entries()</a></code></dt>
+    <dt><code><a href="./docs/urlsearch-params-2/entries.md">URLSearchParams2#entries()</a></code></dt>
     <dd></dd>
-    <dt><code><a href="./docs/urlsearch-params2/for-each.md">URLSearchParams2#forEach()</a></code></dt>
+    <dt><code><a href="./docs/urlsearch-params-2/for-each.md">URLSearchParams2#forEach()</a></code></dt>
     <dd></dd>
-    <dt><code><a href="./docs/urlsearch-params2/get.md">URLSearchParams2#get()</a></code></dt>
+    <dt><code><a href="./docs/urlsearch-params-2/get.md">URLSearchParams2#get()</a></code></dt>
     <dd></dd>
-    <dt><code><a href="./docs/urlsearch-params2/has.md">URLSearchParams2#has()</a></code></dt>
+    <dt><code><a href="./docs/urlsearch-params-2/has.md">URLSearchParams2#has()</a></code></dt>
     <dd></dd>
-    <dt><code><a href="./docs/urlsearch-params2/keys.md">URLSearchParams2#keys()</a></code></dt>
+    <dt><code><a href="./docs/urlsearch-params-2/keys.md">URLSearchParams2#keys()</a></code></dt>
     <dd></dd>
-    <dt><code><a href="./docs/urlsearch-params2/set.md">URLSearchParams2#set()</a></code></dt>
+    <dt><code><a href="./docs/urlsearch-params-2/set.md">URLSearchParams2#set()</a></code></dt>
     <dd></dd>
-    <dt><code><a href="./docs/urlsearch-params2/to-string.md">URLSearchParams2#toString()</a></code></dt>
+    <dt><code><a href="./docs/urlsearch-params-2/to-string.md">URLSearchParams2#toString()</a></code></dt>
     <dd></dd>
-    <dt><code><a href="./docs/urlsearch-params2/values.md">URLSearchParams2#values()</a></code></dt>
+    <dt><code><a href="./docs/urlsearch-params-2/values.md">URLSearchParams2#values()</a></code></dt>
     <dd></dd>
 </dl>
 <!-- methods -->
