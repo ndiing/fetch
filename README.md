@@ -4,6 +4,10 @@
 npm install @ndiinginc/fetch
 ```
 
+
+<!-- examples -->
+<!-- examples -->
+
 ## Global
 
 <!-- constructor -->
@@ -33,6 +37,7 @@ npm install @ndiinginc/fetch
 
 <!-- examples -->
 <!-- examples -->
+
 ## URLSearchParams2
 
 <!-- constructor -->
@@ -80,6 +85,7 @@ npm install @ndiinginc/fetch
 
 <!-- examples -->
 <!-- examples -->
+
 ## URL2
 
 <!-- constructor -->
@@ -109,6 +115,7 @@ npm install @ndiinginc/fetch
 
 <!-- examples -->
 <!-- examples -->
+
 ## Headers
 
 <!-- constructor -->
@@ -152,6 +159,7 @@ npm install @ndiinginc/fetch
 
 <!-- examples -->
 <!-- examples -->
+
 ## Response
 
 <!-- constructor -->
@@ -188,6 +196,3 @@ npm install @ndiinginc/fetch
 
 <!-- staticmethods -->
 <!-- staticmethods -->
-
-<!-- examples -->
-<!-- examples -->
