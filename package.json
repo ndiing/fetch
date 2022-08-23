@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@ndiinginc/database": "^1.0.0"
+    "@ndiinginc/database": "^1.0.7"
   },
   "name": "@ndiinginc/fetch",
   "description": "Nodejs fetch module",
