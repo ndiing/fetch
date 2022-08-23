@@ -28,7 +28,7 @@ class URLSearchParams2 {
      *
      */
     append(name, value) {
-        value = decodeURIComponent(value);
+        value = decodeURIComponent(value||'');
         if (this[name]) {
             if (Array.isArray(this[name])) {
                 this[name].push(value);
@@ -97,7 +97,7 @@ class URLSearchParams2 {
      *
      */
     set(name, value) {
-        value = decodeURIComponent(value);
+        value = decodeURIComponent(value||'');
         this[name] = value;
     }
 
