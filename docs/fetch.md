@@ -44,5 +44,10 @@ fetch(resource,options)
     <dt>A <code>Promise</code></dt>
 </dl>
 
+### Examples
+```
+// usagefetch("https://jsonplaceholder.typicode.com/posts", {    proxy: "http://127.0.0.1:8888", // set proxy url / override with options.agent    // agent: new HttpsProxyAgent('http://127.0.0.1:8888'), // use agent with https://www.npmjs.com/package/https-proxy-agent    credentials: 'omit', // do not store any cookies    // credentials: 'same-origin', // store cookies and use for next request    redirect: 'manual', // do not follow redirect    // redirect: 'follow', // follow redirect,    headers:{        "Accept-Encoding": "gzip, deflate, br",// request compression    }}).then((res) => res.json()).then(console.log);
+```
+
 
 

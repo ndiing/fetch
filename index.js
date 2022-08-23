@@ -1,5 +1,7 @@
 const http = require("http");
 const https = require("https");
+const tls = require("tls");
+const net = require("net");
 const { Readable } = require("stream");
 const zlib = require("zlib");
 const { Blob } = require("buffer");
@@ -28,7 +30,7 @@ class URLSearchParams2 {
      *
      */
     append(name, value) {
-        value = decodeURIComponent(value||'');
+        value = decodeURIComponent(value || "");
         if (this[name]) {
             if (Array.isArray(this[name])) {
                 this[name].push(value);
@@ -97,7 +99,7 @@ class URLSearchParams2 {
      *
      */
     set(name, value) {
-        value = decodeURIComponent(value||'');
+        value = decodeURIComponent(value || "");
         this[name] = value;
     }
 
@@ -157,7 +159,7 @@ class URL2 {
         this.hash = hash;
         this.fragment = fragment;
         this.hostname = hostname;
-        this.port = port;
+        this.port = parseInt(port || (this.protocol == "https:" ? 443 : 80));
 
         this.origin = this.protocol + this.authority;
         // this.password;
@@ -344,8 +346,7 @@ class Request {
             Host: this.input.host,
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
             Accept: "*/*",
-            "Accept-Language": "*",
-            "Accept-Encoding": "gzip, deflate, br",
+            // "Accept-Encoding": "gzip, deflate, br",
             ...options.headers,
         };
         this.headers = new Headers(options.headers);
@@ -497,27 +498,74 @@ class Response {
  * @param {String} resource - This defines the resource that you wish to fetch
  * @param {Object} options - An object containing any custom settings that you want to apply to the request
  * @param {String} options.body - Any body that you want to add to your request: this can be a Blob, an ArrayBuffer, a TypedArray, a DataView, a FormData, a URLSearchParams, string object or literal, or a ReadableStream object.
- * @param {String} options.credentials=same-origin - 
+ * @param {String} options.credentials=same-origin -
  * @param {Object} options.headers - Any headers you want to add to your request, contained within a Headers object or an object literal with String values.
  * @param {String} options.method=GET - The request method, e.g., GET, POST. Note that the Origin header is not set on Fetch requests with a method of HEAD or GET.
  * @param {String} options.redirect=follow - How to handle a redirect response
- * @param {String} options.agent - 
- * @param {String} options.hostname=localhost - 
- * @param {String} options.insecureHTTPParser=true - 
- * @param {String} options.path=/ - 
- * @param {Number} options.port=80 - 
- * @param {String} options.protocol=http: - 
- * @param {Number} options.timeout=3600000 - 
+ * @param {String} options.agent -
+ * @param {String} options.hostname=localhost -
+ * @param {String} options.insecureHTTPParser=true -
+ * @param {String} options.path=/ -
+ * @param {Number} options.port=80 -
+ * @param {String} options.protocol=http: -
+ * @param {Number} options.timeout=3600000 -
  * @returns {Promise}
+ * @example
+ * // usage
+ * fetch("https://jsonplaceholder.typicode.com/posts", {
+ *     proxy: "http://127.0.0.1:8888", // set proxy url / override with options.agent
+ *     // agent: new HttpsProxyAgent('http://127.0.0.1:8888'), // use agent with https://www.npmjs.com/package/https-proxy-agent
+ *     credentials: 'omit', // do not store any cookies
+ *     // credentials: 'same-origin', // store cookies and use for next request
+ *     redirect: 'manual', // do not follow redirect
+ *     // redirect: 'follow', // follow redirect,
+ *     headers:{
+ *         "Accept-Encoding": "gzip, deflate, br",// request compression
+ *     }
+ * })
+ * .then((res) => res.json())
+ * .then(console.log);
  */
 function fetch(resource = "", options = {}) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         const request = new Request(resource, options);
-        const protocol = request.protocol == "https:" ? https : http;
-        const req = protocol.request(request);
+        const protocol = (request) => (request.protocol == "https:" ? https : http);
+
+        if (!options.agent && options.proxy) {
+            const proxy = new URL2(options.proxy);
+            const hostname = request.hostname;
+            const port = request.port;
+
+            if (request.protocol == "https:") {
+                request.agent = await new Promise((resolve) => {
+                    proxy.method = "CONNECT";
+                    proxy.path = hostname + ":" + port;
+
+                    const req = protocol(proxy).request(proxy);
+                    req.on("connect", (res, socket) => {
+                        const agent = new (protocol(request).Agent)({
+                            keepAlive: true,
+                            socket,
+                            rejectUnauthorized: false,
+                        });
+                        resolve(agent);
+                    });
+                    req.end();
+                });
+            } else {
+                request.hostname = proxy.hostname;
+                request.port = proxy.port;
+                request.path = "" + request.input;
+            }
+        }
+
+        const req = protocol(request).request(request);
         req.on("response", (res) => {
-            res.request = request;
-            const response = new Response(res, res);
+            const response = new Response(res, {
+                status: res.statusCode,
+                headers: res.headers,
+                request,
+            });
             resolve(response);
         });
         req.on("error", reject);
