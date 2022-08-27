@@ -248,7 +248,7 @@ class Response {
     /**
      *
      */
-    read() {
+    buffer() {
         return new Promise((resolve, reject) => {
             const encoding = this.headers.get("content-encoding");
 
@@ -274,14 +274,14 @@ class Response {
      *
      */
     arrayBuffer() {
-        return this.read().then((buffer) => buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength));
+        return this.buffer().then((buffer) => buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength));
     }
 
     /**
      *
      */
     blob() {
-        return this.read().then((buffer) => new Blob([buffer]));
+        return this.buffer().then((buffer) => new Blob([buffer]));
     }
 
     // clone() {}
@@ -294,7 +294,7 @@ class Response {
      *
      */
     json() {
-        return this.read().then((buffer) => JSON.parse(buffer));
+        return this.buffer().then((buffer) => JSON.parse(buffer));
     }
 
     /**
@@ -311,7 +311,7 @@ class Response {
      *
      */
     text() {
-        return this.read().then((buffer) => "" + buffer);
+        return this.buffer().then((buffer) => "" + buffer);
     }
 }
 

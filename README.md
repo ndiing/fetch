@@ -101,7 +101,7 @@ npm install @ndiinginc/fetch
 <!-- methods -->
 ### Methods
 <dl>
-    <dt><code><a href="./docs/response/read.md">Response#read()</a></code></dt>
+    <dt><code><a href="./docs/response/buffer.md">Response#buffer()</a></code></dt>
     <dd></dd>
     <dt><code><a href="./docs/response/array-buffer.md">Response#arrayBuffer()</a></code></dt>
     <dd></dd>
