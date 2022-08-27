@@ -372,6 +372,7 @@ function fetch(resource = "", options = {}) {
                         });
                         resolve(agent);
                     });
+                    req.on("error", reject);
                     req.end();
                 });
             } else {
