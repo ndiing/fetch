@@ -1,4 +1,5 @@
 ## HTTP_HEADERS()
+_Normalize headers name_
 
 ### Syntax
 ```
