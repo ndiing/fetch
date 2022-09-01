@@ -153,9 +153,10 @@ class Request {
         }
         this.input = new URL2(input);
         this.database = Database.get(options.origin ?? this.input.origin);
-        this.body = options.body;
+        this.body = options.body ?? "";
 
-        if (!(this.body instanceof Readable)) {
+        // Create readable stream from buffer&string
+        if (!(this.body instanceof Readable) && (typeof this.body == "string" || this.body instanceof Buffer)) {
             this.body = new Readable();
             this.body.push(options.body);
             this.body.push(null);
