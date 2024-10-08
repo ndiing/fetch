@@ -1,2 +1,2 @@
-const fetch = require('./lib/fetch')
-module.exports=fetch
+const fetch = require("./lib/fetch");
+module.exports = fetch;
