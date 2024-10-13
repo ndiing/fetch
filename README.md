@@ -429,6 +429,10 @@ Melakukan permintaan HTTP dan mengembalikan responsnya sebagai Promise.
 
 **Kind**: global function  
 **Returns**: [<code>Promise.&lt;Response&gt;</code>](#Response) - Promise yang menyelesaikan respons HTTP setelah permintaan selesai.  
+**Throws**:
+
+- <code>Error</code> Melempar error jika terjadi kesalahan saat permintaan HTTP.
+
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -436,6 +440,7 @@ Melakukan permintaan HTTP dan mengembalikan responsnya sebagai Promise.
 | [options] | <code>Object</code> | <code>{}</code> | Opsi untuk permintaan HTTP. |
 | [options.credentials] | <code>string</code> |  | Mengontrol apakah cookie harus disertakan dalam permintaan. |
 | [options.store] | <code>Object</code> |  | Objek penyimpanan yang berisi cookie dan data lainnya. |
+| [options.httpProxy] | <code>string</code> |  | URL proxy HTTP untuk digunakan saat melakukan permintaan. |
 
 <a name="read"></a>
 
