@@ -27,8 +27,8 @@
 <dt><a href="#createStore">createStore(filename)</a> ⇒ <code>Object</code></dt>
 <dd><p>Membuat dan mengembalikan objek penyimpanan yang terhubung dengan file.</p>
 </dd>
-<dt><a href="#fetch">fetch(resource, [options])</a> ⇒ <code><a href="#Response">Promise.&lt;Response&gt;</a></code></dt>
-<dd><p>Melakukan permintaan HTTP dan mengembalikan responsnya sebagai Promise.</p>
+<dt><a href="#fetch">fetch(input, [init])</a> ⇒ <code><a href="#Response">Promise.&lt;Response&gt;</a></code></dt>
+<dd><p>Melakukan permintaan HTTP menggunakan Fetch API dengan dukungan untuk proxy dan manajemen cookie.</p>
 </dd>
 <dt><a href="#read">read(filename, [data])</a> ⇒ <code>Object</code> | <code>string</code></dt>
 <dd><p>Membaca data dari file dan mengembalikannya.
@@ -424,24 +424,34 @@ Membuat dan mengembalikan objek penyimpanan yang terhubung dengan file.
 
 <a name="fetch"></a>
 
-## fetch(resource, [options]) ⇒ [<code>Promise.&lt;Response&gt;</code>](#Response)
-Melakukan permintaan HTTP dan mengembalikan responsnya sebagai Promise.
+## fetch(input, [init]) ⇒ [<code>Promise.&lt;Response&gt;</code>](#Response)
+Melakukan permintaan HTTP menggunakan Fetch API dengan dukungan untuk proxy dan manajemen cookie.
 
 **Kind**: global function  
-**Returns**: [<code>Promise.&lt;Response&gt;</code>](#Response) - Promise yang menyelesaikan respons HTTP setelah permintaan selesai.  
+**Returns**: [<code>Promise.&lt;Response&gt;</code>](#Response) - - Objek respons dari permintaan yang diambil.  
 **Throws**:
 
-- <code>Error</code> Melempar error jika terjadi kesalahan saat permintaan HTTP.
+- <code>Error</code> - Jika terjadi kesalahan dalam melakukan permintaan.
 
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
-| resource | <code>string</code> |  | URL sumber daya yang ingin diambil. |
-| [options] | <code>Object</code> | <code>{}</code> | Opsi untuk permintaan HTTP. |
-| [options.credentials] | <code>string</code> |  | Mengontrol apakah cookie harus disertakan dalam permintaan. |
-| [options.store] | <code>Object</code> |  | Objek penyimpanan yang berisi cookie dan data lainnya. |
-| [options.httpProxy] | <code>string</code> |  | URL proxy HTTP untuk digunakan saat melakukan permintaan. |
+| input | <code>string</code> |  | URL atau permintaan yang ingin diambil. |
+| [init] | <code>Object</code> | <code>{}</code> | Opsi untuk permintaan. |
+| [init.httpProxy] | <code>string</code> |  | Alamat server proxy yang digunakan untuk permintaan. |
+| [init.credentials] | <code>string</code> |  | Kredensial yang digunakan untuk permintaan, dapat berupa 'omit', 'same-origin', atau 'include'. |
+| [init.store] | <code>Object</code> |  | Objek penyimpanan yang dapat digunakan untuk menyimpan cookie. |
+| [init.headers] | <code>Object</code> |  | Header tambahan yang ingin ditambahkan ke permintaan. |
 
+**Example**  
+```js
+const response = await fetch('https://api.example.com/data', {
+    httpProxy: 'http://my-proxy-server.com',
+    credentials: 'include',
+    store: { cookieStore: { cookie: 'session=abc123' } }
+});
+console.log(await response.json());
+```
 <a name="read"></a>
 
 ## read(filename, [data]) ⇒ <code>Object</code> \| <code>string</code>

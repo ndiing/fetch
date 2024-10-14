@@ -12,5 +12,8 @@
     "repository": {
         "type": "git",
         "url": "git+https://github.com/ndiing/router.git"
+    },
+    "dependencies": {
+        "undici": "^6.20.0"
     }
 }
