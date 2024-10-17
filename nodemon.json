@@ -1,6 +1,4 @@
 {
-    "ext":"js",
-    "ignore":[
-        "data"
-    ]
+    "ext": "js",
+    "ignore": ["data"]
 }
