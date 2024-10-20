@@ -407,13 +407,13 @@ async function fetch(resource, options = {}) {
         store,
     } = options;
 
+    resource = new URL(resource);
+
     if (params) {
-        resource = resource.replace(/:(\w+)/g, ($, name) => {
+        resource.pathname = resource.pathname.replace(/:(\w+)/g, ($, name) => {
             return params[name] || "";
         });
     }
-
-    resource = new URL(resource);
 
     if (query) {
         for (const name in query) {
