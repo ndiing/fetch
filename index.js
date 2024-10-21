@@ -140,9 +140,10 @@ class Storage {
      * Membuat instance Storage dan menginisialisasi database.
      * @param {string} [tablename="storage"] - Nama tabel yang digunakan untuk menyimpan data.
      */
-    constructor(tablename = "storage") {
+    constructor(tablename = "storage",options={}) {
         this.tablename = tablename;
-        const filename = path.join(process.cwd(), "data", "database.db");
+        const {filename/* ="./data/database.db" */} = options
+        // const filename = path.join(process.cwd(), "data", "database.db");
         const dirname = path.dirname(filename);
 
         try {
@@ -370,8 +371,9 @@ class Store {
  *                                          Secara default adalah "google/default".
  * @returns {Promise<Store>} - Mengembalikan Promise yang menyelesaikan dengan instance Store.
  */
-async function create(_id = "google/default") {
-    const storage = new Storage("storage");
+async function create(_id = "google/default",options={}) {
+    const {filename="./data/database.db"}=options
+    const storage = new Storage("storage",{filename});
     const target = (await storage.get(_id)) || {};
     target.cookieStore = new CookieStore(target.cookieStore);
     const store = new Store(target, (doc) => {
