@@ -102,7 +102,7 @@ HTTP_PROXY=http://127.0.0.1:8080 node app.js
 
 Semua request yang dibuat lewat `fetch()` akan otomatis diteruskan melalui proxy tersebut, dengan verifikasi TLS proxy dimatikan (berguna untuk debugging via mitmproxy/Charles/Burp, dsb).
 
-> ⚠️ `rejectUnauthorized: false` hanya untuk koneksi ke proxy — jangan dipakai di production tanpa pertimbangan keamanan.
+> `rejectUnauthorized: false` hanya untuk koneksi ke proxy — jangan dipakai di production tanpa pertimbangan keamanan.
 
 ## API
 
