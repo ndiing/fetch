@@ -1,6 +1,6 @@
 const Database = require("@ndiinginc/dal");
 const Cookie = require("@ndiinginc/cookie");
-const fetch = require("../src/shared/fetch");
+const fetch = require("../src/fetch");
 
 const db = new Database({
     client: "better-sqlite3",
