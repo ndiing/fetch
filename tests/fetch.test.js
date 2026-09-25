@@ -12,6 +12,7 @@ const cookie = new Cookie(db, {
     sessionId: "test",
 });
 
+
 describe("fetch", () => {
     test("test", () => {});
     // test("fetch with cookie", async () => {
