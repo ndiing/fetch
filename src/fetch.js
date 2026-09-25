@@ -27,24 +27,11 @@ if (process.env.HTTP_PROXY) {
  * @returns {Promise<undici.Response>}
  */
 async function fetch(resource, options = {}) {
-    const {
-        params = {},
-        query = {},
-        beforeRequest = async (resource, options) => ({ resource, options }),
-        beforeResponse = async (response) => response,
-        cookie,
-        credentials = "include",
-        headers = {},
-        redirect = "manual",
-        ...restOptions
-    } = options;
+    const { params = {}, query = {}, beforeRequest = async (resource, options) => ({ resource, options }), beforeResponse = async (response) => response, cookie, credentials = "include", headers = {}, redirect = "manual", ...restOptions } = options;
 
     const url = new URL(resource);
 
-    url.pathname = url.pathname.replace(
-        /:(\w+)/g,
-        (_, name) => params[name] ?? name,
-    );
+    url.pathname = url.pathname.replace(/:(\w+)/g, (_, name) => params[name] ?? name);
 
     for (const name in query) {
         url.searchParams.append(name, query[name]);

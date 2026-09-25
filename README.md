@@ -40,16 +40,16 @@ https://api.example.com/users/123?active=true
 
 ## Opsi (`Options`)
 
-| Opsi          | Tipe                                | Default     | Keterangan                                                                 |
-|---------------|--------------------------------------|-------------|-----------------------------------------------------------------------------|
-| `params`      | `Object`                             | `{}`        | Mengganti placeholder `:nama` pada path URL.                               |
-| `query`       | `Object`                             | `{}`        | Ditambahkan sebagai query string (`URLSearchParams`).                       |
-| `beforeRequest` | `(resource, options) => Promise<{resource, options}>` | identity | Hook sebelum request dikirim, bisa memodifikasi URL/opsi.                  |
-| `beforeResponse` | `(response) => Promise<response>` | identity   | Hook setelah response diterima, sebelum dikembalikan ke caller.             |
-| `cookie`      | `{ get(url), set(url, setCookieHeaders) }` | -    | Cookie jar untuk kirim/simpan cookie otomatis.                              |
-| `credentials` | `"omit" \| "same-origin" \| "include"` | `"include"` | Jika `"omit"`, cookie jar tidak dipakai sama sekali.                        |
-| `headers`     | `Object`                             | `{}`        | Header request, diteruskan ke `Headers`.                                    |
-| `redirect`    | `"follow" \| "error" \| "manual"`    | `"manual"`  | Perilaku terhadap redirect.                                                 |
+| Opsi             | Tipe                                                  | Default     | Keterangan                                                      |
+| ---------------- | ----------------------------------------------------- | ----------- | --------------------------------------------------------------- |
+| `params`         | `Object`                                              | `{}`        | Mengganti placeholder `:nama` pada path URL.                    |
+| `query`          | `Object`                                              | `{}`        | Ditambahkan sebagai query string (`URLSearchParams`).           |
+| `beforeRequest`  | `(resource, options) => Promise<{resource, options}>` | identity    | Hook sebelum request dikirim, bisa memodifikasi URL/opsi.       |
+| `beforeResponse` | `(response) => Promise<response>`                     | identity    | Hook setelah response diterima, sebelum dikembalikan ke caller. |
+| `cookie`         | `{ get(url), set(url, setCookieHeaders) }`            | -           | Cookie jar untuk kirim/simpan cookie otomatis.                  |
+| `credentials`    | `"omit" \| "same-origin" \| "include"`                | `"include"` | Jika `"omit"`, cookie jar tidak dipakai sama sekali.            |
+| `headers`        | `Object`                                              | `{}`        | Header request, diteruskan ke `Headers`.                        |
+| `redirect`       | `"follow" \| "error" \| "manual"`                     | `"manual"`  | Perilaku terhadap redirect.                                     |
 
 Opsi lain di luar daftar di atas (`restOptions`) diteruskan langsung ke `undici.fetch`.
 
